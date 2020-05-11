@@ -15,7 +15,7 @@ public class CatFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cat, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
-        actionBar.setTitle("Cat");
+        actionBar.hide();
 
         return rootView;
     }

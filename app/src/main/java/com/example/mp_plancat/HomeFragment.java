@@ -16,6 +16,7 @@ public class HomeFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_home, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+        actionBar.show();
         actionBar.setTitle("Home");
 
         return rootView;

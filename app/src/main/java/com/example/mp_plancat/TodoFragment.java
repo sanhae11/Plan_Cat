@@ -18,6 +18,7 @@ public class TodoFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_todo, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+        actionBar.show();
         actionBar.setTitle("Todo");
 
 

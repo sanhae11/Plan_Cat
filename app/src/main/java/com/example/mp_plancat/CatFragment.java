@@ -49,7 +49,7 @@ public class CatFragment extends Fragment {
             }
         });
 
-        btn_shop = (Button) rootView.findViewById(R.id.btn_shop);
+        btn_shop = (Button) rootView.findViewById(R.id.btn_settings);
         btn_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

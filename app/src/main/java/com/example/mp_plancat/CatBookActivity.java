@@ -1,4 +1,5 @@
 package com.example.mp_plancat;
+//고양이 - cat book 화면
 
 import androidx.appcompat.app.AppCompatActivity;
 

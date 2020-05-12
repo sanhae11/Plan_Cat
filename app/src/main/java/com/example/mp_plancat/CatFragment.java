@@ -1,4 +1,5 @@
 package com.example.mp_plancat;
+//고양이 화면
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,13 +23,13 @@ public class CatFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cat, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
-        actionBar.hide();
+        actionBar.hide(); //액션바 숨김
 
         btn_cat_book = (Button) rootView.findViewById(R.id.btn_cat_book);
         btn_cat_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), CatBookActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), CatBookActivity.class)); // 클릭 시 cat book activity 화면으로 감
             }
         });
 
@@ -36,7 +37,7 @@ public class CatFragment extends Fragment {
         btn_my_things.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), MyThingsActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), MyThingsActivity.class)); // 클릭 시 my things activity 화면으로 감
             }
         });
 
@@ -44,7 +45,7 @@ public class CatFragment extends Fragment {
         btn_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), ShopActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), ShopActivity.class)); // 클릭 시 shop activity 화면으로 감
             }
         });
 
@@ -52,7 +53,7 @@ public class CatFragment extends Fragment {
         btn_shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //설정 팝업창 띄우기
+                //////////클릭 시 설정 팝업창 띄우기
             }
         });
 

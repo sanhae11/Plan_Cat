@@ -19,15 +19,15 @@ public class TodoFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_todo, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
-        actionBar.show();
+        actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Todo");
 
 
         btn_create_todo = (Button) rootView.findViewById(R.id.btn_create_todo);
-        btn_create_todo.setOnClickListener(new View.OnClickListener() {
+        btn_create_todo.setOnClickListener(new View.OnClickListener() { //할 일 생성 버튼 클릭 시
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), CreateTodoActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), CreateTodoActivity.class)); //create to do activity로 감
             }
         });
         return rootView;

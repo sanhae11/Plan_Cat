@@ -1,4 +1,5 @@
 package com.example.mp_plancat;
+//할 일 생성 화면
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +17,8 @@ public class CreateTodoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_todo);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.show();
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼
+        actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Create Todo");
     }
 
@@ -30,7 +31,7 @@ public class CreateTodoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+            case android.R.id.home:{ //뒤로가기 버튼 눌렀을 때 동작
                 finish();
                 return true;
             }

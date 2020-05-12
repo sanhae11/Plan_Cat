@@ -1,4 +1,5 @@
 package com.example.mp_plancat;
+//고양이 - 보유 물품 배치 화면
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,7 @@ public class AssignThingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assign_things);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼
         actionBar.show();
         actionBar.setTitle("");
     }
@@ -30,7 +31,7 @@ public class AssignThingsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+            case android.R.id.home:{ //뒤로 가기 버튼 눌렀을 때 동작
                 finish();
                 return true;
             }

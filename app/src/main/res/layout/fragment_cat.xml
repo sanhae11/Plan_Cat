@@ -10,6 +10,12 @@
         android:layout_height="wrap_content"
         android:text="고양이 화면" />
 
+
+    <!-- TODO:좌측 상단에 코인 배치하기 -->
+    <!-- TODO:네 개 버튼 floating bar로 합치기 -->
+    <!-- TODO:화면 구성 등 기타 -->
+
+
     <!-- cat book 버튼 -->
     <Button
         android:layout_width="wrap_content"

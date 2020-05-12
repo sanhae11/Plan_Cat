@@ -78,13 +78,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){ //각 메뉴 클릭 시 알맞게 동작
         switch (item.getItemId()){
             case R.id.menu_hide_done_list :
-                ////////////완료 목록 숨기기
+                //TODO:완료 목록 숨기기
                 return true;
             case R.id.menu_hide_past_list :
-                //////////과거 목록 숨기기
+                //TODO:과거 목록 숨기기
                 return true;
             case R.id.menu_hide_coin :
-                //////////코인 표시 숨기기
+                //TODO:코인 표시 숨기기
                 return true;
             default :
                 return super.onOptionsItemSelected(item);

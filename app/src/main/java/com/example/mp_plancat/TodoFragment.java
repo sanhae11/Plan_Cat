@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 public class TodoFragment extends Fragment {
+    Button btn_create_todo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class TodoFragment extends Fragment {
         actionBar.setTitle("Todo");
 
 
-        Button btn_create_todo = (Button) rootView.findViewById(R.id.btn_create_todo);
+        btn_create_todo = (Button) rootView.findViewById(R.id.btn_create_todo);
         btn_create_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

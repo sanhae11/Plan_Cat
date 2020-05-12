@@ -1,5 +1,5 @@
-<!-- 액션바; 타이틀 + 점 세 개 메뉴 -->
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 액션바; 타이틀 + 점 세 개 메뉴 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

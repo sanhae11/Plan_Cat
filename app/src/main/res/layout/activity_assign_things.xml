@@ -8,4 +8,8 @@
     tools:context=".AssignThingsActivity"
     android:paddingTop="?android:attr/actionBarSize">
 
+
+    <!-- TODO:장난감 배치 영역 선택할 수 있게 만들기??? -->
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

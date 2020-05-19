@@ -1,58 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 고양이 화면 -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#FFFF00">
+    android:background="#A566FF">
 
     <!-- 좌측 상단에 코인 배치 -->
     // 이미지나 사이즈, 간격 봐가면서 수정하기
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        // Silver Coin
-        <ImageView
-            android:id="@+id/ic_silvercoin"
-            android:src="@drawable/icon_silvercoin"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp" />
-        <TextView
-            android:id="@+id/txt_silvercoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="7dp"
-            android:text="13120"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-        // Gold Coin
-        <ImageView
-            android:id="@+id/ic_goldcoin"
-            android:src="@drawable/icon_goldcoin"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp" />
-        <TextView
-            android:id="@+id/txt_goldcoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:layout_marginLeft="7dp"
-            android:text="40"
-            android:textSize="17dp"
-            android:textStyle="bold" />
-    </LinearLayout>
 
     <!-- TODO:네 개 버튼 floating bar로 합치기 -->
     <!-- TODO:화면 구성 등 기타 -->
 
     <!-- cat book 버튼 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        // Silver Coin
+        <ImageView
+            android:id="@+id/ic_silvercoin"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_silvercoin" />
+
+        <TextView
+            android:id="@+id/txt_silvercoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="11dp"
+            android:text="13120"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        // Gold Coin
+        <ImageView
+            android:id="@+id/ic_goldcoin"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_goldcoin" />
+
+        <TextView
+            android:id="@+id/txt_goldcoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="11dp"
+            android:text="40"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        // 리니어레이아웃에서 오른쪽 정렬
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        // 포인트 보상 확인하는 알림모음
+        <ImageView
+            android:id="@+id/ic_msg"
+            android:src="@drawable/icon_msg"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:onClick="onClickButton" />
+    </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,9 +96,9 @@
 
     <!-- 설정 버튼 -->
     <Button
+        android:id="@+id/btn_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_settings"
-        android:text="settings"/>
+        android:text="settings" />
 
 </LinearLayout>

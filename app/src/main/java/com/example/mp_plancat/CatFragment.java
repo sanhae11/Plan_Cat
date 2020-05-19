@@ -11,12 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-public class CatFragment extends Fragment {
+import org.w3c.dom.Text;
+
+public class CatFragment extends Fragment{
     Button btn_cat_book;
     Button btn_my_things;
     Button btn_shop;
     Button btn_settings;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class CatFragment extends Fragment {
 
         //TODO:이미지 움직이게 하기
         //TODO:추후 데이터베이스 작업한 후에, 포인트 보상 팝업창 구현
+
+
+
+
 
 
         btn_cat_book = (Button) rootView.findViewById(R.id.btn_cat_book);

@@ -25,7 +25,6 @@ public class CatFragment extends Fragment {
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
         actionBar.hide(); //액션바 숨김
 
-
         //TODO:이미지 움직이게 하기
         //TODO:추후 데이터베이스 작업한 후에, 포인트 보상 팝업창 구현
 

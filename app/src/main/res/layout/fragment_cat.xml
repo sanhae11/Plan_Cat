@@ -9,11 +9,10 @@
 
     <!-- 좌측 상단에 코인 배치 -->
     // 이미지나 사이즈, 간격 봐가면서 수정하기
-
+    // 배경에 글자 안 보일 거 생각해서 저거 감싸는 둥근 네모 하든지.. 텍스트에 테두리 싸든지..
     <!-- TODO:네 개 버튼 floating bar로 합치기 -->
     <!-- TODO:화면 구성 등 기타 -->
 
-    <!-- cat book 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +62,8 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        // 포인트 보상 확인하는 알림모음
+        <!-- 우측 상단에 알림함 배치 -->
+        // 포인트 보상 확인하는 알림모음 클릭시 보상받기
         <ImageView
             android:id="@+id/ic_msg"
             android:src="@drawable/icon_msg"

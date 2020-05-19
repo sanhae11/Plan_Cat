@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -20,6 +21,8 @@ public class CatFragment extends Fragment{
     Button btn_my_things;
     Button btn_shop;
     Button btn_settings;
+
+    ImageView btn_msg;
 
 
     @Override
@@ -32,8 +35,15 @@ public class CatFragment extends Fragment{
         //TODO:이미지 움직이게 하기
         //TODO:추후 데이터베이스 작업한 후에, 포인트 보상 팝업창 구현
 
-
-
+        // 포인트 보상 알림창 + 팝업창 구현
+        btn_msg = (ImageView)rootView.findViewById(R.id.ic_msg);
+        btn_msg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                MessageFragment e = MessageFragment.getInstance();
+                e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
+            }
+        });
 
 
 

@@ -55,10 +55,15 @@ c        <TextView
             android:layout_gravity="center"
             android:text="포인트 보상이 도착했어요!"
             android:textSize="17dp"/>
-        <Button
+        <ImageButton
             android:id="@+id/btn_confirm"
-            android:text="confirm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:src="@drawable/icon_btncheck"
+            android:background="@drawable/btn_shape"
+            android:layout_width="88dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"/>
     </LinearLayout>
 </LinearLayout>

@@ -1,10 +1,12 @@
 package com.example.mp_plancat;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,7 +20,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
     public static final String TAG_EVENT_DIALOG = "dialog_event";
     TextView txt_date;
     private SimpleDateFormat mformat = new SimpleDateFormat("yyyy년 M월 d일 "); // 날짜 포맷
-    Button btn_confirm;
+    ImageButton btn_confirm;
 
     public MessageFragment(){}
 
@@ -39,8 +41,9 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
         time = time + str;
         txt_date.setText(time); //현재 날짜로 설정
 
-        btn_confirm = (Button)v.findViewById(R.id.btn_confirm);
+        btn_confirm = (ImageButton)v.findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
+        setCancelable(false);   // 검은 영역 터치시에도 꺼지는 거 방지
         return v;
     }
 

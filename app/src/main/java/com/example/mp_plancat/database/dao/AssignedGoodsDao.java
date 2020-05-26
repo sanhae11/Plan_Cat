@@ -3,6 +3,7 @@ package com.example.mp_plancat.database.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Dao
 public interface AssignedGoodsDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(AssignedGoods... assignedGoods);
 
     //배치된 물품 list 반환
@@ -25,7 +26,7 @@ public interface AssignedGoodsDao {
     @Query("SELECT COUNT(*) FROM AssignedGoods")
     int getCount();
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(AssignedGoods... assignedGoods);
 
     @Delete

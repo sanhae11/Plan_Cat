@@ -1,4 +1,4 @@
-package com.example.mp_plancat.entity;
+package com.example.mp_plancat.database.entity;
 
 import android.graphics.Bitmap;
 

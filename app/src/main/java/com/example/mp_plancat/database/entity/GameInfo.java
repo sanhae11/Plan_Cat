@@ -1,11 +1,8 @@
-package com.example.mp_plancat.entity;
+package com.example.mp_plancat.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
-
-import org.jetbrains.annotations.NotNull;
 
 @Entity
 public class GameInfo {

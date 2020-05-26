@@ -1,4 +1,4 @@
-package com.example.mp_plancat.entity;
+package com.example.mp_plancat.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

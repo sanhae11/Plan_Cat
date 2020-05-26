@@ -3,6 +3,7 @@ package com.example.mp_plancat.database.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -12,14 +13,14 @@ import java.util.List;
 
 @Dao
 public interface GameInfoDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(GameInfo gameInfo);
 
     //Game Info를 list 형식으로 반환
     @Query("SELECT * FROM GameInfo")
     List<GameInfo> getAll();
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(GameInfo gameInfo);
 
     @Delete

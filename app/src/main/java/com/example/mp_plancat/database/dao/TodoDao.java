@@ -3,6 +3,7 @@ package com.example.mp_plancat.database.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -13,7 +14,7 @@ import java.sql.Date;
 
 @Dao
 public interface TodoDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Todo... todo);
 
     //특정 날짜의 to do list 중 완료된 것들의 타이틀 List 반환
@@ -44,7 +45,7 @@ public interface TodoDao {
     @Query("SELECT * FROM Todo WHERE todo_category = :category AND :date = deadline AND is_finished = 0")
     List<Todo> getAllOfNotFinishedByCategoryAndDate(String category, Date date);
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Todo... todo);
 
     @Delete

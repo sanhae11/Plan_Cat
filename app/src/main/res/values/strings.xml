@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MP_PlanCat</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_daily">DAILY</string>
+    <string name="tab_weekly">WEEKLY</string>
+    <string name="tab_monthly">MONTHLY</string>
+    <string name="tab_yearly">YEARLY</string>
 </resources>

@@ -13,10 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
 
 public class CatFragment extends Fragment{
+    FloatingActionButton fab;
     Button btn_cat_book;
     Button btn_my_things;
     Button btn_shop;
@@ -30,11 +34,19 @@ public class CatFragment extends Fragment{
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cat, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
-        actionBar.hide(); //액션바 숨김
+        actionBar.hide(); // 액션바 숨김
 
+        // Fab menu button
+        fab = (FloatingActionButton)rootView.findViewById(R.id.fab_btn);
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(getActivity(),"You clicked on fab button", Toast.LENGTH_SHORT).show();
+            }
+        });
         //TODO:이미지 움직이게 하기
         //TODO:추후 데이터베이스 작업한 후에, 포인트 보상 팝업창 구현
-
+        //보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
         btn_msg = (ImageView)rootView.findViewById(R.id.ic_msg);
         btn_msg.setOnClickListener(new View.OnClickListener(){
@@ -44,8 +56,6 @@ public class CatFragment extends Fragment{
                 e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
             }
         });
-
-
 
         btn_cat_book = (Button) rootView.findViewById(R.id.btn_cat_book);
         btn_cat_book.setOnClickListener(new View.OnClickListener() {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 고양이 화면 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#A566FF">
+    tools:context=".MainActivity">
 
     <!-- 좌측 상단에 코인 배치 -->
     // 이미지나 사이즈, 간격 봐가면서 수정하기
@@ -74,6 +74,35 @@
             android:onClick="onClickButton" />
     </LinearLayout>
 
+    // Fab menu button
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Floating Button"
+            android:layout_centerInParent="true"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="74dp"
+        app:fabSize="normal"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="6dp"
+        android:src="@drawable/icon_fab" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,4 +130,4 @@
         android:layout_height="wrap_content"
         android:text="settings" />
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

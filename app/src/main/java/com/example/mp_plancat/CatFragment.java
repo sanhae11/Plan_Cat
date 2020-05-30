@@ -38,7 +38,7 @@ public class CatFragment extends Fragment{
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
         actionBar.hide(); // 액션바 숨김
 
-        //보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
+        // 보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
         btn_msg = (ImageView)rootView.findViewById(R.id.ic_msg);
         btn_msg.setOnClickListener(new View.OnClickListener(){
@@ -48,7 +48,6 @@ public class CatFragment extends Fragment{
                 e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
             }
         });
-
 
         // Floating Action Button
         fab_menu = (FloatingActionButton)rootView.findViewById(R.id.fab_menu);
@@ -100,7 +99,9 @@ public class CatFragment extends Fragment{
         fab_settings.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //TODO:설정 팝업창 띄우기
+                // TODO:설정 팝업창 띄우기
+                SettingsFragment e = SettingsFragment.getInstance();
+                e.show(getActivity().getSupportFragmentManager(), SettingsFragment.TAG_EVENT_DIALOG);
             }
         });
 

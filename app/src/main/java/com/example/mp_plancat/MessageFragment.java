@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 public class MessageFragment extends DialogFragment implements View.OnClickListener {
 
     public static final String TAG_EVENT_DIALOG = "dialog_event";
+
     TextView txt_date;
     private SimpleDateFormat mformat = new SimpleDateFormat("yyyy년 M월 d일 "); // 날짜 포맷
     ImageButton btn_confirm;
@@ -39,7 +40,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
         String str = txt_date.getText().toString();
         String time = mformat.format(date);
         time = time + str;
-        txt_date.setText(time); //현재 날짜로 설정
+        txt_date.setText(time); // 현재 날짜로 설정
 
         btn_confirm = (ImageButton)v.findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);

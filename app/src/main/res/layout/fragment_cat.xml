@@ -12,6 +12,7 @@
     // 배경에 글자 안 보일 거 생각해서 저거 감싸는 둥근 네모 하든지.. 텍스트에 테두리 싸든지..
     <!-- TODO:네 개 버튼 floating bar로 합치기 -->
     <!-- TODO:화면 구성 등 기타 -->
+    <!-- TODO: 화면 옆으로 넘겨서 확장-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:id="@+id/ic_silvercoin"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/icon_silvercoin" />
 
@@ -69,30 +70,79 @@
             android:src="@drawable/icon_msg"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
-            android:onClick="onClickButton" />
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
 
-    // Fab menu button
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Floating Button"
-            android:layout_centerInParent="true"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack" />
-
-    </RelativeLayout>
-
+    // Fab catbook button
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn"
+        android:id="@+id/fab_catbook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginBottom="304dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        app:backgroundTint="@color/colorWhite"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_collections_black_24dp"
+        android:visibility="invisible" />
+
+    // Fab mythings button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_mythings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginBottom="254dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        app:backgroundTint="@color/colorWhite"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_inbox_black_24dp"
+        android:visibility="invisible" />
+
+    // Fab shop button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginBottom="204dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        app:backgroundTint="@color/colorWhite"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_shopping_cart_black_24dp"
+        android:visibility="invisible" />
+
+    // Fab setting button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginBottom="154dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        app:backgroundTint="@color/colorWhite"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+        android:src="@drawable/ic_settings_black_24dp"
+        android:visibility="invisible" />
+
+    // icon 수정
+    // toast message 뜰 때 높이 설정
+    // Fab menu button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -101,33 +151,6 @@
         app:fabSize="normal"
         app:backgroundTint="@color/colorPrimary"
         app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
         android:src="@drawable/icon_fab" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_cat_book"
-        android:text="cat book"/>
-
-    <!-- my things 버튼 -->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_my_things"
-        android:text="my things"/>
-
-    <!-- shop 버튼 -->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_shop"
-        android:text="shop"/>
-
-    <!-- 설정 버튼 -->
-    <Button
-        android:id="@+id/btn_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="settings" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

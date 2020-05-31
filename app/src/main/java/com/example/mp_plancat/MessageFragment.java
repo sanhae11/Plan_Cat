@@ -19,8 +19,8 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
 
     public static final String TAG_EVENT_DIALOG = "dialog_event";
 
-    TextView txt_date;
     private SimpleDateFormat mformat = new SimpleDateFormat("yyyy년 M월 d일 "); // 날짜 포맷
+    TextView txt_date;
     ImageButton btn_confirm;
 
     public MessageFragment(){}

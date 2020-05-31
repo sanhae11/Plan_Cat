@@ -17,6 +17,8 @@ public class SettingsFragment extends DialogFragment implements View.OnClickList
 
     public static final String TAG_EVENT_DIALOG = "dialog_event";
 
+    SwitchButton sb_bgsound, sb_soundeff;
+
     public SettingsFragment(){}
 
     public static SettingsFragment getInstance() {
@@ -29,20 +31,32 @@ public class SettingsFragment extends DialogFragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.popup_settings, container);
 
-        // 스위치 버튼 상태에 따라 문자열을 출력할 텍스트뷰
-        final TextView optionState = (TextView)v.findViewById(R.id.textView);
-
-        // 스위치 버튼
-        SwitchButton switchButton = (SwitchButton)v.findViewById(R.id.sb_bgsound);
-        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // background sound switch
+        sb_bgsound = (SwitchButton)v.findViewById(R.id.sb_bgsound);
+        final TextView sb1 = (TextView)v.findViewById(R.id.sb1);
+        sb_bgsound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력
                 if(isChecked){
-                    optionState.setText("Option ON");
+                    sb1.setText("Option ON"); // example
                 }
                 else{
-                    optionState.setText("Option OFF");
+                    sb1.setText("Option OFF");
+                }
+            }
+        });
+
+        // sound effect switch
+        sb_soundeff = (SwitchButton)v.findViewById(R.id.sb_soundeff);
+        final TextView sb2 = (TextView)v.findViewById(R.id.sb2);
+        sb_soundeff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    sb2.setText("Option ON"); // example
+                }
+                else{
+                    sb2.setText("Option OFF");
                 }
             }
         });

@@ -42,6 +42,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
         time = time + str;
         txt_date.setText(time); // 현재 날짜로 설정
 
+        // confirm button
         btn_confirm = (ImageButton)v.findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
         setCancelable(false);   // 검은 영역 터치시에도 꺼지는 거 방지

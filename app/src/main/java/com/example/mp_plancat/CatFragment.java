@@ -99,9 +99,8 @@ public class CatFragment extends Fragment{
         fab_settings.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                // TODO:설정 팝업창 띄우기
                 SettingsFragment e = SettingsFragment.getInstance();
-                e.show(getActivity().getSupportFragmentManager(), SettingsFragment.TAG_EVENT_DIALOG);
+                e.show(getActivity().getSupportFragmentManager(), SettingsFragment.TAG_EVENT_DIALOG); // 클릭 시 Setting fragment 화면 띄움
             }
         });
 

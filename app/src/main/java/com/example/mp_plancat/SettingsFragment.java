@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ public class SettingsFragment extends DialogFragment implements View.OnClickList
     public static final String TAG_EVENT_DIALOG = "dialog_event";
 
     SwitchButton sb_bgsound, sb_soundeff;
+    ImageView btn_close;
 
     public SettingsFragment(){}
 
@@ -60,6 +62,11 @@ public class SettingsFragment extends DialogFragment implements View.OnClickList
                 }
             }
         });
+
+        // TODO : 배경음, 효과음 database & 설정
+        btn_close = (ImageView)v.findViewById(R.id.btn_close);
+        btn_close.setOnClickListener(this);
+        setCancelable(false);   // 검은 영역 터치시에도 꺼지는 거 방지
         return v;
     }
 

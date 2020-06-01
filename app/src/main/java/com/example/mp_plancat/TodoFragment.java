@@ -13,11 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class TodoFragment extends Fragment {
     int i = 0;
-
     //Button btn_create_todo;
 
     @Override
@@ -44,15 +44,14 @@ public class TodoFragment extends Fragment {
         TabLayout tab = view.findViewById(R.id.tab);
         tab.setupWithViewPager(vp);
 
-        /*
-        btn_create_todo = (Button) rootView.findViewById(R.id.btn_create_todo);
+        FloatingActionButton btn_create_todo = (FloatingActionButton) view.findViewById(R.id.btn_create_todo);
         btn_create_todo.setOnClickListener(new View.OnClickListener() { //할 일 생성 버튼 클릭 시
             @Override
             public void onClick(View v) {
                 getActivity().startActivity(new Intent(getActivity(), CreateTodoActivity.class)); //create to do activity로 감
             }
         });
-        */
+
         return view;
     }
 }

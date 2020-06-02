@@ -3,13 +3,21 @@ package com.example.mp_plancat;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Spinner;
 
 public class CreateTodoActivity extends AppCompatActivity {
+    String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +28,32 @@ public class CreateTodoActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼
         actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Create Todo");
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_category);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        /*
+        DatePicker datePicker = (DatePicker)findViewById(R.id.dataPicker);
+        datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                String date = year + "/" + monthOfYear + "/" + dayOfMonth;
+            }
+        });
+        */
+
+        final Button btn_priority_top = (Button) findViewById(R.id.btn_priority_top);
+        btn_priority_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
+                btn_priority_top.setTextColor(Color.WHITE);
+            }
+        });
+
+
     }
 
     @Override

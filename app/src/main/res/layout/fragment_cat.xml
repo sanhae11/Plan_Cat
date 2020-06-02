@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/bg_ex">
 
     <!-- 좌측 상단에 코인 배치 -->
     // 이미지나 사이즈, 간격 봐가면서 수정하기

@@ -70,7 +70,7 @@
             android:id="@+id/btn_choose_date"
             android:text="2020. 06. 01"
             android:textSize="17dp"
-            android:background="@drawable/custom_button_calander"
+            android:background="@drawable/custom_button_calendar"
             android:layout_marginLeft="17dp"/>
         <!--<DatePicker
             android:id="@+id/dataPicker"

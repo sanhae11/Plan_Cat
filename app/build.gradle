@@ -43,4 +43,11 @@ dependencies {
     implementation "androidx.room:room-guava:$room_version"
 
     implementation 'com.google.android.material:material:1.1.0-alpha10'
+
+    //implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha05'
+    // FAB
+    implementation 'com.google.android.material:material:1.1.0-beta01'
+    // switch button
+    implementation 'com.kyleduo.switchbutton:library:2.0.0'
 }

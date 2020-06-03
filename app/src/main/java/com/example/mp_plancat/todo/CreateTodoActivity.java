@@ -1,4 +1,4 @@
-package com.example.mp_plancat;
+package com.example.mp_plancat.todo;
 //할 일 생성 화면
 
 import androidx.appcompat.app.ActionBar;
@@ -23,6 +23,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.mp_plancat.R;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +46,7 @@ public class CreateTodoActivity extends AppCompatActivity {
         actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Create Todo");
 
-        //create_todo 액티비티 실행됐을 때 키보드 나타나게 함; 앱 종료되어도 키보드 안 사라지는 문제 때문에 주석 처리
+        //create_todo 액티비티 실행됐을 때 키보드 나타나게 함; 앱 종료되어도 키보드 안 사라지는 문제 때문에 주석 처리 해둠
         //showKeyBoard();
 
         final Button btn_choose_date = (Button) findViewById(R.id.btn_choose_date);
@@ -61,6 +63,8 @@ public class CreateTodoActivity extends AppCompatActivity {
                 Date date = new Date(now);
                 SimpleDateFormat simpleDate;
                 String getDate;
+
+                //spinner에서 선택되는 카테고리에 맞는 포맷의 날짜가 버튼에 나타남
                 switch(position){
                     case 0:
                         simpleDate = new SimpleDateFormat("yyyy년 MM월 dd일");

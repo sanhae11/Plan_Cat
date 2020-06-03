@@ -1,4 +1,4 @@
-package com.example.mp_plancat;
+package com.example.mp_plancat.todo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.mp_plancat.todo_category.DailyFragment;
-import com.example.mp_plancat.todo_category.MonthlyFragment;
-import com.example.mp_plancat.todo_category.WeeklyFragment;
-import com.example.mp_plancat.todo_category.YearlyFragment;
+import com.example.mp_plancat.todo.category.DailyFragment;
+import com.example.mp_plancat.todo.category.MonthlyFragment;
+import com.example.mp_plancat.todo.category.WeeklyFragment;
+import com.example.mp_plancat.todo.category.YearlyFragment;
 
 import java.util.ArrayList;
 

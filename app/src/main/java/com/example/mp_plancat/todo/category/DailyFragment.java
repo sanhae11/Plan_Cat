@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo_category;
+package com.example.mp_plancat.todo.category;
 
 import android.os.Bundle;
 
@@ -12,14 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.mp_plancat.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class WeeklyFragment extends Fragment {
+public class DailyFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        return inflater.inflate(R.layout.fragment_weekly, container, false);
+        return inflater.inflate(R.layout.fragment_daily, container, false);
     }
 }

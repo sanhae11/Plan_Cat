@@ -1,4 +1,4 @@
-package com.example.mp_plancat;
+package com.example.mp_plancat.todo;
 //할 일 편집 화면
 
 import androidx.appcompat.app.ActionBar;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.mp_plancat.R;
 
 public class EditTodoActivity extends AppCompatActivity {
 

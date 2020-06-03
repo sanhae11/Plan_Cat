@@ -45,11 +45,48 @@ public class CreateTodoActivity extends AppCompatActivity {
         */
 
         final Button btn_priority_top = (Button) findViewById(R.id.btn_priority_top);
-        btn_priority_top.setOnClickListener(new View.OnClickListener() {
+        final Button btn_priority_middle = (Button) findViewById(R.id.btn_priority_middle);
+        final Button btn_priority_bottom = (Button) findViewById(R.id.btn_priority_bottom);
+        btn_priority_top.setOnClickListener(new View.OnClickListener() { //중요도 상 클릭 시
             @Override
             public void onClick(View v) {
+                //중요도 상 만 검은 동그라미로 감싸짐; 중,하 는 검은 동그라미 사라짐
                 btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
                 btn_priority_top.setTextColor(Color.WHITE);
+
+                btn_priority_middle.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+                btn_priority_middle.setTextColor(Color.BLACK);
+
+                btn_priority_bottom.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+                btn_priority_bottom.setTextColor(Color.BLACK);
+            }
+        });
+        btn_priority_middle.setOnClickListener(new View.OnClickListener() { //중요도 중 클릭 시
+            @Override
+            public void onClick(View v) {
+                //중요도 중 만 검은 동그라미로 감싸짐; 상,하 는 검은 동그라미 사라짐
+                btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+                btn_priority_top.setTextColor(Color.BLACK);
+
+                btn_priority_middle.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
+                btn_priority_middle.setTextColor(Color.WHITE);
+
+                btn_priority_bottom.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+                btn_priority_bottom.setTextColor(Color.BLACK);
+            }
+        });
+        btn_priority_bottom.setOnClickListener(new View.OnClickListener() { //중요도 하 클릭 시
+            @Override
+            public void onClick(View v) {
+                //중요도 하 만 검은 동그라미로 감싸짐; 상,중 은 검은 동그라미 사라짐
+                btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+                btn_priority_top.setTextColor(Color.BLACK);
+
+                btn_priority_middle.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+                btn_priority_middle.setTextColor(Color.BLACK);
+
+                btn_priority_bottom.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
+                btn_priority_bottom.setTextColor(Color.WHITE);
             }
         });
 

@@ -5,19 +5,30 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 public class CreateTodoActivity extends AppCompatActivity {
     String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
+    InputMethodManager imm;
+    ArrayList<Button> priority_btn_list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +40,28 @@ public class CreateTodoActivity extends AppCompatActivity {
         actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Create Todo");
 
+        //create_todo 화면으로 넘어왔을 때 키보드 나타나게 함
+        showKeyBoard();
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner_category);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        //editText 이외의 부분 터치하면 키보드 감추기
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        linearLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                /*EditText editText = (EditText) findViewById(R.id.editText_todo_title);
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);*/
+
+                disAppearKeyBoard();
+                return false;
+            }
+        });
+
 
         /*
         DatePicker datePicker = (DatePicker)findViewById(R.id.dataPicker);
@@ -44,49 +73,34 @@ public class CreateTodoActivity extends AppCompatActivity {
         });
         */
 
+
         final Button btn_priority_top = (Button) findViewById(R.id.btn_priority_top);
         final Button btn_priority_middle = (Button) findViewById(R.id.btn_priority_middle);
         final Button btn_priority_bottom = (Button) findViewById(R.id.btn_priority_bottom);
+
+        //중요도 상중하 버튼 중 클릭한 것만 검은 동그라미로 감싸짐
         btn_priority_top.setOnClickListener(new View.OnClickListener() { //중요도 상 클릭 시
             @Override
             public void onClick(View v) {
-                //중요도 상 만 검은 동그라미로 감싸짐; 중,하 는 검은 동그라미 사라짐
-                btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
-                btn_priority_top.setTextColor(Color.WHITE);
-
-                btn_priority_middle.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
-                btn_priority_middle.setTextColor(Color.BLACK);
-
-                btn_priority_bottom.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
-                btn_priority_bottom.setTextColor(Color.BLACK);
+                checkPriority(btn_priority_top);
+                uncheckPriority(btn_priority_middle);
+                uncheckPriority(btn_priority_bottom);
             }
         });
         btn_priority_middle.setOnClickListener(new View.OnClickListener() { //중요도 중 클릭 시
             @Override
             public void onClick(View v) {
-                //중요도 중 만 검은 동그라미로 감싸짐; 상,하 는 검은 동그라미 사라짐
-                btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
-                btn_priority_top.setTextColor(Color.BLACK);
-
-                btn_priority_middle.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
-                btn_priority_middle.setTextColor(Color.WHITE);
-
-                btn_priority_bottom.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
-                btn_priority_bottom.setTextColor(Color.BLACK);
+                uncheckPriority(btn_priority_top);
+                checkPriority(btn_priority_middle);
+                uncheckPriority(btn_priority_bottom);
             }
         });
         btn_priority_bottom.setOnClickListener(new View.OnClickListener() { //중요도 하 클릭 시
             @Override
             public void onClick(View v) {
-                //중요도 하 만 검은 동그라미로 감싸짐; 상,중 은 검은 동그라미 사라짐
-                btn_priority_top.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
-                btn_priority_top.setTextColor(Color.BLACK);
-
-                btn_priority_middle.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
-                btn_priority_middle.setTextColor(Color.BLACK);
-
-                btn_priority_bottom.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
-                btn_priority_bottom.setTextColor(Color.WHITE);
+                uncheckPriority(btn_priority_top);
+                uncheckPriority(btn_priority_middle);
+                checkPriority(btn_priority_bottom);
             }
         });
 
@@ -110,4 +124,28 @@ public class CreateTodoActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void showKeyBoard(){
+        if(imm == null)
+            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+    }
+    public void disAppearKeyBoard(){
+        if(imm == null)
+            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        EditText editText = (EditText) findViewById(R.id.editText_todo_title);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+    }
+
+    public void checkPriority(final Button btn){
+        btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
+        btn.setTextColor(Color.WHITE);
+    }
+    public void uncheckPriority(final Button btn){
+        btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
+        btn.setTextColor(Color.BLACK);
+    }
 }
+
+
+

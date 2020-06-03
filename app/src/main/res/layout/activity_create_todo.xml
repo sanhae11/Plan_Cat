@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/linearLayout"
     android:orientation="vertical"
     android:paddingTop="?android:attr/actionBarSize"
     tools:context=".CreateTodoActivity">
 
+    //todo 타이틀 적는 editText
     <EditText
         android:id="@+id/editText_todo_title"
         android:layout_width="match_parent"
@@ -15,7 +17,9 @@
         android:layout_marginTop="25dp"
         android:layout_marginRight="17dp"
         android:hint="@string/editText_todo_title"
-        android:textColorHint="@color/colorGray" />
+        android:textColorHint="@color/colorGray">
+        <requestFocus/> //editText에 포커스 맞추기
+    </EditText>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +36,7 @@
             android:textSize="17dp"
             android:textStyle="bold"
             android:textColor="@color/colorBlack"/>
-
+        //카테고리(Daily, Weekly, Monthly, Yearly)
         <Spinner
             android:id="@+id/spinner_category"
             android:layout_width="match_parent"
@@ -57,6 +61,8 @@
             android:textStyle="bold"
             android:textColor="@color/colorBlack"
             android:layout_gravity="center_vertical"/>
+        //날짜 선택
+        //카테고리에 따라 날짜 표현 달라야 함 ...
         <Button
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -89,16 +95,19 @@
             android:textStyle="bold"
             android:textColor="@color/colorBlack"/>
 
+        //중요도 상
         <Button
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/btn_priority_top"
             android:text="@string/btn_priority_top"
             android:textSize="17dp"
-            android:background="@drawable/custom_button_priority"
+            android:background="@drawable/custom_button_priority_checked"
+            android:textColor="@color/colorWhite"
             android:layout_marginLeft="65dp"
             android:layout_marginRight="13dp"
             android:layout_marginBottom="10dp"/>
+        //중요도 중
         <Button
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -109,6 +118,7 @@
             android:layout_marginLeft="13dp"
             android:layout_marginRight="13dp"
             android:layout_marginBottom="10dp"/>
+        //중요도 하
         <Button
             android:layout_width="40dp"
             android:layout_height="40dp"

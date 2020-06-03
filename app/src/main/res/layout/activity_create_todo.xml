@@ -36,7 +36,7 @@
             android:text="@string/text_category"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorDarkGray"/>
         //카테고리(Daily, Weekly, Monthly, Yearly)
         <Spinner
             style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -63,18 +63,22 @@
             android:text="@string/text_date"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorDarkGray"
             android:layout_gravity="center_vertical"/>
         //날짜 선택
-        //카테고리에 따라 날짜 표현 달라야 함 ...
         <Button
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:id="@+id/btn_choose_date"
             android:text="2020. 06. 01"
-            android:textSize="17dp"
+            android:textSize="14dp"
             android:background="@drawable/custom_button_calendar"
-            android:layout_marginLeft="17dp"/>
+            android:layout_marginLeft="17dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            tools:targetApi="lollipop"
+            android:clickable="true"/>
         <!--<DatePicker
             android:id="@+id/dataPicker"
             android:layout_width="wrap_content"
@@ -97,7 +101,7 @@
             android:text="@string/text_priority"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/colorDarkGray"/>
 
         //중요도 상
         <Button

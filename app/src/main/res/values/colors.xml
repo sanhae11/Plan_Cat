@@ -8,4 +8,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="cursorColor">#A566FF</color>
     <color name="normalColor">#E8D9FF</color>
+    <color name="colorWhiteGray">#EEEEEE</color>
+    <color name="colorDarkGray">#333333</color>
+    <color name="colorCream">#FFFEFF</color>
 </resources>

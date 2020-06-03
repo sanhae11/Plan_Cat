@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -22,7 +23,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CreateTodoActivity extends AppCompatActivity {
     String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
@@ -40,13 +44,56 @@ public class CreateTodoActivity extends AppCompatActivity {
         actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Create Todo");
 
-        //create_todo 액티비티 실행됐을 때 키보드 나타나게 함
+        //create_todo 액티비티 실행됐을 때 키보드 나타나게 함; 앱 종료되어도 키보드 안 사라지는 문제 때문에 주석 처리
         //showKeyBoard();
+
+        final Button btn_choose_date = (Button) findViewById(R.id.btn_choose_date);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner_category);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat simpleDate;
+                String getDate;
+                switch(position){
+                    case 0:
+                        simpleDate = new SimpleDateFormat("yyyy년 MM월 dd일");
+                        getDate = simpleDate.format(date);
+                        btn_choose_date.setText(getDate);
+                        break;
+                    case 1:
+                        simpleDate = new SimpleDateFormat("yyyy년 MM월");
+                        getDate = simpleDate.format(date);
+
+                        //현재 해당 월의 몇 주차인지 받아옴
+                        Calendar c = Calendar.getInstance();
+                        getDate += " "+c.get(Calendar.WEEK_OF_MONTH)+"주";
+                        btn_choose_date.setText(getDate);
+                        break;
+                    case 2:
+                        simpleDate = new SimpleDateFormat("yyyy년 MM월");
+                        getDate = simpleDate.format(date);
+                        btn_choose_date.setText(getDate);
+                        break;
+                    case 3:
+                        simpleDate = new SimpleDateFormat("yyyy년");
+                        getDate = simpleDate.format(date);
+                        btn_choose_date.setText(getDate);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            public void onNothingSelected(AdapterView adapterView){
+
+            }
+        });
 
         //editText 이외의 부분 터치하면 키보드 감추기
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
@@ -75,7 +122,7 @@ public class CreateTodoActivity extends AppCompatActivity {
         final Button btn_priority_middle = (Button) findViewById(R.id.btn_priority_middle);
         final Button btn_priority_bottom = (Button) findViewById(R.id.btn_priority_bottom);
 
-        //중요도 상중하 버튼 중 클릭한 것만 검은 동그라미로 감싸짐
+        //중요도 상중하 버튼 중 클릭한 것만 색칠됨
         btn_priority_top.setOnClickListener(new View.OnClickListener() { //중요도 상 클릭 시
             @Override
             public void onClick(View v) {

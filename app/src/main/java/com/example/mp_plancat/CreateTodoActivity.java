@@ -40,7 +40,7 @@ public class CreateTodoActivity extends AppCompatActivity {
         actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Create Todo");
 
-        //create_todo 화면으로 넘어왔을 때 키보드 나타나게 함
+        //create_todo 액티비티 실행됐을 때 키보드 나타나게 함
         showKeyBoard();
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner_category);

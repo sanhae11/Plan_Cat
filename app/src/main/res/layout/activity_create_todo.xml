@@ -39,9 +39,12 @@
             android:textColor="@color/colorBlack"/>
         //카테고리(Daily, Weekly, Monthly, Yearly)
         <Spinner
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:theme="@style/SpinnerTheme"
             android:id="@+id/spinner_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" />
     </LinearLayout>

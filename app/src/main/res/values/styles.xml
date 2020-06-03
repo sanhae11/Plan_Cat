@@ -14,6 +14,11 @@
         <item name="colorControlNormal">@color/normalColor</item>
     </style>
 
+    <style name="SpinnerTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@color/cursorColor</item>
+        <item name="colorControlNormal">@color/colorGray</item>
+    </style>
+
     <style name="SwitchButtonStyle">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>

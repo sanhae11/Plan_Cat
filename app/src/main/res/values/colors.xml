@@ -6,4 +6,6 @@
     <color name="colorGray">#888888</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="cursorColor">#A566FF</color>
+    <color name="normalColor">#E8D9FF</color>
 </resources>

@@ -10,6 +10,7 @@
 
     //todo 타이틀 적는 editText
     <EditText
+        android:theme="@style/EditTheme"
         android:id="@+id/editText_todo_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

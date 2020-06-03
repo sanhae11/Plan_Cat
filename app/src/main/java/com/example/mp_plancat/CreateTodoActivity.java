@@ -53,10 +53,7 @@ public class CreateTodoActivity extends AppCompatActivity {
         linearLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                /*EditText editText = (EditText) findViewById(R.id.editText_todo_title);
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);*/
-
+                EditText editText = (EditText)findViewById(R.id.editText_todo_title);
                 disAppearKeyBoard();
                 return false;
             }
@@ -125,23 +122,23 @@ public class CreateTodoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showKeyBoard(){
+    public void showKeyBoard(){ //키보드 나타남
         if(imm == null)
             imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
-    public void disAppearKeyBoard(){
+    public void disAppearKeyBoard(){ //키보드 사라짐
         if(imm == null)
             imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         EditText editText = (EditText) findViewById(R.id.editText_todo_title);
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-    public void checkPriority(final Button btn){
+    public void checkPriority(final Button btn){ //중요도 버튼 체크
         btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority_checked));
         btn.setTextColor(Color.WHITE);
     }
-    public void uncheckPriority(final Button btn){
+    public void uncheckPriority(final Button btn){ //중요도 버튼 체크 해제
         btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
         btn.setTextColor(Color.BLACK);
     }

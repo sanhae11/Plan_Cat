@@ -3,13 +3,16 @@ package com.example.mp_plancat.todo.picker_dialog;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.mp_plancat.R;
@@ -41,6 +44,7 @@ public class DailyPickerDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false); //dialog 창 이외의 영역 터치해도 창 안 꺼지게 함
 
@@ -56,30 +60,6 @@ public class DailyPickerDialog extends DialogFragment {
         dayPicker = (NumberPicker) dialog.findViewById(R.id.dailyPicker_day);
 
         setPickers(); //pickers 값 세팅
-        yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() { //값이 변경될 때마다 year 값 받아옴
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                year = newVal;
-                setPickers();
-                yearPicker.setValue(newVal); //dialog 창 열렸을 때 yearPicker의 처음 보여지는 값 다시 설정
-            }
-        });
-        monthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {//값이 변경될 때마다 month 값 받아옴
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                month = newVal;
-                setPickers();
-                monthPicker.setValue(newVal); //dialog 창 열렸을 때 monthPicker의 처음 보여지는 값 다시 설정
-            }
-        });
-        dayPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() { //값이 변경될 때마다 day 값 받아옴
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                day = newVal;
-                setPickers();
-                dayPicker.setValue(newVal); //dialog 창 열렸을 때 dayPicker의 처음 보여지는 값 다시 설정
-            }
-        });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() { //취소 버튼 눌렀을 때
             @Override
@@ -95,7 +75,13 @@ public class DailyPickerDialog extends DialogFragment {
                 //창 닫히기 직전의 year, month, day 값 저장
                 year = yearPicker.getValue();
                 month = monthPicker.getValue();
-                day = dayPicker.getValue();
+                cal.set(year, month-1, 1);
+                if(dayPicker.getValue() > cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+                    day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                else
+                    day = dayPicker.getValue();
+
+                setPickers();//pickers 값 세팅
                 DailyPickerDialog.this.getDialog().cancel(); //dialog 창 닫기
             }
         });
@@ -108,11 +94,13 @@ public class DailyPickerDialog extends DialogFragment {
         return dialog1;
     }
 
-
-
     public void setPickers(){ //pickers 값 세팅
+        Calendar c = Calendar.getInstance();
+        c.set(year, month-1, 1);
+        if(day > c.getActualMaximum(Calendar.DAY_OF_MONTH))
+            day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayPicker.setMinValue(1);
-        dayPicker.setMaxValue(cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        dayPicker.setMaxValue(c.getActualMaximum(Calendar.DAY_OF_MONTH));
         dayPicker.setValue(day);
 
         monthPicker.setMinValue(1);

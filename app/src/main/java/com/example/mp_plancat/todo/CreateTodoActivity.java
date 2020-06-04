@@ -132,7 +132,11 @@ public class CreateTodoActivity extends AppCompatActivity {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 month = month1;
-                day = dayOfMonth1;
+                cal.set(year, month-1, 1);
+                if(dayOfMonth1 > cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+                    day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                else
+                    day = dayOfMonth1;
                 //Daily 카테고리일 때, DailyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
                 btn_choose_date.setText(year+"년 "+month+"월 "+day+"일");
 
@@ -181,6 +185,11 @@ public class CreateTodoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //카테고리에 해당하는 dialog 창이 뜸
+                cal.set(year, month-1, 1);
+                if(day > cal.getActualMaximum(Calendar.DAY_OF_MONTH))
+                    day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                if(week > cal.getActualMaximum(Calendar.WEEK_OF_MONTH))
+                    week = cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
                 switch (category){
                     case 0:
                         DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);

@@ -38,8 +38,9 @@ public class CreateTodoActivity extends AppCompatActivity {
     InputMethodManager imm;
     ArrayList<Button> priority_btn_list;
     Button btn_choose_date;
-    private Calendar cal = Calendar.getInstance();
+    int category=0;
 
+    private Calendar cal = Calendar.getInstance();
 
     //카테고리 바뀔 때마다 ㅎ현재 날짜로 초기화 할지 아님 그냥 쓸지 ?!?!
     private int day = cal.get(Calendar.DATE);
@@ -75,7 +76,7 @@ public class CreateTodoActivity extends AppCompatActivity {
                 Date date = new Date(now);
                 SimpleDateFormat simpleDate;
                 String getDate;
-
+                initDate();
                 //spinner에서 선택되는 카테고리에 맞는 포맷의 날짜가 버튼에 나타남
                 switch(position){
                     case 0:
@@ -221,6 +222,14 @@ public class CreateTodoActivity extends AppCompatActivity {
     public void uncheckPriority(final Button btn){ //중요도 버튼 체크 해제
         btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_button_priority));
         btn.setTextColor(Color.BLACK);
+    }
+
+    public void initDate(){
+        cal = Calendar.getInstance();
+        day = cal.get(Calendar.DATE);
+        month = cal.get(Calendar.MONTH)+1;
+        year = cal.get(Calendar.YEAR);
+        week = cal.get(Calendar.WEEK_OF_MONTH);
     }
 }
 

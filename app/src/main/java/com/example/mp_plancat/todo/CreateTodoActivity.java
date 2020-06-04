@@ -77,6 +77,7 @@ public class CreateTodoActivity extends AppCompatActivity {
                 SimpleDateFormat simpleDate;
                 String getDate;
                 initDate();
+                category = position;
                 //spinner에서 선택되는 카테고리에 맞는 포맷의 날짜가 버튼에 나타남
                 switch(position){
                     case 0:
@@ -122,20 +123,37 @@ public class CreateTodoActivity extends AppCompatActivity {
             }
         });
 
-        //DatePicker(연, 월, 일 선택하는 창)
-        /////////예시에서는 이 코드 위치가 oncreate 밖임 오류 나는지 확인 하기
+
+        //DailyPicker(연, 월, 일 선택하는 창)
         final DatePickerDialog.OnDateSetListener dailyListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int dayOfMonth1) {
                 ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
-                Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
+                //Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
 
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 month = month1;
                 day = dayOfMonth1;
                 //Daily 카테고리일 때, DailyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
-                btn_choose_date.setText(year1+"년 "+month1+"월 "+dayOfMonth1+"일");
+                btn_choose_date.setText(year+"년 "+month+"월 "+day+"일");
+
+            }
+        };
+
+        //WeeklyPicker(연, 월, 주 선택하는 창)
+        final DatePickerDialog.OnDateSetListener weeklyListner = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year1, int month1, int week1) {
+                ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
+                //Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
+
+                //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
+                year = year1;
+                month = month1;
+                week = week1;
+                //Weekly 카테고리일 때, WeeklyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
+                btn_choose_date.setText(year+"년 "+month+"월 "+week+"주");
 
             }
         };
@@ -144,9 +162,21 @@ public class CreateTodoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //카테고리에 따라 다른 dialog 창 떠야 함. spinner 눌린 값 받아와서 ??????? 해야 하나.. 아님 int로 구분할 지 생각해봐
-                DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);
-                dailyPD.setListener(dailyListner);
-                dailyPD.show(getSupportFragmentManager(), "DailyPickerTest");
+                switch (category){
+                    case 0:
+                        DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);
+                        dailyPD.setListener(dailyListner);
+                        dailyPD.show(getSupportFragmentManager(), "DailyPickerTest");
+                        break;
+                    case 1:
+                        WeeklyPickerDialog weeklyPD = new WeeklyPickerDialog(year, month, week);
+                        weeklyPD.setListener(weeklyListner);
+                        weeklyPD.show(getSupportFragmentManager(), "WeeklyPickerTest");
+                        break;
+                    default:
+                        break;
+                }
+
             }
         });
 

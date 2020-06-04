@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
@@ -78,6 +79,7 @@ public class YearlyPickerDialog extends DialogFragment {
 
         Dialog dialog1 = builder.create();
         dialog1.setCanceledOnTouchOutside(false); //dialog 창 이외의 영역 터치해도 창 안 꺼지게 함
+        dialog1.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND); //dialog 창 이외 부분 투명하게 보이게 함
         return dialog1;
     }
 

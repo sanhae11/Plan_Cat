@@ -161,7 +161,7 @@ public class CreateTodoActivity extends AppCompatActivity {
                 if(week1 > max_week)
                     week = max_week;
                 else
-                    week = week1;
+                    week = week1+1;
                 //Weekly 카테고리일 때, WeeklyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
                 btn_choose_date.setText(year+"년 "+month+"월 "+week+"주");
 

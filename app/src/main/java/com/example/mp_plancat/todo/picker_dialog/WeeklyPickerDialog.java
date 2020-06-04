@@ -20,6 +20,16 @@ public class WeeklyPickerDialog extends DialogFragment {
     private static final int MAX_YEAR = 2099;
     private static final int MIN_YEAR = 2000;
 
+    //////////////////////////////////////////////////////////////
+
+    private String[] four_weeks = new String[]{"1주", "2주", "3주", "4주"};
+    private String[] five_weeks = new String[]{"1주", "2주", "3주", "4주", "5주"};
+    private String[] six_weeks = new String[]{"1주", "2주", "3주", "4주", "5주", "6주"};
+
+    private int chosenIndex = 0;
+
+    //////////////////////////////////////////////////////////////
+
     private DatePickerDialog.OnDateSetListener listener;
     private Calendar cal = Calendar.getInstance();
     private int year, month, week;
@@ -80,10 +90,10 @@ public class WeeklyPickerDialog extends DialogFragment {
 
                 int max_week = cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
 
-                if(weekPicker.getValue() > max_week)
+                if(weekPicker.getValue() >= max_week)
                     week = max_week;
                 else
-                    week = weekPicker.getValue();
+                    week = weekPicker.getValue()+1;
 
                 setPickers(); //pickers 값 세팅
                 WeeklyPickerDialog.this.getDialog().cancel(); //dialog 창 닫기
@@ -113,7 +123,20 @@ public class WeeklyPickerDialog extends DialogFragment {
 
         weekPicker.setMinValue(1);
         weekPicker.setMaxValue(c.get(Calendar.WEEK_OF_MONTH));
-        weekPicker.setValue(week);
+
+        ////////////////////////////////////////////////////////////
+
+        chosenIndex = week - 1;
+
+        weekPicker.setValue(chosenIndex);
+        if(max_week == 4)
+            weekPicker.setDisplayedValues(four_weeks);
+        else if(max_week == 5)
+            weekPicker.setDisplayedValues(five_weeks);
+        if(max_week == 6)
+            weekPicker.setDisplayedValues(six_weeks);
+
+        ///////////////////////////////////////////////////////////
 
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);

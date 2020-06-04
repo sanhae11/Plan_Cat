@@ -158,6 +158,22 @@ public class CreateTodoActivity extends AppCompatActivity {
             }
         };
 
+        //MonthlyPicker(연, 월 선택하는 창)
+        final DatePickerDialog.OnDateSetListener monthlyListner = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year1, int month1, int day1) {
+                ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
+                //Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
+
+                //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
+                year = year1;
+                month = month1;
+                //Monthly 카테고리일 때, MonthlyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
+                btn_choose_date.setText(year+"년 "+month+"월");
+
+            }
+        };
+
         btn_choose_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,6 +188,11 @@ public class CreateTodoActivity extends AppCompatActivity {
                         WeeklyPickerDialog weeklyPD = new WeeklyPickerDialog(year, month, week);
                         weeklyPD.setListener(weeklyListner);
                         weeklyPD.show(getSupportFragmentManager(), "WeeklyPickerTest");
+                        break;
+                    case 2:
+                        MonthlyPickerDialog monthlyPD = new MonthlyPickerDialog(year, month);
+                        monthlyPD.setListener(monthlyListner);
+                        monthlyPD.show(getSupportFragmentManager(), "MonthlyPickerTest");
                         break;
                     default:
                         break;

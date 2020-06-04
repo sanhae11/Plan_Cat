@@ -38,11 +38,10 @@ public class CreateTodoActivity extends AppCompatActivity {
     InputMethodManager imm;
     ArrayList<Button> priority_btn_list;
     Button btn_choose_date;
-    int category=0;
+    int category=0; //카테고리; 0=daily, 1=weekly, 2=monthly, 3=yearly
 
     private Calendar cal = Calendar.getInstance();
 
-    //카테고리 바뀔 때마다 ㅎ현재 날짜로 초기화 할지 아님 그냥 쓸지 ?!?!
     private int day = cal.get(Calendar.DATE);
     private int month = cal.get(Calendar.MONTH)+1;
     private int year = cal.get(Calendar.YEAR);
@@ -76,8 +75,10 @@ public class CreateTodoActivity extends AppCompatActivity {
                 Date date = new Date(now);
                 SimpleDateFormat simpleDate;
                 String getDate;
+
                 initDate();
                 category = position;
+
                 //spinner에서 선택되는 카테고리에 맞는 포맷의 날짜가 버튼에 나타남
                 switch(position){
                     case 0:
@@ -128,9 +129,6 @@ public class CreateTodoActivity extends AppCompatActivity {
         final DatePickerDialog.OnDateSetListener dailyListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int dayOfMonth1) {
-                ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
-                //Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
-
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 month = month1;
@@ -145,9 +143,6 @@ public class CreateTodoActivity extends AppCompatActivity {
         final DatePickerDialog.OnDateSetListener weeklyListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int week1) {
-                ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
-                //Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
-
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 month = month1;
@@ -162,9 +157,6 @@ public class CreateTodoActivity extends AppCompatActivity {
         final DatePickerDialog.OnDateSetListener monthlyListner = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int day1) {
-                ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
-                //Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
-
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 month = month1;
@@ -174,10 +166,21 @@ public class CreateTodoActivity extends AppCompatActivity {
             }
         };
 
+        //YearlyPicker(연 선택하는 창)
+        final DatePickerDialog.OnDateSetListener yearlyListner = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year1, int month1, int day1) {
+                //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
+                year = year1;
+                //Yearly 카테고리일 때, YearlyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
+                btn_choose_date.setText(year+"년");
+            }
+        };
+
         btn_choose_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //카테고리에 따라 다른 dialog 창 떠야 함. spinner 눌린 값 받아와서 ??????? 해야 하나.. 아님 int로 구분할 지 생각해봐
+                //카테고리에 해당하는 dialog 창이 뜸
                 switch (category){
                     case 0:
                         DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);
@@ -193,6 +196,11 @@ public class CreateTodoActivity extends AppCompatActivity {
                         MonthlyPickerDialog monthlyPD = new MonthlyPickerDialog(year, month);
                         monthlyPD.setListener(monthlyListner);
                         monthlyPD.show(getSupportFragmentManager(), "MonthlyPickerTest");
+                        break;
+                    case 3:
+                        YearlyPickerDialog yearlyPD = new YearlyPickerDialog(year);
+                        yearlyPD.setListener(yearlyListner);
+                        yearlyPD.show(getSupportFragmentManager(), "YearlyPickerTest");
                         break;
                     default:
                         break;

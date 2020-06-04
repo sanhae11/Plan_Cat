@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.mp_plancat.R;
 
@@ -34,7 +37,15 @@ public class CreateTodoActivity extends AppCompatActivity {
     String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
     InputMethodManager imm;
     ArrayList<Button> priority_btn_list;
+    Button btn_choose_date;
+    private Calendar cal = Calendar.getInstance();
 
+
+    //카테고리 바뀔 때마다 ㅎ현재 날짜로 초기화 할지 아님 그냥 쓸지 ?!?!
+    private int day = cal.get(Calendar.DATE);
+    private int month = cal.get(Calendar.MONTH)+1;
+    private int year = cal.get(Calendar.YEAR);
+    private int week = cal.get(Calendar.WEEK_OF_MONTH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,7 @@ public class CreateTodoActivity extends AppCompatActivity {
 
         final Button btn_choose_date = (Button) findViewById(R.id.btn_choose_date);
 
+        //spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinner_category);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,8 +88,7 @@ public class CreateTodoActivity extends AppCompatActivity {
                         getDate = simpleDate.format(date);
 
                         //현재 해당 월의 몇 주차인지 받아옴
-                        Calendar c = Calendar.getInstance();
-                        getDate += " "+c.get(Calendar.WEEK_OF_MONTH)+"주";
+                        getDate += " "+cal.get(Calendar.WEEK_OF_MONTH)+"주";
                         btn_choose_date.setText(getDate);
                         break;
                     case 2:
@@ -110,16 +121,34 @@ public class CreateTodoActivity extends AppCompatActivity {
             }
         });
 
-
-        /*
-        DatePicker datePicker = (DatePicker)findViewById(R.id.dataPicker);
-        datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+        //DatePicker(연, 월, 일 선택하는 창)
+        /////////예시에서는 이 코드 위치가 oncreate 밖임 오류 나는지 확인 하기
+        final DatePickerDialog.OnDateSetListener dailyListner = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String date = year + "/" + monthOfYear + "/" + dayOfMonth;
+            public void onDateSet(DatePicker view, int year1, int month1, int dayOfMonth1) {
+                ////////////////로그 체크;; 확인 누르면 값 전달됨 !!!!
+                Log.d("DailyPickerTest", "year = "+year1+", month = "+month1+", day = "+dayOfMonth1);
+
+                //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
+                year = year1;
+                month = month1;
+                day = dayOfMonth1;
+                //Daily 카테고리일 때, DailyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
+                btn_choose_date.setText(year1+"년 "+month1+"월 "+dayOfMonth1+"일");
+
+            }
+        };
+
+        btn_choose_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //카테고리에 따라 다른 dialog 창 떠야 함. spinner 눌린 값 받아와서 ??????? 해야 하나.. 아님 int로 구분할 지 생각해봐
+                DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);
+                dailyPD.setListener(dailyListner);
+                dailyPD.show(getSupportFragmentManager(), "DailyPickerTest");
             }
         });
-        */
+
 
 
         final Button btn_priority_top = (Button) findViewById(R.id.btn_priority_top);
@@ -165,7 +194,7 @@ public class CreateTodoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:{ //뒤로가기 버튼 눌렀을 때 동작
+            case android.R.id.home:{ //액션바의 뒤로가기 버튼 눌렀을 때 동작
                 finish();
                 return true;
             }

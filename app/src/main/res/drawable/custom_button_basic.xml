@@ -7,21 +7,15 @@
         <shape
             android:shape="rectangle">
             <stroke
-                android:width="0.6dp"
-                android:color="@color/colorGray" />
-            <solid android:color="@color/colorWhiteGray"/>
-            <corners android:radius="25dp" />
+                android:width="0dp" />
+            <solid android:color="@color/basicBtnColor"/>
         </shape>
     </item>
     //버튼 클릭 안했을 시
     <item
         android:state_enabled="true">
-        <shape
-            android:shape="rectangle">
-            <stroke
-                android:width="0.6dp"
-                android:color="@color/colorGray" />
-            <corners android:radius="25dp" />
+        <shape android:shape="rectangle">
+            <stroke android:width="0dp" />
         </shape>
     </item>
 </selector>

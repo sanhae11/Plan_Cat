@@ -20,6 +20,10 @@ public class WeeklyPickerDialog extends DialogFragment {
     private static final int MAX_YEAR = 2099;
     private static final int MIN_YEAR = 2000;
 
+    private String[] four_weeks = new String[]{"1주", "2주", "3주", "4주"};
+    private String[] five_weeks = new String[]{"1주", "2주", "3주", "4주", "5주"};
+    private String[] six_weeks = new String[]{"1주", "2주", "3주", "4주", "5주", "6주"};
+
     private DatePickerDialog.OnDateSetListener listener;
     private Calendar cal = Calendar.getInstance();
     private int year, month, week;
@@ -111,9 +115,18 @@ public class WeeklyPickerDialog extends DialogFragment {
         if(week > max_week)
             week = max_week;
 
+        weekPicker.setDisplayedValues(null);
+
         weekPicker.setMinValue(1);
         weekPicker.setMaxValue(c.get(Calendar.WEEK_OF_MONTH));
         weekPicker.setValue(week);
+
+        if(max_week == 4)
+            weekPicker.setDisplayedValues(four_weeks);
+        else if(max_week == 5)
+            weekPicker.setDisplayedValues(five_weeks);
+        else if(max_week == 6)
+            weekPicker.setDisplayedValues(six_weeks);
 
         monthPicker.setMinValue(1);
         monthPicker.setMaxValue(12);

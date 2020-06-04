@@ -55,22 +55,27 @@ public class DailyPickerDialog extends DialogFragment {
         dayPicker = (NumberPicker) dialog.findViewById(R.id.dailyPicker_day);
 
         setPickers(); //pickers 값 세팅
-
         yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() { //값이 변경될 때마다 year 값 받아옴
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                year = newVal;
+                setPickers();
                 yearPicker.setValue(newVal); //dialog 창 열렸을 때 yearPicker의 처음 보여지는 값 다시 설정
             }
         });
         monthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {//값이 변경될 때마다 month 값 받아옴
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                month = newVal;
+                setPickers();
                 monthPicker.setValue(newVal); //dialog 창 열렸을 때 monthPicker의 처음 보여지는 값 다시 설정
             }
         });
         dayPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() { //값이 변경될 때마다 day 값 받아옴
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                day = newVal;
+                setPickers();
                 dayPicker.setValue(newVal); //dialog 창 열렸을 때 dayPicker의 처음 보여지는 값 다시 설정
             }
         });

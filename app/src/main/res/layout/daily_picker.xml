@@ -21,6 +21,7 @@
             android:textColor="@color/colorPrimaryDark"/>
     </LinearLayout>
     <LinearLayout
+        android:theme="@style/EditTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

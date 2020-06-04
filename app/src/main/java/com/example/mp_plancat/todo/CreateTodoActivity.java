@@ -150,7 +150,18 @@ public class CreateTodoActivity extends AppCompatActivity {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 month = month1;
-                week = week1;
+                cal.set(year, month-1, 1);
+
+                int max_day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                cal.set(year, month-1, max_day);
+
+                int max_week = cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
+
+                if(week1 > max_week)
+                    week = max_week;
+                else
+                    week = week1;
                 //Weekly 카테고리일 때, WeeklyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
                 btn_choose_date.setText(year+"년 "+month+"월 "+week+"주");
 
@@ -186,10 +197,19 @@ public class CreateTodoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //카테고리에 해당하는 dialog 창이 뜸
                 cal.set(year, month-1, 1);
-                if(day > cal.getActualMaximum(Calendar.DAY_OF_MONTH))
-                    day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-                if(week > cal.getActualMaximum(Calendar.WEEK_OF_MONTH))
-                    week = cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
+
+                int max_day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                if(day > max_day)
+                    day = max_day;
+
+                cal.set(year, month-1, max_day);
+
+                int max_week = cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
+
+                if(week > max_week)
+                    week = max_week;
+
                 switch (category){
                     case 0:
                         DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);

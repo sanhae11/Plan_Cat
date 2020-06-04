@@ -57,25 +57,6 @@ public class WeeklyPickerDialog extends DialogFragment {
 
         setPickers(); //pickers 값 세팅
 
-        yearPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() { //값이 변경될 때마다 year 값 받아옴
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                yearPicker.setValue(newVal); //dialog 창 열렸을 때 yearPicker의 처음 보여지는 값 다시 설정
-            }
-        });
-        monthPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {//값이 변경될 때마다 month 값 받아옴
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                monthPicker.setValue(newVal); //dialog 창 열렸을 때 monthPicker의 처음 보여지는 값 다시 설정
-            }
-        });
-        weekPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() { //값이 변경될 때마다 week 값 받아옴
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                weekPicker.setValue(newVal); //dialog 창 열렸을 때 weekPicker의 처음 보여지는 값 다시 설정
-            }
-        });
-
         btn_cancel.setOnClickListener(new View.OnClickListener() { //취소 버튼 눌렀을 때
             @Override
             public void onClick(View v) {
@@ -90,7 +71,21 @@ public class WeeklyPickerDialog extends DialogFragment {
                 //창 닫히기 직전의 year, month, week 값 저장
                 year = yearPicker.getValue();
                 month = monthPicker.getValue();
-                week = weekPicker.getValue();
+
+                cal.set(year, month-1, 1);
+
+                int max_day = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                cal.set(year, month-1, max_day);
+
+                int max_week = cal.getActualMaximum(Calendar.WEEK_OF_MONTH);
+
+                if(weekPicker.getValue() > max_week)
+                    week = max_week;
+                else
+                    week = weekPicker.getValue();
+
+                setPickers(); //pickers 값 세팅
                 WeeklyPickerDialog.this.getDialog().cancel(); //dialog 창 닫기
             }
         });
@@ -105,7 +100,16 @@ public class WeeklyPickerDialog extends DialogFragment {
 
     public void setPickers(){ //pickers 값 세팅
         Calendar c = Calendar.getInstance();
-        c.set(year, month, c.getActualMaximum(Calendar.DATE));
+        c.set(year, month-1,1);
+
+        int max_day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        c.set(year, month-1, max_day);
+
+        int max_week = c.getActualMaximum(Calendar.WEEK_OF_MONTH);
+
+        if(week > max_week)
+            week = max_week;
 
         weekPicker.setMinValue(1);
         weekPicker.setMaxValue(c.get(Calendar.WEEK_OF_MONTH));

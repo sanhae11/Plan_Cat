@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    //버튼 클릭 시
+    <item
+        android:state_pressed="true">
+        <shape
+            android:shape="rectangle">
+            <stroke
+                android:width="0dp" />
+            <solid android:color="@color/basicBtnColor"/>
+        </shape>
+    </item>
+    //버튼 클릭 안했을 시
+    <item
+        android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="0dp" />
+        </shape>
+    </item>
+</selector>

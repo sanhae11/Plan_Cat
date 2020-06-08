@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">MP_PlanCat</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_daily">DAILY</string>
+    <string name="tab_weekly">WEEKLY</string>
+    <string name="tab_monthly">MONTHLY</string>
+    <string name="tab_yearly">YEARLY</string>
+    <string name="text_daily">Daily</string>
+    <string name="text_weekly">Weekly</string>
+    <string name="text_monthly">Monthly</string>
+    <string name="text_yearly">Yearly</string>
+    <string name="text_category">분류</string>
+    <string name="text_date">날짜</string>
+    <string name="text_priority">중요도</string>
+    <string name="editText_todo_title">할 일</string>
+    <string name="btn_priority_top">상</string>
+    <string name="btn_priority_middle">중</string>
+    <string name="btn_priority_bottom">하</string>
+    <string name="btn_cancel">취소</string>
+    <string name="btn_ok">확인</string>
+
 </resources>

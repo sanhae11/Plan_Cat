@@ -3,6 +3,14 @@
     <color name="colorPrimary">#E8D9FF</color>
     <color name="colorPrimaryDark">#A566FF</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorBlack">#000</color>
+    <color name="colorGray">#888888</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteGray">#EEEEEE</color>
+    <color name="colorDarkGray">#333333</color>
+    <color name="colorCream">#FFFEFF</color>
+    <color name="cursorColor">#A566FF</color>
+    <color name="normalColor">#E8D9FF</color>
+    <color name="basicBtnColor">#FEF9FF</color>
+    <color name="basicBtnPressedColor">#F5EDF7</color>
 </resources>

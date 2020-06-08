@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.mp_plancat.R;
+import com.example.mp_plancat.database.entity.Todo;
 import com.example.mp_plancat.todo.picker_dialog.DailyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.MonthlyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.WeeklyPickerDialog;
@@ -36,9 +37,10 @@ import java.util.Date;
 public class CreateTodoActivity extends AppCompatActivity {
     String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
     InputMethodManager imm;
-    ArrayList<Button> priority_btn_list;
-    Button btn_choose_date;
-    int category=0; //카테고리; 0=daily, 1=weekly, 2=monthly, 3=yearly
+    //ArrayList<Button> priority_btn_list;
+    //Button btn_choose_date;
+    private int category = 0; //카테고리; 0=daily, 1=weekly, 2=monthly, 3=yearly
+    private int priority = 1; //중요도; 1=상, 2=중, 3=하
 
     private Calendar cal = Calendar.getInstance();
 
@@ -247,26 +249,29 @@ public class CreateTodoActivity extends AppCompatActivity {
         //중요도 상중하 버튼 중 클릭한 것만 색칠됨
         btn_priority_top.setOnClickListener(new View.OnClickListener() { //중요도 상 클릭 시
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //중요도 상 클릭 시
                 checkPriority(btn_priority_top);
                 uncheckPriority(btn_priority_middle);
                 uncheckPriority(btn_priority_bottom);
+                priority = 1;
             }
         });
         btn_priority_middle.setOnClickListener(new View.OnClickListener() { //중요도 중 클릭 시
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //중요도 중 클릭 시
                 uncheckPriority(btn_priority_top);
                 checkPriority(btn_priority_middle);
                 uncheckPriority(btn_priority_bottom);
+                priority = 2;
             }
         });
         btn_priority_bottom.setOnClickListener(new View.OnClickListener() { //중요도 하 클릭 시
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { //중요도 하 클릭 시
                 uncheckPriority(btn_priority_top);
                 uncheckPriority(btn_priority_middle);
                 checkPriority(btn_priority_bottom);
+                priority = 3;
             }
         });
 
@@ -293,7 +298,9 @@ public class CreateTodoActivity extends AppCompatActivity {
                     alertDialog.show(getSupportFragmentManager(), "AlertDialogTest");
                 }
                 else{
-                    //디비 저장하고 리사이클러뷰 추가
+                    //디비 저장
+
+                    //리사이클러뷰 추가
                     finish();
                 }
                 return true;

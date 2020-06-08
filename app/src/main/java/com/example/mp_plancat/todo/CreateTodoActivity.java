@@ -286,7 +286,7 @@ public class CreateTodoActivity extends AppCompatActivity {
             case android.R.id.home: //액션바의 뒤로가기 버튼 눌렀을 때 동작
                 finish();
                 return true;
-            case R.id.check:
+            case R.id.check: //액션바의 체크 버튼 눌렀을 때의 동작
                 if(getEditText().length() == 0 || spaceCheck(getEditText())){ //할 일 타이틀 입력하지 않았을 때
                     //제목 입력하라는 팝업창 띄움
                     NoTitleAlertDialog alertDialog = new NoTitleAlertDialog();

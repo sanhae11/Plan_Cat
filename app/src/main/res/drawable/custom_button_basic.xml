@@ -8,7 +8,7 @@
             android:shape="rectangle">
             <stroke
                 android:width="0dp" />
-            <solid android:color="@color/basicBtnColor"/>
+            <solid android:color="@color/colorWhiteGray"/>
         </shape>
     </item>
     //버튼 클릭 안했을 시

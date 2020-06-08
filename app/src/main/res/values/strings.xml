@@ -17,5 +17,6 @@
     <string name="btn_priority_bottom">하</string>
     <string name="btn_cancel">취소</string>
     <string name="btn_ok">확인</string>
-
+    <string name="no_title_alert_text">제목을 입력하세요.</string>
+    <string name="notification_text">Notification</string>
 </resources>

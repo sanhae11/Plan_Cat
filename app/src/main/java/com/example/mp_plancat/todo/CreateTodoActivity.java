@@ -288,7 +288,9 @@ public class CreateTodoActivity extends AppCompatActivity {
                 return true;
             case R.id.check:
                 if(getEditText().length() == 0 || spaceCheck(getEditText())){ //할 일 타이틀 입력하지 않았을 때
-                    //타이틀 입력하라는 팝업창 띄우기
+                    //제목 입력하라는 팝업창 띄움
+                    NoTitleAlertDialog alertDialog = new NoTitleAlertDialog();
+                    alertDialog.show(getSupportFragmentManager(), "AlertDialogTest");
                 }
                 else{
                     //디비 저장하고 리사이클러뷰 추가

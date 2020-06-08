@@ -283,10 +283,18 @@ public class CreateTodoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case android.R.id.home:{ //액션바의 뒤로가기 버튼 눌렀을 때 동작
+            case android.R.id.home: //액션바의 뒤로가기 버튼 눌렀을 때 동작
                 finish();
                 return true;
-            }
+            case R.id.check:
+                if(getEditText().length() == 0 || spaceCheck(getEditText())){ //할 일 타이틀 입력하지 않았을 때
+                    //타이틀 입력하라는 팝업창 띄우기
+                }
+                else{
+                    //디비 저장하고 리사이클러뷰 추가
+                    finish();
+                }
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -318,6 +326,19 @@ public class CreateTodoActivity extends AppCompatActivity {
         month = cal.get(Calendar.MONTH)+1;
         year = cal.get(Calendar.YEAR);
         week = cal.get(Calendar.WEEK_OF_MONTH);
+    }
+
+    public String getEditText(){
+        EditText editText = findViewById(R.id.editText_todo_title);
+        return editText.getText().toString();
+    }
+
+    public boolean spaceCheck(String str){
+        for (int i = 0; i < str.length(); i++){
+            if(str.charAt(i) != ' ')
+                return false;
+        }
+        return true;
     }
 }
 

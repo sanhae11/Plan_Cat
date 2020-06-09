@@ -1,20 +1,38 @@
 package com.example.mp_plancat;
-//고양이 - cat book 화면
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class CatBookActivity extends AppCompatActivity {
-
-
-    //TODO: 고양이 리스트 만들기; recyclerView 사용
-    //TODO: 고양이 클릭 시 팝업창 띄우기
-
+    ImageButton exit_button;
+    ImageButton cat1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cat_book);
+
+        exit_button=(ImageButton) findViewById(R.id.exitbtn);
+
+        exit_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(CatBookActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cat1=(ImageButton) findViewById(R.id.cat1);
+
+        cat1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(CatBookActivity.this, CatPopActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

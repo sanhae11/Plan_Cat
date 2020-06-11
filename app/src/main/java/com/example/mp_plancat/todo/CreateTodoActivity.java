@@ -3,11 +3,16 @@ package com.example.mp_plancat.todo;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +29,7 @@ import android.widget.Spinner;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
+import com.example.mp_plancat.todo.category.DailyFragment;
 import com.example.mp_plancat.todo.picker_dialog.DailyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.MonthlyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.WeeklyPickerDialog;
@@ -37,8 +43,7 @@ import java.util.Date;
 public class CreateTodoActivity extends AppCompatActivity {
     String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
     InputMethodManager imm;
-    //ArrayList<Button> priority_btn_list;
-    //Button btn_choose_date;
+
     private int category = 0; //카테고리; 0=daily, 1=weekly, 2=monthly, 3=yearly
     private int priority = 1; //중요도; 1=상, 2=중, 3=하
 
@@ -298,9 +303,58 @@ public class CreateTodoActivity extends AppCompatActivity {
                     alertDialog.show(getSupportFragmentManager(), "AlertDialogTest");
                 }
                 else{
-                    //디비 저장
+                    String title = getEditText();
+                    String category_str = InputConverter.getCategory(category);
 
-                    //리사이클러뷰 추가
+                    Calendar startDate = InputConverter.getStartDate(day, week, month, year, category);
+                    Calendar endDate = InputConverter.getEndDate(day, week, month, year, category);
+
+                    int startDay = startDate.get(Calendar.DAY_OF_MONTH);
+                    int startMonth = startDate.get(Calendar.MONTH) + 1;
+                    int startYear = startDate.get(Calendar.YEAR);
+                    int endDay = endDate.get(Calendar.DAY_OF_MONTH);
+                    int endMonth = endDate.get(Calendar.MONTH) + 1;
+                    int endYear = endDate.get(Calendar.YEAR);
+
+                    double point = InputConverter.getCalculatedPoint(endDate, priority);
+
+                    Todo todoData = new Todo(title, category_str, startDate, endDate, point, priority);
+
+                    //Todo : 디비 저장
+
+
+
+                    //Todo : 리사이클러뷰 추가
+
+
+
+
+
+
+
+
+
+
+
+
+                    //Intent intent = getIntent();
+                    Intent intent = new Intent();
+
+                    //dailyFragment = new DailyFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("todoData", todoData);
+
+                    ////////////////log test
+                    Todo todo = (Todo) bundle.get("todoData");
+                    Log.e("test", "createTodoActivity : " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
+
+
+                    intent.putExtra("todoData", bundle);
+
+                    setResult(RESULT_OK, intent);
+
+
                     finish();
                 }
                 return true;

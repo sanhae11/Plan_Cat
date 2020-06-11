@@ -8,18 +8,36 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mp_plancat.MainActivity;
 import com.example.mp_plancat.R;
+import com.example.mp_plancat.database.entity.Todo;
+import com.example.mp_plancat.todo.category.DailyFragment;
+import com.example.mp_plancat.todo.category.MonthlyFragment;
+import com.example.mp_plancat.todo.category.WeeklyFragment;
+import com.example.mp_plancat.todo.category.YearlyFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+
+import java.time.Year;
+import java.util.ArrayList;
+
+import static android.app.Activity.RESULT_OK;
 
 public class TodoFragment extends Fragment {
     int i = 0;
     //Button btn_create_todo;
+    ViewPagerAdapter adapter;
+    ViewPager vp;
+    private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
+    public DailyFragment dailyFragment = new DailyFragment();
+    public WeeklyFragment weeklyFragment = new WeeklyFragment();
+    public MonthlyFragment monthlyFragment = new MonthlyFragment();
+    public YearlyFragment yearlyFragment = new YearlyFragment();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
@@ -28,7 +46,11 @@ public class TodoFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+        Log.e("test", "todofrag : oncreateview() 실행");
+
+
+
         View view = (View) inflater.inflate(R.layout.fragment_todo, container, false);
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
@@ -36,8 +58,16 @@ public class TodoFragment extends Fragment {
         actionBar.setTitle("Todo");
 
         //To do 의 화면 swipe하면 다른 화면으로 넘어감
-        ViewPager vp = (ViewPager) view.findViewById(R.id.viewPager);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        vp = (ViewPager) view.findViewById(R.id.viewPager);
+        adapter = new ViewPagerAdapter(getChildFragmentManager());
+
+        fragments.add(0, dailyFragment);
+        fragments.add(1, weeklyFragment);
+        fragments.add(2, monthlyFragment);
+        fragments.add(3, yearlyFragment);
+
+        adapter.setFrag(fragments);
+        adapter.getItem(0);
         vp.setAdapter(adapter);
         vp.setCurrentItem(0);
 
@@ -49,10 +79,45 @@ public class TodoFragment extends Fragment {
         btn_create_todo.setOnClickListener(new View.OnClickListener() { //할 일 생성 버튼 클릭 시
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), CreateTodoActivity.class)); //create to do activity로 감
+                //getActivity().startActivityForResult(new Intent(getActivity(), CreateTodoActivity.class), 3); //create to do activity로 감
+                startActivityForResult(new Intent(getActivity(), CreateTodoActivity.class), 3); //create to do activity로 감
+
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+
+        Log.e("test", "todofrag : onActivityResult 실행됨");
+        if(requestCode == 3){
+            if(resultCode == RESULT_OK){
+                Bundle bundle = intent.getBundleExtra("todoData");
+
+                /////////////logtest
+                Todo todo = (Todo) bundle.get("todoData");
+
+                Log.e("test", "todoFrag : " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
+
+
+                dailyFragment.setArguments(bundle);
+                weeklyFragment.setArguments(bundle);
+                monthlyFragment.setArguments(bundle);
+                yearlyFragment.setArguments(bundle);
+
+                fragments.add(0, dailyFragment);
+                fragments.add(1, weeklyFragment);
+                fragments.add(2, monthlyFragment);
+                fragments.add(3, yearlyFragment);
+
+                adapter = new ViewPagerAdapter(getChildFragmentManager());
+                adapter.setFrag(fragments);
+
+                vp.setAdapter(adapter);
+                vp.setCurrentItem(0);
+            }
+        }
     }
 }

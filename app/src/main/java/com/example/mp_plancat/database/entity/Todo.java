@@ -5,10 +5,12 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.Calendar;
 
-@Entity(indices = @Index(value = {"todo_title", "todo_category", "deadline"}, unique = true))
-public class Todo {
+@Entity(indices = @Index(value = {"todo_title", "todo_category", "priority"}, unique = true))
+public class Todo implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int todoID;
@@ -19,22 +21,52 @@ public class Todo {
     @ColumnInfo(name = "todo_category")
     public String todoCategory; //카테고리; D(=Daily), W(=Weekly), M(=Monthly), Y(=Yearly)
 
-    public Date deadline; // 포맷 "yyyy-mm-dd"; e.g. 2020-11-14
+    /*
+    @ColumnInfo(name = "start_date")
+    public Date startDate; // 포맷 "yyyy-mm-dd"; e.g. 2020-11-14
+
+    @ColumnInfo(name = "end_date")
+    public Date endDate; // 포맷 "yyyy-mm-dd"; e.g. 2020-11-14
+    */
+
+    @ColumnInfo(name = "start_day")
+    public int startDay;
+
+    @ColumnInfo(name = "start_month")
+    public int startMonth;
+
+    @ColumnInfo(name = "start_year")
+    public int startYear;
+
+    @ColumnInfo(name = "end_day")
+    public int endDay;
+
+    @ColumnInfo(name = "end_month")
+    public int endMonth;
+
+    @ColumnInfo(name = "end_year")
+    public int endYear;
+
 
     @ColumnInfo(name = "is_finished")
     public int isFinished; //to do 완료 여부; 1=true, 0=false
 
     @ColumnInfo(name = "allocated_point")
-    public float allocatedPoint; //각 to do에 할당된 포인트
+    public double allocatedPoint; //각 to do에 할당된 포인트
 
     public int priority; //우선순위; 1(=상), 2(=중), 3(=하)
 
     public Todo(){}
 
-    public Todo(String todoTitle, String todoCategory, Date deadline, float allocatedPoint, int priority){
+    public Todo(String todoTitle, String todoCategory, Calendar startDate, Calendar endDate, double allocatedPoint, int priority){
         this.todoTitle = todoTitle;
         this.todoCategory = todoCategory;
-        this.deadline = deadline;
+        this.startDay = startDate.get(Calendar.DAY_OF_MONTH);
+        this.startMonth = startDate.get(Calendar.MONTH) + 1;
+        this.startYear = startDate.get(Calendar.YEAR);
+        this.endDay = endDate.get(Calendar.DAY_OF_MONTH);
+        this.endMonth = endDate.get(Calendar.MONTH) + 1;
+        this.endYear = endDate.get(Calendar.YEAR);
         this.isFinished = 0;
         this.allocatedPoint = allocatedPoint;
         this.priority = priority;

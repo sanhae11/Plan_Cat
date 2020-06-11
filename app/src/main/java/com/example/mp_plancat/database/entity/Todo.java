@@ -1,5 +1,7 @@
 package com.example.mp_plancat.database.entity;
 
+import android.widget.CheckBox;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
@@ -106,5 +108,20 @@ public class Todo implements Serializable {
         Calendar cal = Calendar.getInstance();
         cal.set(endYear, endMonth - 1, endDay);
         return cal;
+    }
+
+    public boolean isChecked(){
+        if(isFinished == 1)
+            return true;
+        else
+            return false;
+    }
+    public void setIsFinished(boolean isFinished){
+        if(true){
+            this.isFinished = 1;
+        }
+        else{
+            this.isFinished = 0;
+        }
     }
 }

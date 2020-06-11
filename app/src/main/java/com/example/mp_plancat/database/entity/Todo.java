@@ -71,4 +71,40 @@ public class Todo implements Serializable {
         this.allocatedPoint = allocatedPoint;
         this.priority = priority;
     }
+
+    public int getTodoID() {
+        return todoID;
+    }
+
+    public String getTodoTitle() {
+        return todoTitle;
+    }
+
+    public String getTodoCategory() {
+        return todoCategory;
+    }
+
+    public int getIsFinished() {
+        return isFinished;
+    }
+
+    public double getAllocatedPoint() {
+        return allocatedPoint;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public Calendar getStartDate(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(startYear, startMonth - 1, startDay);
+        return cal;
+    }
+
+    public Calendar getEndDate(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(endYear, endMonth - 1, endDay);
+        return cal;
+    }
 }

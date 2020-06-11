@@ -12,59 +12,54 @@ import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapter.ItemViewHolder> {
+public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapter.TodoHolder> {
 
-    // adapter에 들어갈 list 입니다.
-    private ArrayList<Todo> listData = new ArrayList<>();
+    private List<Todo> todos = new ArrayList<>();
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // LayoutInflater를 이용하여 전 단계에서 만들었던 item.xml을 inflate 시킵니다.
-        // return 인자는 ViewHolder 입니다.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_todo_item, parent, false);
-        return new ItemViewHolder(view);
+    public TodoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_todo_item, parent, false);
+        return new TodoHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        // Item을 하나, 하나 보여주는(bind 되는) 함수입니다.
-        holder.onBind(listData.get(position));
+    public void onBindViewHolder(@NonNull TodoHolder holder, int position) {
+        Todo currentTodo = todos.get(position);
+
+        Calendar calendar = currentTodo.getEndDate();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+
+        holder.textViewTitle.setText(currentTodo.getTodoTitle());
+        holder.textViewEndDate.setText(String.valueOf(month) + "." + String.valueOf(day));
+        holder.textViewPoint.setText(String.valueOf(currentTodo.getAllocatedPoint()));
     }
 
     @Override
     public int getItemCount() {
-        // RecyclerView의 총 개수 입니다.
-        return listData.size();
+        return todos.size();
     }
 
-    void addItem(Todo data) {
-        // 외부에서 item을 추가시킬 함수입니다.
-        listData.add(data);
+    public void setTodos(List<Todo> todos){
+        this.todos = todos;
+        notifyDataSetChanged();
     }
 
-    void setList(ArrayList arrayList) {
-        listData = arrayList;
-    }
+    class TodoHolder extends RecyclerView.ViewHolder {
+        private TextView textViewTitle;
+        private TextView textViewEndDate;
+        private TextView textViewPoint;
 
-    // RecyclerView의 핵심인 ViewHolder 입니다.
-    // 여기서 subView를 setting 해줍니다.
-    class ItemViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView todo_title;
-        private TextView point;
-
-        ItemViewHolder(View itemView) {
+        public TodoHolder(View itemView){
             super(itemView);
-
-            todo_title = itemView.findViewById(R.id.todo_title);
-            point = itemView.findViewById(R.id.point);
-        }
-
-        void onBind(Todo data) {
-            todo_title.setText(data.todoTitle);
-            point.setText(String.valueOf(data.allocatedPoint));
+            textViewTitle = itemView.findViewById(R.id.todo_title);
+            textViewEndDate = itemView.findViewById(R.id.todo_endDate);
+            textViewPoint = itemView.findViewById(R.id.todo_point);
         }
     }
 }

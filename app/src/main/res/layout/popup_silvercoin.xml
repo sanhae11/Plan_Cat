@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="24dp">
+        // Silver Coin 이미지
+        <ImageView
+            android:src="@drawable/icon_silvercoin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center" />
+        // 획득 코인 - 데이터베이스 연결!!
+c        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center"
+            android:text="550"
+            android:textSize="27dp"
+            android:textStyle="bold" />
+        // 오늘 날짜 가져오기
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center"
+            android:text="할 일 완료"
+            android:textSize="17dp"/>
+        // 데이터베이스로 완료한 할 일 가져오기
+        <TextView
+            android:id="@+id/txt_completedplan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="데이터베이스로 값 가져올 부분" />
+        // 그냥 보여주기 예시라 데베 연결 후 삭제할 것
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="졸작 아이디어 구상" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center"
+            android:text="포인트 보상이 도착했어요!"
+            android:textSize="17dp"/>
+        <ImageButton
+            android:id="@+id/btn_confirm"
+            android:src="@drawable/icon_btncheck"
+            android:background="@drawable/btn_shape"
+            android:layout_width="88dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:padding="7dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"/>
+    </LinearLayout>
+</LinearLayout>

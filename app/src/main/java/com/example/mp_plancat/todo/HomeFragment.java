@@ -1,4 +1,4 @@
-package com.example.mp_plancat;
+package com.example.mp_plancat.todo;
 //홈 화면
 
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mp_plancat.MainActivity;
+import com.example.mp_plancat.R;
 
 public class HomeFragment extends Fragment {
     @Override

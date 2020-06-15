@@ -23,16 +23,16 @@ import com.example.mp_plancat.todo.category.YearlyFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import java.time.Year;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
 public class TodoFragment extends Fragment {
-    int i = 0;
-    //Button btn_create_todo;
+    public static final int ADD_TODO_REQUEST = 1;
+
     ViewPagerAdapter adapter;
     ViewPager vp;
+
     private ArrayList<Fragment> fragments = new ArrayList<Fragment>();
     public DailyFragment dailyFragment = new DailyFragment();
     public WeeklyFragment weeklyFragment = new WeeklyFragment();
@@ -48,7 +48,6 @@ public class TodoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         Log.e("test", "todofrag : oncreateview() 실행");
-
 
 
         View view = (View) inflater.inflate(R.layout.fragment_todo, container, false);
@@ -80,7 +79,7 @@ public class TodoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //getActivity().startActivityForResult(new Intent(getActivity(), CreateTodoActivity.class), 3); //create to do activity로 감
-                startActivityForResult(new Intent(getActivity(), CreateTodoActivity.class), 3); //create to do activity로 감
+                startActivityForResult(new Intent(getActivity(), CreateEditTodoActivity.class), ADD_TODO_REQUEST); //create to do activity로 감
 
             }
         });
@@ -92,32 +91,29 @@ public class TodoFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
 
         Log.e("test", "todofrag : onActivityResult 실행됨");
-        if(requestCode == 3){
-            if(resultCode == RESULT_OK){
-                Bundle bundle = intent.getBundleExtra("todoData");
+        if(requestCode == ADD_TODO_REQUEST && resultCode == RESULT_OK){
+            Bundle bundle = intent.getBundleExtra("todoData");
 
-                /////////////logtest
-                Todo todo = (Todo) bundle.get("todoData");
-
-                Log.e("test", "todoFrag : " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
+            /////////////logtest
+            Todo todo = (Todo) bundle.get("todoData");
+            Log.e("test", "todoFrag : " + todo.todoID + " " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
 
 
-                dailyFragment.setArguments(bundle);
-                weeklyFragment.setArguments(bundle);
-                monthlyFragment.setArguments(bundle);
-                yearlyFragment.setArguments(bundle);
+            dailyFragment.setArguments(bundle);
+            weeklyFragment.setArguments(bundle);
+            monthlyFragment.setArguments(bundle);
+            yearlyFragment.setArguments(bundle);
 
-                fragments.add(0, dailyFragment);
-                fragments.add(1, weeklyFragment);
-                fragments.add(2, monthlyFragment);
-                fragments.add(3, yearlyFragment);
+            fragments.add(0, dailyFragment);
+            fragments.add(1, weeklyFragment);
+            fragments.add(2, monthlyFragment);
+            fragments.add(3, yearlyFragment);
 
-                adapter = new ViewPagerAdapter(getChildFragmentManager());
-                adapter.setFrag(fragments);
+            adapter = new ViewPagerAdapter(getChildFragmentManager());
+            adapter.setFrag(fragments);
 
-                vp.setAdapter(adapter);
-                vp.setCurrentItem(0);
-            }
+            vp.setAdapter(adapter);
+            vp.setCurrentItem(0);
         }
     }
 }

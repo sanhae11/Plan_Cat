@@ -54,7 +54,7 @@ public interface TodoDao {
     LiveData<List<Todo>> getAllOfNotFinishedByCategoryAndDate(int day, int month, int year, String category);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void update(Todo... todo);
+    void update(Todo todo);
 
     @Delete
     void delete(Todo... todo);

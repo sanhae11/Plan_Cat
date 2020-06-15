@@ -15,21 +15,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
-import com.example.mp_plancat.todo.CreateTodoActivity;
+import com.example.mp_plancat.todo.CreateEditTodoActivity;
 import com.example.mp_plancat.todo.TodoRecyclerAdapter;
 import com.example.mp_plancat.todo.TodoViewModel;
 
-import java.sql.Date;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class DailyFragment extends Fragment {
-    public static final int ADD_NOTE_REQUEST = 1;
+    public static final int EDIT_TODO_REQUEST = 2;
+
     private TodoViewModel todoViewModel;
 
     @Nullable
@@ -58,7 +57,20 @@ public class DailyFragment extends Fragment {
             }
         });
 
+        adapter.setOnItemClickListener(new TodoRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Todo todo) {
+                Intent intent = new Intent(getActivity(), CreateEditTodoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("todoData", todo);
+                intent.putExtra("todoData", bundle);
+                intent.putExtra("todoData_ID", todo.getTodoID());
 
+                Log.e("checkID", "dailyfrag" + todo.getTodoID() + "");
+
+                startActivityForResult(intent, EDIT_TODO_REQUEST);
+            }
+        });
 
 
         Bundle bundle = getArguments();
@@ -68,34 +80,25 @@ public class DailyFragment extends Fragment {
             Todo todo = (Todo) bundle.get("todoData");
 
             todoViewModel.insert(todo);
-
-            //Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
-
         }
+
+
 
         return rootView;
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
-        Log.e("Test", "dailyFrag : onResume() 실행");
-    }
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        ////////////log test
+        Log.e("test", "dailyfrag : onActivityResult 실행됨");
 
-    @Override
-    public void onPause(){
-        super.onPause();
-        Log.e("Test", "dailyFrag : onPause() 실행");
-    }
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.e("Test", "dailyfrag : onStart() 실행");
-    }
+        if (requestCode == EDIT_TODO_REQUEST && resultCode == RESULT_OK) {
+            Bundle bundle = intent.getBundleExtra("todoData");
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e("test", "dailyFrag : oncreate() 실행");
+            Todo todo = (Todo) bundle.get("todoData");
+            Log.e("test", "dailyFrag onactivityresult 실행 : " + todo.todoID + " " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
+
+            todoViewModel.update(todo);
+        }
     }
 }

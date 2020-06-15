@@ -3,10 +3,7 @@ package com.example.mp_plancat.todo;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,21 +23,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
-import com.example.mp_plancat.todo.category.DailyFragment;
 import com.example.mp_plancat.todo.picker_dialog.DailyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.MonthlyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.WeeklyPickerDialog;
 import com.example.mp_plancat.todo.picker_dialog.YearlyPickerDialog;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateTodoActivity extends AppCompatActivity {
+public class CreateEditTodoActivity extends AppCompatActivity {
+    int check = 0; //activity 생성 이후 spinner 한 번도 클릭 안 했다면 0; 클릭하면 1씩 증가
+
     String[] items = {"Daily", "Weekly", "Monthly", "Yearly"};
     InputMethodManager imm;
 
@@ -54,71 +52,114 @@ public class CreateTodoActivity extends AppCompatActivity {
     private int year = cal.get(Calendar.YEAR);
     private int week = cal.get(Calendar.WEEK_OF_MONTH);
 
+    String dateFormatStr;
+
+    private EditText editTextTitle;
+    private Spinner spinner;
+    private Button btn_choose_date;
+
+    private DailyPickerDialog dailyPD;
+    private WeeklyPickerDialog weeklyPD;
+    private MonthlyPickerDialog monthlyPD;
+    private YearlyPickerDialog yearlyPD;
+
+    private Button btn_priority_top, btn_priority_middle, btn_priority_bottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_todo);
+        setContentView(R.layout.activity_create_edit_todo);
+
+        editTextTitle = findViewById(R.id.editText_todo_title);
+        spinner = (Spinner) findViewById(R.id.spinner_category);
+        btn_choose_date = (Button) findViewById(R.id.btn_choose_date);
+
+        btn_priority_top = (Button) findViewById(R.id.btn_priority_top);
+        btn_priority_middle = (Button) findViewById(R.id.btn_priority_middle);
+        btn_priority_bottom = (Button) findViewById(R.id.btn_priority_bottom);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼
         actionBar.show(); //액션바 보여줌
-        actionBar.setTitle("Create Todo");
+
+        Intent intent = getIntent();
+
+        if(intent.hasExtra("todoData_ID")){ //edit to do 일 때
+            Bundle bundle = intent.getBundleExtra("todoData");
+            Todo todo = (Todo) bundle.get("todoData");
+
+            Log.e("checkDate", todo.getStartDate().get(Calendar.DAY_OF_MONTH) + "");
+
+            editSetting(todo);
+
+            actionBar.setTitle("Edit Todo");
+        }
+        else{ //create to do 일 때
+            actionBar.setTitle("Create Todo");
+
+            setButtonText();
+        }
 
         //create_todo 액티비티 실행됐을 때 키보드 나타나게 함; 앱 종료되어도 키보드 안 사라지는 문제 때문에 주석 처리 해둠
         //showKeyBoard();
 
-        final Button btn_choose_date = (Button) findViewById(R.id.btn_choose_date);
 
         //spinner
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_category);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                long now = System.currentTimeMillis();
-                Date date = new Date(now);
-                SimpleDateFormat simpleDate;
-                String getDate;
+                if(++check > 1) {
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat simpleDate;
+                    String getDate;
 
-                initDate();
-                category = position;
+                    initDate();
+                    category = position;
 
-                //spinner에서 선택되는 카테고리에 맞는 포맷의 날짜가 버튼에 나타남
-                switch(position){
-                    case 0:
-                        simpleDate = new SimpleDateFormat("yyyy년 MM월 dd일");
-                        getDate = simpleDate.format(date);
-                        btn_choose_date.setText(getDate);
-                        break;
-                    case 1:
-                        simpleDate = new SimpleDateFormat("yyyy년 MM월");
-                        getDate = simpleDate.format(date);
+                    //spinner에서 선택되는 카테고리에 맞는 포맷의 날짜가 버튼에 나타남
+                    switch (position) {
+                        case 0:
+                            simpleDate = new SimpleDateFormat("yyyy년 MM월 dd일");
+                            getDate = simpleDate.format(date);
+                            btn_choose_date.setText(getDate);
+                            Log.e("switchCheck", "스위치문 실행");
+                            break;
+                        case 1:
+                            simpleDate = new SimpleDateFormat("yyyy년 MM월");
+                            getDate = simpleDate.format(date);
 
-                        //현재 해당 월의 몇 주차인지 받아옴
-                        getDate += " "+cal.get(Calendar.WEEK_OF_MONTH)+"주";
-                        btn_choose_date.setText(getDate);
-                        break;
-                    case 2:
-                        simpleDate = new SimpleDateFormat("yyyy년 MM월");
-                        getDate = simpleDate.format(date);
-                        btn_choose_date.setText(getDate);
-                        break;
-                    case 3:
-                        simpleDate = new SimpleDateFormat("yyyy년");
-                        getDate = simpleDate.format(date);
-                        btn_choose_date.setText(getDate);
-                        break;
-                    default:
-                        break;
+                            //현재 해당 월의 몇 주차인지 받아옴
+                            getDate += " " + cal.get(Calendar.WEEK_OF_MONTH) + "주";
+                            btn_choose_date.setText(getDate);
+                            break;
+                        case 2:
+                            simpleDate = new SimpleDateFormat("yyyy년 MM월");
+                            getDate = simpleDate.format(date);
+                            btn_choose_date.setText(getDate);
+                            break;
+                        case 3:
+                            simpleDate = new SimpleDateFormat("yyyy년");
+                            getDate = simpleDate.format(date);
+                            btn_choose_date.setText(getDate);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             public void onNothingSelected(AdapterView adapterView){
 
             }
         });
+
+
 
         //editText 이외의 부분 터치하면 키보드 감추기
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
@@ -145,7 +186,8 @@ public class CreateTodoActivity extends AppCompatActivity {
                 else
                     day = dayOfMonth1;
                 //Daily 카테고리일 때, DailyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
-                btn_choose_date.setText(year+"년 "+month+"월 "+day+"일");
+                dateFormatStr = year+"년 "+month+"월 "+day+"일";
+                btn_choose_date.setText(dateFormatStr);
 
             }
         };
@@ -170,7 +212,8 @@ public class CreateTodoActivity extends AppCompatActivity {
                 else
                     week = week1;
                 //Weekly 카테고리일 때, WeeklyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
-                btn_choose_date.setText(year+"년 "+month+"월 "+week+"주");
+                dateFormatStr = year+"년 "+month+"월 "+week+"주";
+                btn_choose_date.setText(dateFormatStr);
 
             }
         };
@@ -183,7 +226,8 @@ public class CreateTodoActivity extends AppCompatActivity {
                 year = year1;
                 month = month1;
                 //Monthly 카테고리일 때, MonthlyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
-                btn_choose_date.setText(year+"년 "+month+"월");
+                dateFormatStr = year+"년 "+month+"월";
+                btn_choose_date.setText(dateFormatStr);
 
             }
         };
@@ -195,7 +239,8 @@ public class CreateTodoActivity extends AppCompatActivity {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
                 year = year1;
                 //Yearly 카테고리일 때, YearlyPickerDialog에서 선택한 날짜대로 버튼의 날짜도 바뀜
-                btn_choose_date.setText(year+"년");
+                dateFormatStr = year+"년";
+                btn_choose_date.setText(dateFormatStr);
             }
         };
 
@@ -219,22 +264,22 @@ public class CreateTodoActivity extends AppCompatActivity {
 
                 switch (category){
                     case 0:
-                        DailyPickerDialog dailyPD = new DailyPickerDialog(year, month, day);
+                        dailyPD = new DailyPickerDialog(year, month, day);
                         dailyPD.setListener(dailyListner);
                         dailyPD.show(getSupportFragmentManager(), "DailyPickerTest");
                         break;
                     case 1:
-                        WeeklyPickerDialog weeklyPD = new WeeklyPickerDialog(year, month, week);
+                        weeklyPD = new WeeklyPickerDialog(year, month, week);
                         weeklyPD.setListener(weeklyListner);
                         weeklyPD.show(getSupportFragmentManager(), "WeeklyPickerTest");
                         break;
                     case 2:
-                        MonthlyPickerDialog monthlyPD = new MonthlyPickerDialog(year, month);
+                        monthlyPD = new MonthlyPickerDialog(year, month);
                         monthlyPD.setListener(monthlyListner);
                         monthlyPD.show(getSupportFragmentManager(), "MonthlyPickerTest");
                         break;
                     case 3:
-                        YearlyPickerDialog yearlyPD = new YearlyPickerDialog(year);
+                        yearlyPD = new YearlyPickerDialog(year);
                         yearlyPD.setListener(yearlyListner);
                         yearlyPD.show(getSupportFragmentManager(), "YearlyPickerTest");
                         break;
@@ -244,12 +289,6 @@ public class CreateTodoActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-        final Button btn_priority_top = (Button) findViewById(R.id.btn_priority_top);
-        final Button btn_priority_middle = (Button) findViewById(R.id.btn_priority_middle);
-        final Button btn_priority_bottom = (Button) findViewById(R.id.btn_priority_bottom);
 
         //중요도 상중하 버튼 중 클릭한 것만 색칠됨
         btn_priority_top.setOnClickListener(new View.OnClickListener() { //중요도 상 클릭 시
@@ -280,7 +319,6 @@ public class CreateTodoActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
@@ -298,9 +336,8 @@ public class CreateTodoActivity extends AppCompatActivity {
                 return true;
             case R.id.check: //액션바의 체크 버튼 눌렀을 때의 동작
                 if(getEditText().length() == 0 || spaceCheck(getEditText())){ //할 일 타이틀 입력하지 않았을 때
-                    //제목 입력하라는 팝업창 띄움
-                    NoTitleAlertDialog alertDialog = new NoTitleAlertDialog();
-                    alertDialog.show(getSupportFragmentManager(), "AlertDialogTest");
+                    //할 일 입력하라는 toast message 띄움
+                    Toast.makeText(this, "할 일을 입력하세요!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     String title = getEditText();
@@ -309,52 +346,26 @@ public class CreateTodoActivity extends AppCompatActivity {
                     Calendar startDate = InputConverter.getStartDate(day, week, month, year, category);
                     Calendar endDate = InputConverter.getEndDate(day, week, month, year, category);
 
-                    int startDay = startDate.get(Calendar.DAY_OF_MONTH);
-                    int startMonth = startDate.get(Calendar.MONTH) + 1;
-                    int startYear = startDate.get(Calendar.YEAR);
-                    int endDay = endDate.get(Calendar.DAY_OF_MONTH);
-                    int endMonth = endDate.get(Calendar.MONTH) + 1;
-                    int endYear = endDate.get(Calendar.YEAR);
-
                     double point = InputConverter.getCalculatedPoint(endDate, priority);
 
                     Todo todoData = new Todo(title, category_str, startDate, endDate, point, priority);
 
-                    //Todo : 디비 저장
+                    int id = getIntent().getIntExtra("todoData_ID", -1);
+                    if(id != -1){
+                        todoData.setId(id);
+                    }
 
-
-
-                    //Todo : 리사이클러뷰 추가
-
-
-
-
-
-
-
-
-
-
-
-
-                    //Intent intent = getIntent();
                     Intent intent = new Intent();
-
-                    //dailyFragment = new DailyFragment();
-
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("todoData", todoData);
 
                     ////////////////log test
                     Todo todo = (Todo) bundle.get("todoData");
-                    Log.e("test", "createTodoActivity : " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
-
+                    Log.e("test", "createTodoActivity : " + todo.todoID + " " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
 
                     intent.putExtra("todoData", bundle);
 
                     setResult(RESULT_OK, intent);
-
-
                     finish();
                 }
                 return true;
@@ -383,7 +394,7 @@ public class CreateTodoActivity extends AppCompatActivity {
         btn.setTextColor(Color.BLACK);
     }
 
-    public void initDate(){
+    public void initDate(){ //date를 현재 날짜로 초기화
         cal = Calendar.getInstance();
         day = cal.get(Calendar.DATE);
         month = cal.get(Calendar.MONTH)+1;
@@ -396,12 +407,72 @@ public class CreateTodoActivity extends AppCompatActivity {
         return editText.getText().toString();
     }
 
-    public boolean spaceCheck(String str){
+    public boolean spaceCheck(String str){ //문자열이 공백으로만 이루어져 있을 때 true return
         for (int i = 0; i < str.length(); i++){
             if(str.charAt(i) != ' ')
                 return false;
         }
         return true;
+    }
+
+    public void editSetting(Todo todo){ //edit to do 일 때, to do의 정보 세팅해줌
+        this.day = todo.getStartDate().get(Calendar.DAY_OF_MONTH);
+        this.week = todo.getStartDate().get(Calendar.WEEK_OF_MONTH);
+        this.month = todo.getStartDate().get(Calendar.MONTH) + 1;
+        this.year = todo.getStartDate().get(Calendar.YEAR);
+
+        switch (todo.getTodoCategory()){
+            case "D":
+                this.category = 0;
+                this.dateFormatStr = year + "년 " + month + "월 " + day + "일";
+                break;
+            case "W":
+                this.category = 1;
+                this.dateFormatStr = year + "년 " + month + "월 " + week + "주";
+                break;
+            case "M":
+                this.category = 2;
+                this.dateFormatStr = year + "년 " + month + "월";
+                break;
+            default:
+                this.category = 3;
+                this.dateFormatStr = year + "년";
+                break;
+        }
+        this.priority = todo.getPriority();
+
+        editTextTitle.setText(todo.getTodoTitle());
+        spinner.setSelection(category);
+        btn_choose_date.setText(dateFormatStr);
+
+        switch (priority){
+            case 1:
+                checkPriority(btn_priority_top);
+                uncheckPriority(btn_priority_middle);
+                uncheckPriority(btn_priority_bottom);
+                break;
+            case 2:
+                uncheckPriority(btn_priority_top);
+                checkPriority(btn_priority_middle);
+                uncheckPriority(btn_priority_bottom);
+                break;
+            default:
+                uncheckPriority(btn_priority_top);
+                uncheckPriority(btn_priority_middle);
+                checkPriority(btn_priority_bottom);
+                break;
+        }
+    }
+
+    public void setButtonText(){ //create to do 일 때, 날짜 선택 버튼의 텍스트 세팅해줌
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat simpleDate;
+        String getDate;
+
+        simpleDate = new SimpleDateFormat("yyyy년 MM월 dd일");
+        getDate = simpleDate.format(date);
+        btn_choose_date.setText(getDate);
     }
 }
 

@@ -21,6 +21,7 @@ import java.util.List;
 public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapter.TodoHolder> {
 
     private List<Todo> todos = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -31,6 +32,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull TodoHolder holder, int position) {
+        //final Todo currentTodo = todos.get(position);
         final Todo currentTodo = todos.get(position);
 
         Calendar calendar = currentTodo.getEndDate();
@@ -78,6 +80,23 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
             textViewEndDate = itemView.findViewById(R.id.todo_endDate);
             textViewPoint = itemView.findViewById(R.id.todo_point);
             checkBox = itemView.findViewById(R.id.checkbox);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(todos.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Todo todo);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }

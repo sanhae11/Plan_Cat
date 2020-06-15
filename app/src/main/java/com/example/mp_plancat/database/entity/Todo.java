@@ -110,6 +110,10 @@ public class Todo implements Serializable {
         return cal;
     }
 
+    public void setId(int id) {
+        this.todoID = id;
+    }
+
     public boolean isChecked(){
         if(isFinished == 1)
             return true;

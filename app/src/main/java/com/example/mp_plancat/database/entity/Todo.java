@@ -121,7 +121,7 @@ public class Todo implements Serializable {
             return false;
     }
     public void setIsFinished(boolean isFinished){
-        if(true){
+        if(isFinished){
             this.isFinished = 1;
         }
         else{

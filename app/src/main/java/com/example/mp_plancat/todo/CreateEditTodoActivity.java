@@ -88,8 +88,6 @@ public class CreateEditTodoActivity extends AppCompatActivity {
             Bundle bundle = intent.getBundleExtra("todoData");
             Todo todo = (Todo) bundle.get("todoData");
 
-            Log.e("checkDate", todo.getStartDate().get(Calendar.DAY_OF_MONTH) + "");
-
             editSetting(todo);
 
             actionBar.setTitle("Edit Todo");
@@ -114,7 +112,7 @@ public class CreateEditTodoActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id) {
-                if(++check > 1) {
+                if(++check > 1) { //spinner가 최소 한 번 눌렸을 때부터 if문 실행
                     long now = System.currentTimeMillis();
                     Date date = new Date(now);
                     SimpleDateFormat simpleDate;
@@ -351,18 +349,21 @@ public class CreateEditTodoActivity extends AppCompatActivity {
                     Todo todoData = new Todo(title, category_str, startDate, endDate, point, priority);
 
                     int id = getIntent().getIntExtra("todoData_ID", -1);
-                    if(id != -1){
+                    if(id != -1){ //edit to do 일 시, id 값 세팅
                         todoData.setId(id);
+                    }
+
+                    int checkState = getIntent().getIntExtra("todoData_checkState", -1);
+                    if(checkState != -1){ //edit to do 일 시, check state 세팅
+                        if(checkState == 1)
+                            todoData.setIsFinished(true);
+                        else
+                            todoData.setIsFinished(false);
                     }
 
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("todoData", todoData);
-
-                    ////////////////log test
-                    Todo todo = (Todo) bundle.get("todoData");
-                    Log.e("test", "createTodoActivity : " + todo.todoID + " " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
-
                     intent.putExtra("todoData", bundle);
 
                     setResult(RESULT_OK, intent);

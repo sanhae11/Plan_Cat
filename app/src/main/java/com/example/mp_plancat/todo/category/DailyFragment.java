@@ -22,6 +22,7 @@ import com.example.mp_plancat.todo.CreateEditTodoActivity;
 import com.example.mp_plancat.todo.TodoRecyclerAdapter;
 import com.example.mp_plancat.todo.TodoViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -36,13 +37,8 @@ public class DailyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_daily, container, false);
 
-        ////////////////logtest
-        Log.e("Test", "dailyfrag : oncreateview() 실행");
-
-
-
         RecyclerView recyclerView = rootView.findViewById(R.id.todoRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //parameter 원래는 this였음. 오류 나면 얘가 문제일수도
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //parameter 원래는 this였음
         recyclerView.setHasFixedSize(true);
 
         final TodoRecyclerAdapter adapter = new TodoRecyclerAdapter();
@@ -57,7 +53,7 @@ public class DailyFragment extends Fragment {
             }
         });
 
-        adapter.setOnItemClickListener(new TodoRecyclerAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new TodoRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
             @Override
             public void onItemClick(Todo todo) {
                 Intent intent = new Intent(getActivity(), CreateEditTodoActivity.class);
@@ -65,38 +61,36 @@ public class DailyFragment extends Fragment {
                 bundle.putSerializable("todoData", todo);
                 intent.putExtra("todoData", bundle);
                 intent.putExtra("todoData_ID", todo.getTodoID());
-
-                Log.e("checkID", "dailyfrag" + todo.getTodoID() + "");
+                intent.putExtra("todoData_checkState", todo.getIsFinished());
 
                 startActivityForResult(intent, EDIT_TODO_REQUEST);
             }
         });
 
+        adapter.setOnStatusCheckBoxChanged(new TodoRecyclerAdapter.OnStatusCheckBoxChangeListener() { //checkbox 클릭할 때마다 db 업데이트
+            @Override
+            public void onStatusCheckBoxChanged(Todo todo, boolean isChecked) {
+                todo.setIsFinished(isChecked);
+                todoViewModel.update(todo);
+            }
+        });
 
         Bundle bundle = getArguments();
         if(bundle != null){
-            Log.e("test", "dailyFrag : 번들 if문 실행");
-
             Todo todo = (Todo) bundle.get("todoData");
 
             todoViewModel.insert(todo);
         }
-
-
 
         return rootView;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        ////////////log test
-        Log.e("test", "dailyfrag : onActivityResult 실행됨");
-
         if (requestCode == EDIT_TODO_REQUEST && resultCode == RESULT_OK) {
             Bundle bundle = intent.getBundleExtra("todoData");
 
             Todo todo = (Todo) bundle.get("todoData");
-            Log.e("test", "dailyFrag onactivityresult 실행 : " + todo.todoID + " " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
 
             todoViewModel.update(todo);
         }

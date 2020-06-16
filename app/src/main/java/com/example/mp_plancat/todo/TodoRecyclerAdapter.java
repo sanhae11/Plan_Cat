@@ -1,5 +1,6 @@
 package com.example.mp_plancat.todo;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
@@ -22,6 +24,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
     private List<Todo> todos = new ArrayList<>();
     private OnItemClickListener listener;
+    private OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
 
     @NonNull
     @Override
@@ -31,8 +34,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodoHolder holder, int position) {
-        //final Todo currentTodo = todos.get(position);
+    public void onBindViewHolder(@NonNull TodoHolder holder, final int position) { //recyclerview 바인딩
         final Todo currentTodo = todos.get(position);
 
         Calendar calendar = currentTodo.getEndDate();
@@ -45,17 +47,20 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
         holder.textViewPoint.setText(String.valueOf(currentTodo.getAllocatedPoint()));
 
 
-        //Todo : 체크박스 상태 유지 하는 거 에러; 다시 짜기
-        holder.checkBox.setOnCheckedChangeListener(null);
+        //holder.checkBox.setOnCheckedChangeListener(null);
+        holder.checkBox.setTag(currentTodo);
 
-        holder.checkBox.setChecked(currentTodo.isChecked());////////////////////////////////////
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-                currentTodo.setIsFinished(isChecked);
+            public void onClick(View v) {
+                CheckBox cb = (CheckBox) v;
+                Todo todo = (Todo) cb.getTag();
+                if (onStatusCheckBoxChangeListener != null)
+                    onStatusCheckBoxChangeListener.onStatusCheckBoxChanged(todo,cb.isChecked());
             }
         });
-        ///////////////////////////////
+
+        holder.checkBox.setChecked(currentTodo.isChecked());
     }
 
     @Override
@@ -98,5 +103,12 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     }
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
+    }
+
+    public interface OnStatusCheckBoxChangeListener{
+        void onStatusCheckBoxChanged(Todo todo, boolean isChecked);
+    }
+    public void setOnStatusCheckBoxChanged(OnStatusCheckBoxChangeListener listener){
+        this.onStatusCheckBoxChangeListener = listener;
     }
 }

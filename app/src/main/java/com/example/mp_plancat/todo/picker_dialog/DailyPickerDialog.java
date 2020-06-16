@@ -71,7 +71,6 @@ public class DailyPickerDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onDateSet(null, yearPicker.getValue(), monthPicker.getValue(), dayPicker.getValue()); //확인 버튼 누를 당시의 year, month, day 값을 넘겨줌
-
                 //창 닫히기 직전의 year, month, day 값 저장
                 year = yearPicker.getValue();
                 month = monthPicker.getValue();

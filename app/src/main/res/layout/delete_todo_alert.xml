@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/notification_text"
+            android:text="@string/delete_todo_title"
             android:letterSpacing="0.01"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_title_alert_text"
+            android:text="@string/delete_todo_description"
             android:textSize="14dp"/>
     </LinearLayout>
 
@@ -38,6 +38,22 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:orientation="horizontal">
+        <Button
+            android:background="@drawable/custom_button_basic"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_cancel"
+            android:text="@string/btn_cancel"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:letterSpacing="0.01"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="2dp"
+            tools:targetApi="lollipop"
+            android:clickable="true"/>
         <Button
             android:background="@drawable/custom_button_basic"
             android:layout_width="60dp"

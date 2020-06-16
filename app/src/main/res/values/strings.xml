@@ -17,6 +17,6 @@
     <string name="btn_priority_bottom">하</string>
     <string name="btn_cancel">취소</string>
     <string name="btn_ok">확인</string>
-    <string name="no_title_alert_text">할 일을 입력하세요!</string>
-    <string name="notification_text">알림</string>
+    <string name="delete_todo_description">할 일을 삭제하시겠습니까?</string>
+    <string name="delete_todo_title">Delete Todo</string>
 </resources>

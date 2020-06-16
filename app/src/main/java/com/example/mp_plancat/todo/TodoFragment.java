@@ -89,15 +89,8 @@ public class TodoFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
-
-        Log.e("test", "todofrag : onActivityResult 실행됨");
         if(requestCode == ADD_TODO_REQUEST && resultCode == RESULT_OK){
             Bundle bundle = intent.getBundleExtra("todoData");
-
-            /////////////logtest
-            Todo todo = (Todo) bundle.get("todoData");
-            Log.e("test", "todoFrag : " + todo.todoID + " " + todo.todoTitle + " " + todo.todoCategory + " " + todo.endDay + " " + todo.allocatedPoint + " " + todo.priority);
-
 
             dailyFragment.setArguments(bundle);
             weeklyFragment.setArguments(bundle);

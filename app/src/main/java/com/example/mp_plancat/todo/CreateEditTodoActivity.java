@@ -172,7 +172,7 @@ public class CreateEditTodoActivity extends AppCompatActivity {
 
 
         //DailyPicker(연, 월, 일 선택하는 창)
-        final DatePickerDialog.OnDateSetListener dailyListner = new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog.OnDateSetListener dailyListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int dayOfMonth1) {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
@@ -191,7 +191,7 @@ public class CreateEditTodoActivity extends AppCompatActivity {
         };
 
         //WeeklyPicker(연, 월, 주 선택하는 창)
-        final DatePickerDialog.OnDateSetListener weeklyListner = new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog.OnDateSetListener weeklyListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int week1) {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
@@ -217,7 +217,7 @@ public class CreateEditTodoActivity extends AppCompatActivity {
         };
 
         //MonthlyPicker(연, 월 선택하는 창)
-        final DatePickerDialog.OnDateSetListener monthlyListner = new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog.OnDateSetListener monthlyListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int day1) {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
@@ -231,7 +231,7 @@ public class CreateEditTodoActivity extends AppCompatActivity {
         };
 
         //YearlyPicker(연 선택하는 창)
-        final DatePickerDialog.OnDateSetListener yearlyListner = new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog.OnDateSetListener yearlyListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year1, int month1, int day1) {
                 //dialog 창의 확인 버튼 눌렀을 때의 값을 받아와서 저장
@@ -263,22 +263,22 @@ public class CreateEditTodoActivity extends AppCompatActivity {
                 switch (category){
                     case 0:
                         dailyPD = new DailyPickerDialog(year, month, day);
-                        dailyPD.setListener(dailyListner);
+                        dailyPD.setListener(dailyListener);
                         dailyPD.show(getSupportFragmentManager(), "DailyPickerTest");
                         break;
                     case 1:
                         weeklyPD = new WeeklyPickerDialog(year, month, week);
-                        weeklyPD.setListener(weeklyListner);
+                        weeklyPD.setListener(weeklyListener);
                         weeklyPD.show(getSupportFragmentManager(), "WeeklyPickerTest");
                         break;
                     case 2:
                         monthlyPD = new MonthlyPickerDialog(year, month);
-                        monthlyPD.setListener(monthlyListner);
+                        monthlyPD.setListener(monthlyListener);
                         monthlyPD.show(getSupportFragmentManager(), "MonthlyPickerTest");
                         break;
                     case 3:
                         yearlyPD = new YearlyPickerDialog(year);
-                        yearlyPD.setListener(yearlyListner);
+                        yearlyPD.setListener(yearlyListener);
                         yearlyPD.show(getSupportFragmentManager(), "YearlyPickerTest");
                         break;
                     default:

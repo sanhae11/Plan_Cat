@@ -24,6 +24,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
     private List<Todo> todos = new ArrayList<>();
     private OnItemClickListener listener;
+    private OnItemLongClickListener longClickListener;
     private OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
 
     @NonNull
@@ -95,6 +96,17 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
                     }
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getAdapterPosition();
+                    if(longClickListener != null && position != RecyclerView.NO_POSITION){
+                        longClickListener.onItemLongClick(todos.get(position));
+                    }
+                    return true;
+                }
+            });
         }
     }
 
@@ -103,6 +115,13 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     }
     public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Todo todo);
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener listener){
+        this.longClickListener = listener;
     }
 
     public interface OnStatusCheckBoxChangeListener{

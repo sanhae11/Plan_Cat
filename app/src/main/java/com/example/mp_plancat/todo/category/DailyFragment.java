@@ -1,5 +1,7 @@
 package com.example.mp_plancat.todo.category;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
 import com.example.mp_plancat.todo.CreateEditTodoActivity;
+import com.example.mp_plancat.todo.DeleteTodoDialog;
 import com.example.mp_plancat.todo.TodoRecyclerAdapter;
 import com.example.mp_plancat.todo.TodoViewModel;
 
@@ -64,6 +67,25 @@ public class DailyFragment extends Fragment {
                 intent.putExtra("todoData_checkState", todo.getIsFinished());
 
                 startActivityForResult(intent, EDIT_TODO_REQUEST);
+            }
+        });
+
+        adapter.setOnItemLongClickListener(new TodoRecyclerAdapter.OnItemLongClickListener() { //할 일 꾹 누르면 delete to do 다이얼로그 창 뜸
+            @Override
+            public void onItemLongClick(final Todo todo) {
+                DeleteTodoDialog deleteTodoDialog = new DeleteTodoDialog();
+                deleteTodoDialog.setDialogListener(new DeleteTodoDialog.DeleteTodoDialogListener() {
+                    @Override
+                    public void onPositiveClicked() {
+                        todoViewModel.delete(todo);
+                    }
+
+                    @Override
+                    public void onNegativeClicked() {
+
+                    }
+                });
+                deleteTodoDialog.show(getActivity().getSupportFragmentManager(), "Delete Todo Dialog");
             }
         });
 

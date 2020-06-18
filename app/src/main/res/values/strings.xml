@@ -19,4 +19,6 @@
     <string name="btn_ok">확인</string>
     <string name="delete_todo_description">할 일을 삭제하시겠습니까?</string>
     <string name="delete_todo_title">Delete Todo</string>
+    <string name="text_edit">수정</string>
+    <string name="text_delete">삭제</string>
 </resources>

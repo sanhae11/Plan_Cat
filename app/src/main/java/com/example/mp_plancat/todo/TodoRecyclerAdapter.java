@@ -102,7 +102,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
                 public boolean onLongClick(View v) {
                     int position = getAdapterPosition();
                     if(longClickListener != null && position != RecyclerView.NO_POSITION){
-                        longClickListener.onItemLongClick(todos.get(position));
+                        longClickListener.onItemLongClick(todos.get(position), v);
                     }
                     return true;
                 }
@@ -118,7 +118,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     }
 
     public interface OnItemLongClickListener {
-        void onItemLongClick(Todo todo);
+        void onItemLongClick(Todo todo, View view);
     }
     public void setOnItemLongClickListener(OnItemLongClickListener listener){
         this.longClickListener = listener;

@@ -15,9 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
+import com.example.mp_plancat.MainActivity;
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
 import com.example.mp_plancat.todo.CreateEditTodoActivity;
@@ -59,33 +64,49 @@ public class DailyFragment extends Fragment {
         adapter.setOnItemClickListener(new TodoRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
             @Override
             public void onItemClick(Todo todo) {
-                Intent intent = new Intent(getActivity(), CreateEditTodoActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("todoData", todo);
-                intent.putExtra("todoData", bundle);
-                intent.putExtra("todoData_ID", todo.getTodoID());
-                intent.putExtra("todoData_checkState", todo.getIsFinished());
-
-                startActivityForResult(intent, EDIT_TODO_REQUEST);
+                //할 일 클릭 시
             }
         });
 
         adapter.setOnItemLongClickListener(new TodoRecyclerAdapter.OnItemLongClickListener() { //할 일 꾹 누르면 delete to do 다이얼로그 창 뜸
             @Override
-            public void onItemLongClick(final Todo todo) {
-                DeleteTodoDialog deleteTodoDialog = new DeleteTodoDialog();
-                deleteTodoDialog.setDialogListener(new DeleteTodoDialog.DeleteTodoDialogListener() {
-                    @Override
-                    public void onPositiveClicked() {
-                        todoViewModel.delete(todo);
-                    }
+            public void onItemLongClick(final Todo todo, View view) {
+                PopupMenu popupMenu = new PopupMenu(getContext(), view);
+                getActivity().getMenuInflater().inflate(R.menu.popup_menu_listview, popupMenu.getMenu());
 
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onNegativeClicked() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.item_edit:
+                                Intent intent = new Intent(getActivity(), CreateEditTodoActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("todoData", todo);
+                                intent.putExtra("todoData", bundle);
+                                intent.putExtra("todoData_ID", todo.getTodoID());
+                                intent.putExtra("todoData_checkState", todo.getIsFinished());
 
+                                startActivityForResult(intent, EDIT_TODO_REQUEST);
+                                break;
+                            case R.id.item_delete:
+                                DeleteTodoDialog deleteTodoDialog = new DeleteTodoDialog();
+                                deleteTodoDialog.setDialogListener(new DeleteTodoDialog.DeleteTodoDialogListener() {
+                                    @Override
+                                    public void onPositiveClicked() {
+                                        todoViewModel.delete(todo);
+                                    }
+                                    @Override
+                                    public void onNegativeClicked() {
+
+                                    }
+                                });
+                                deleteTodoDialog.show(getActivity().getSupportFragmentManager(), "Delete Todo Dialog");
+                                break;
+                        }
+                        return false;
                     }
                 });
-                deleteTodoDialog.show(getActivity().getSupportFragmentManager(), "Delete Todo Dialog");
+                popupMenu.show();
             }
         });
 

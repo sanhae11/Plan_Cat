@@ -20,10 +20,11 @@ import com.example.mp_plancat.database.entity.Goods;
 import com.example.mp_plancat.database.entity.PurchasedGoods;
 import com.example.mp_plancat.database.entity.Todo;
 
-@Database(entities = {Todo.class, GameInfo.class, Goods.class, PurchasedGoods.class, AssignedGoods.class, Cat.class, CollectedCat.class}, version = 1)
+//@Database(entities = {Todo.class, GameInfo.class, Goods.class, PurchasedGoods.class, AssignedGoods.class, Cat.class, CollectedCat.class}, version = 1)
+@Database(entities = {GameInfo.class, Goods.class, PurchasedGoods.class, AssignedGoods.class, Cat.class, CollectedCat.class}, version = 1)
 @TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract TodoDao todoDao();
+    //public abstract TodoDao todoDao();
 
     public abstract GameInfoDao gameInfoDao();
 

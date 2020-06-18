@@ -15,8 +15,7 @@
         <activity android:name=".CatPopActivity" />
         <activity android:name=".AssignThingsActivity" />
         <activity android:name=".MyThingsActivity" />
-        <activity android:name=".todo.EditTodoActivity" />
-        <activity android:name=".todo.CreateTodoActivity" />
+        <activity android:name=".todo.CreateEditTodoActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

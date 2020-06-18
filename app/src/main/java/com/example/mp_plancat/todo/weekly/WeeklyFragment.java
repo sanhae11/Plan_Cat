@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo.category;
+package com.example.mp_plancat.todo.weekly;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,34 +22,32 @@ import com.example.mp_plancat.database.dao.TodoDao;
 import com.example.mp_plancat.database.entity.Todo;
 import com.example.mp_plancat.todo.CreateEditTodoActivity;
 import com.example.mp_plancat.todo.DeleteTodoDialog;
-import com.example.mp_plancat.todo.YearlyTodoRecyclerAdapter;
-import com.example.mp_plancat.todo.YearlyTodoViewModel;
-import com.example.mp_plancat.todo.monthly.MonthlyTodoRecyclerAdapter;
-import com.example.mp_plancat.todo.monthly.MonthlyTodoViewModel;
+import com.example.mp_plancat.todo.weekly.WeeklyTodoRecyclerAdapter;
+import com.example.mp_plancat.todo.weekly.WeeklyTodoViewModel;
 
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-public class YearlyFragment extends Fragment {
+public class WeeklyFragment extends Fragment {
     public static final int EDIT_TODO_REQUEST = 2;
 
-    private YearlyTodoViewModel todoViewModel;
+    private WeeklyTodoViewModel todoViewModel;
     private TodoDao todoDao;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_yearly, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_weekly, container, false);
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.yearlyTodoRecyclerView);
+        RecyclerView recyclerView = rootView.findViewById(R.id.weeklyTodoRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //parameter 원래는 this였음
         recyclerView.setHasFixedSize(true);
 
-        final YearlyTodoRecyclerAdapter adapter = new YearlyTodoRecyclerAdapter();
+        final WeeklyTodoRecyclerAdapter adapter = new WeeklyTodoRecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
-        todoViewModel = ViewModelProviders.of(this).get(YearlyTodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
+        todoViewModel = ViewModelProviders.of(this).get(WeeklyTodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
         todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() { //parameter 원래 this 였는데 오류나서 바꿈
             @Override
             public void onChanged(@Nullable List<Todo> todos) {
@@ -58,14 +56,14 @@ public class YearlyFragment extends Fragment {
             }
         });
 
-        adapter.setOnItemClickListener(new YearlyTodoRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
+        adapter.setOnItemClickListener(new WeeklyTodoRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
             @Override
             public void onItemClick(Todo todo) {
                 //할 일 클릭 시
             }
         });
 
-        adapter.setOnItemLongClickListener(new YearlyTodoRecyclerAdapter.OnItemLongClickListener() { //할 일 꾹 누르면 delete to do 다이얼로그 창 뜸
+        adapter.setOnItemLongClickListener(new WeeklyTodoRecyclerAdapter.OnItemLongClickListener() { //할 일 꾹 누르면 delete to do 다이얼로그 창 뜸
             @Override
             public void onItemLongClick(final Todo todo, View view) {
                 PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -107,7 +105,7 @@ public class YearlyFragment extends Fragment {
             }
         });
 
-        adapter.setOnStatusCheckBoxChanged(new YearlyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener() { //checkbox 클릭할 때마다 db 업데이트
+        adapter.setOnStatusCheckBoxChanged(new WeeklyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener() { //checkbox 클릭할 때마다 db 업데이트
             @Override
             public void onStatusCheckBoxChanged(Todo todo, boolean isChecked) {
                 todo.setIsFinished(isChecked);

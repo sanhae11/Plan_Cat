@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo;
+package com.example.mp_plancat.todo.weekly;
 
 import android.app.Application;
 
@@ -10,13 +10,13 @@ import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.List;
 
-public class DailyTodoViewModel extends AndroidViewModel {
-    private DailyTodoRepository repository;
+public class WeeklyTodoViewModel extends AndroidViewModel {
+    private WeeklyTodoRepository repository;
     private LiveData<List<Todo>> allTodos;
 
-    public DailyTodoViewModel(@NonNull Application application){
+    public WeeklyTodoViewModel(@NonNull Application application){
         super(application);
-        repository = new DailyTodoRepository(application);
+        repository = new WeeklyTodoRepository(application);
         allTodos = repository.getAllTodos();
     }
 

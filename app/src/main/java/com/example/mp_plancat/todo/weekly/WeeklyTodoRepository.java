@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo;
+package com.example.mp_plancat.todo.weekly;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -11,27 +11,26 @@ import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.List;
 
-public class DailyTodoRepository {
+public class WeeklyTodoRepository {
     private TodoDao todoDao;
     private LiveData<List<Todo>> allTodos;
 
-    public DailyTodoRepository(Application application){
+    public WeeklyTodoRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
         todoDao = database.todoDao();
-        allTodos = todoDao.getAllByCategory("D");
-        //Todo 카테고리에 맞게 가져오도록 ,, 바꿔야 함 ,,, sort 한 곳에다가 해보기!!!!!!!!!!!!!!!!!!!!!!1
+        allTodos = todoDao.getAllByCategory("W");
     }
     public void insert(Todo todo){
-        new InsertTodoAsyncTask(todoDao).execute(todo);
+        new WeeklyTodoRepository.InsertTodoAsyncTask(todoDao).execute(todo);
     }
     public void update(Todo todo){
-        new UpdateTodoAsyncTask(todoDao).execute(todo);
+        new WeeklyTodoRepository.UpdateTodoAsyncTask(todoDao).execute(todo);
     }
     public void delete(Todo todo){
-        new DeleteTodoAsyncTask(todoDao).execute(todo);
+        new WeeklyTodoRepository.DeleteTodoAsyncTask(todoDao).execute(todo);
     }
     public void deleteAllTodos(){
-        new DeleteAllTodosAsyncTask(todoDao).execute();
+        new WeeklyTodoRepository.DeleteAllTodosAsyncTask(todoDao).execute();
     }
     public LiveData<List<Todo>> getAllTodos() {
         return allTodos;

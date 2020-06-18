@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.util.Calendar;
 
 @Entity(indices = @Index(value = {"todo_title", "todo_category", "priority"}, unique = true))
-public class Todo implements Serializable {
+public class Todo implements Serializable, Comparable<Todo>{
 
     @PrimaryKey(autoGenerate = true)
     public int todoID;
@@ -127,5 +127,9 @@ public class Todo implements Serializable {
         else{
             this.isFinished = 0;
         }
+    }
+
+    public int compareTo(Todo todo){
+        return this.getEndDate().compareTo(todo.getEndDate());
     }
 }

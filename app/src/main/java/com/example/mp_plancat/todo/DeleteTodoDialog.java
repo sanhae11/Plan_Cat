@@ -41,7 +41,6 @@ public class DeleteTodoDialog extends DialogFragment {
         btn_ok.setOnClickListener(new View.OnClickListener() { //확인 버튼 눌렀을 때
             @Override
             public void onClick(View v) {
-                //Todo 일정 삭제
                 deleteTodoDialogListener.onPositiveClicked();
                 DeleteTodoDialog.this.getDialog().cancel(); //dialog 창 닫기
             }

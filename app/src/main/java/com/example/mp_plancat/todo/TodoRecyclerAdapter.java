@@ -1,5 +1,7 @@
 package com.example.mp_plancat.todo;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapter.TodoHolder> {
@@ -62,6 +65,14 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
         });
 
         holder.checkBox.setChecked(currentTodo.isChecked());
+        if(currentTodo.isChecked()){
+            holder.textViewTitle.setPaintFlags(holder.textViewTitle.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.textViewTitle.setTextColor(Color.LTGRAY);
+        }
+        else{
+            holder.textViewTitle.setPaintFlags(0);
+            holder.textViewTitle.setTextColor(Color.BLACK);
+        }
     }
 
     @Override
@@ -70,6 +81,8 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     }
 
     public void setTodos(List<Todo> todos){
+        Collections.sort(todos, new AscendingTodo());
+
         this.todos = todos;
         notifyDataSetChanged();
     }

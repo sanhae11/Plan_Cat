@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo;
+package com.example.mp_plancat.todo.monthly;
 
 import android.app.Application;
 
@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.mp_plancat.database.entity.Todo;
-import com.example.mp_plancat.todo.weekly.WeeklyTodoRepository;
 
 import java.util.List;
 

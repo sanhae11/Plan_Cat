@@ -8,30 +8,30 @@ import androidx.lifecycle.LiveData;
 import com.example.mp_plancat.database.TodoDatabase;
 import com.example.mp_plancat.database.dao.TodoDao;
 import com.example.mp_plancat.database.entity.Todo;
-import com.example.mp_plancat.todo.weekly.WeeklyTodoRepository;
+import com.example.mp_plancat.todo.monthly.MonthlyTodoRepository;
 
 import java.util.List;
 
-public class MonthlyTodoRepository {
+public class YearlyTodoRepository {
     private TodoDao todoDao;
     private LiveData<List<Todo>> allTodos;
 
-    public MonthlyTodoRepository(Application application){
+    public YearlyTodoRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
         todoDao = database.todoDao();
-        allTodos = todoDao.getAllByCategory("M");
+        allTodos = todoDao.getAllByCategory("Y");
     }
     public void insert(Todo todo){
-        new MonthlyTodoRepository.InsertTodoAsyncTask(todoDao).execute(todo);
+        new YearlyTodoRepository.InsertTodoAsyncTask(todoDao).execute(todo);
     }
     public void update(Todo todo){
-        new MonthlyTodoRepository.UpdateTodoAsyncTask(todoDao).execute(todo);
+        new YearlyTodoRepository.UpdateTodoAsyncTask(todoDao).execute(todo);
     }
     public void delete(Todo todo){
-        new MonthlyTodoRepository.DeleteTodoAsyncTask(todoDao).execute(todo);
+        new YearlyTodoRepository.DeleteTodoAsyncTask(todoDao).execute(todo);
     }
     public void deleteAllTodos(){
-        new MonthlyTodoRepository.DeleteAllTodosAsyncTask(todoDao).execute();
+        new YearlyTodoRepository.DeleteAllTodosAsyncTask(todoDao).execute();
     }
     public LiveData<List<Todo>> getAllTodos() {
         return allTodos;

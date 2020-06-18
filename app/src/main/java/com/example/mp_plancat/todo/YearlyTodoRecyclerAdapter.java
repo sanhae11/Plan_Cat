@@ -13,27 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
+import com.example.mp_plancat.todo.monthly.MonthlyTodoRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class MonthlyTodoRecyclerAdapter extends RecyclerView.Adapter<MonthlyTodoRecyclerAdapter.TodoHolder> {
+public class YearlyTodoRecyclerAdapter extends RecyclerView.Adapter<YearlyTodoRecyclerAdapter.TodoHolder> {
     private List<Todo> todos = new ArrayList<>();
-    private MonthlyTodoRecyclerAdapter.OnItemClickListener listener;
-    private MonthlyTodoRecyclerAdapter.OnItemLongClickListener longClickListener;
-    private MonthlyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
+    private YearlyTodoRecyclerAdapter.OnItemClickListener listener;
+    private YearlyTodoRecyclerAdapter.OnItemLongClickListener longClickListener;
+    private YearlyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
 
     @NonNull
     @Override
-    public MonthlyTodoRecyclerAdapter.TodoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public YearlyTodoRecyclerAdapter.TodoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_todo_item, parent, false);
-        return new MonthlyTodoRecyclerAdapter.TodoHolder(itemView);
+        return new YearlyTodoRecyclerAdapter.TodoHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MonthlyTodoRecyclerAdapter.TodoHolder holder, final int position) { //recyclerview 바인딩
+    public void onBindViewHolder(@NonNull YearlyTodoRecyclerAdapter.TodoHolder holder, final int position) { //recyclerview 바인딩
         final Todo currentTodo = todos.get(position);
 
         Calendar calendar = currentTodo.getEndDate();
@@ -42,7 +43,7 @@ public class MonthlyTodoRecyclerAdapter extends RecyclerView.Adapter<MonthlyTodo
         int year = calendar.get(Calendar.YEAR);
 
         holder.textViewTitle.setText(currentTodo.getTodoTitle());
-        holder.textViewEndDate.setText(String.valueOf(year) + "년 " + String.valueOf(month) + "월");
+        holder.textViewEndDate.setText(String.valueOf(year) + "년 ");
         holder.textViewPoint.setText(String.valueOf(currentTodo.getAllocatedPoint()));
 
 
@@ -123,21 +124,21 @@ public class MonthlyTodoRecyclerAdapter extends RecyclerView.Adapter<MonthlyTodo
     public interface OnItemClickListener {
         void onItemClick(Todo todo);
     }
-    public void setOnItemClickListener(MonthlyTodoRecyclerAdapter.OnItemClickListener listener){
+    public void setOnItemClickListener(YearlyTodoRecyclerAdapter.OnItemClickListener listener){
         this.listener = listener;
     }
 
     public interface OnItemLongClickListener {
         void onItemLongClick(Todo todo, View view);
     }
-    public void setOnItemLongClickListener(MonthlyTodoRecyclerAdapter.OnItemLongClickListener listener){
+    public void setOnItemLongClickListener(YearlyTodoRecyclerAdapter.OnItemLongClickListener listener){
         this.longClickListener = listener;
     }
 
     public interface OnStatusCheckBoxChangeListener{
         void onStatusCheckBoxChanged(Todo todo, boolean isChecked);
     }
-    public void setOnStatusCheckBoxChanged(MonthlyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener listener){
+    public void setOnStatusCheckBoxChanged(YearlyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener listener){
         this.onStatusCheckBoxChangeListener = listener;
     }
 }

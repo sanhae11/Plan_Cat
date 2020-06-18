@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo.category;
+package com.example.mp_plancat.todo.monthly;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +22,6 @@ import com.example.mp_plancat.database.dao.TodoDao;
 import com.example.mp_plancat.database.entity.Todo;
 import com.example.mp_plancat.todo.CreateEditTodoActivity;
 import com.example.mp_plancat.todo.DeleteTodoDialog;
-import com.example.mp_plancat.todo.MonthlyTodoRecyclerAdapter;
-import com.example.mp_plancat.todo.MonthlyTodoViewModel;
-import com.example.mp_plancat.todo.weekly.WeeklyTodoRecyclerAdapter;
-import com.example.mp_plancat.todo.weekly.WeeklyTodoViewModel;
 
 import java.util.List;
 

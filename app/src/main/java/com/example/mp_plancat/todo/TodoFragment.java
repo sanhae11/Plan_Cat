@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import com.example.mp_plancat.MainActivity;
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.todo.daily.DailyFragment;
-import com.example.mp_plancat.todo.category.MonthlyFragment;
+import com.example.mp_plancat.todo.monthly.MonthlyFragment;
 import com.example.mp_plancat.todo.weekly.WeeklyFragment;
 import com.example.mp_plancat.todo.category.YearlyFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

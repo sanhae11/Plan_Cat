@@ -50,4 +50,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-beta01'
     // switch button
     implementation 'com.kyleduo.switchbutton:library:2.0.0'
+    // for gif splash activity
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

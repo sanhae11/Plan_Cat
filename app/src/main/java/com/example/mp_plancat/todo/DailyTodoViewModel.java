@@ -8,18 +8,15 @@ import androidx.lifecycle.LiveData;
 
 import com.example.mp_plancat.database.entity.Todo;
 
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class TodoViewModel extends AndroidViewModel {
-    private TodoRepository repository;
+public class DailyTodoViewModel extends AndroidViewModel {
+    private DailyTodoRepository repository;
     private LiveData<List<Todo>> allTodos;
 
-    public TodoViewModel(@NonNull Application application){
+    public DailyTodoViewModel(@NonNull Application application){
         super(application);
-        repository = new TodoRepository(application);
+        repository = new DailyTodoRepository(application);
         allTodos = repository.getAllTodos();
     }
 

@@ -1,7 +1,5 @@
 package com.example.mp_plancat.todo.category;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,24 +11,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
-import com.example.mp_plancat.MainActivity;
 import com.example.mp_plancat.R;
+import com.example.mp_plancat.database.dao.TodoDao;
 import com.example.mp_plancat.database.entity.Todo;
 import com.example.mp_plancat.todo.CreateEditTodoActivity;
 import com.example.mp_plancat.todo.DeleteTodoDialog;
-import com.example.mp_plancat.todo.TodoRecyclerAdapter;
-import com.example.mp_plancat.todo.TodoViewModel;
+import com.example.mp_plancat.todo.DailyTodoRecyclerAdapter;
+import com.example.mp_plancat.todo.DailyTodoViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -38,7 +32,8 @@ import static android.app.Activity.RESULT_OK;
 public class DailyFragment extends Fragment {
     public static final int EDIT_TODO_REQUEST = 2;
 
-    private TodoViewModel todoViewModel;
+    private DailyTodoViewModel todoViewModel;
+    private TodoDao todoDao;
 
     @Nullable
     @Override
@@ -49,10 +44,10 @@ public class DailyFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //parameter 원래는 this였음
         recyclerView.setHasFixedSize(true);
 
-        final TodoRecyclerAdapter adapter = new TodoRecyclerAdapter();
+        final DailyTodoRecyclerAdapter adapter = new DailyTodoRecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
-        todoViewModel = ViewModelProviders.of(this).get(TodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
+        todoViewModel = ViewModelProviders.of(this).get(DailyTodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
         todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() { //parameter 원래 this 였는데 오류나서 바꿈
             @Override
             public void onChanged(@Nullable List<Todo> todos) {
@@ -61,14 +56,14 @@ public class DailyFragment extends Fragment {
             }
         });
 
-        adapter.setOnItemClickListener(new TodoRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
+        adapter.setOnItemClickListener(new DailyTodoRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
             @Override
             public void onItemClick(Todo todo) {
                 //할 일 클릭 시
             }
         });
 
-        adapter.setOnItemLongClickListener(new TodoRecyclerAdapter.OnItemLongClickListener() { //할 일 꾹 누르면 delete to do 다이얼로그 창 뜸
+        adapter.setOnItemLongClickListener(new DailyTodoRecyclerAdapter.OnItemLongClickListener() { //할 일 꾹 누르면 delete to do 다이얼로그 창 뜸
             @Override
             public void onItemLongClick(final Todo todo, View view) {
                 PopupMenu popupMenu = new PopupMenu(getContext(), view);
@@ -110,7 +105,7 @@ public class DailyFragment extends Fragment {
             }
         });
 
-        adapter.setOnStatusCheckBoxChanged(new TodoRecyclerAdapter.OnStatusCheckBoxChangeListener() { //checkbox 클릭할 때마다 db 업데이트
+        adapter.setOnStatusCheckBoxChanged(new DailyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener() { //checkbox 클릭할 때마다 db 업데이트
             @Override
             public void onStatusCheckBoxChanged(Todo todo, boolean isChecked) {
                 todo.setIsFinished(isChecked);

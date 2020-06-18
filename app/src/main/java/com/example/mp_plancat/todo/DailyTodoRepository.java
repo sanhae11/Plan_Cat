@@ -11,14 +11,15 @@ import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.List;
 
-public class TodoRepository {
+public class DailyTodoRepository {
     private TodoDao todoDao;
     private LiveData<List<Todo>> allTodos;
 
-    public TodoRepository(Application application){
+    public DailyTodoRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
         todoDao = database.todoDao();
-        allTodos = todoDao.getAllTodos();
+        allTodos = todoDao.getAllByCategory("D");
+        //Todo 카테고리에 맞게 가져오도록 ,, 바꿔야 함 ,,, sort 한 곳에다가 해보기!!!!!!!!!!!!!!!!!!!!!!1
     }
     public void insert(Todo todo){
         new InsertTodoAsyncTask(todoDao).execute(todo);

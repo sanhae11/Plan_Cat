@@ -2,18 +2,14 @@ package com.example.mp_plancat.todo;
 
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
@@ -23,12 +19,13 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapter.TodoHolder> {
+public class DailyTodoRecyclerAdapter extends RecyclerView.Adapter<DailyTodoRecyclerAdapter.TodoHolder> {
 
     private List<Todo> todos = new ArrayList<>();
     private OnItemClickListener listener;
     private OnItemLongClickListener longClickListener;
     private OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
+    private String category = "D";
 
     @NonNull
     @Override
@@ -82,6 +79,8 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
     public void setTodos(List<Todo> todos){
         Collections.sort(todos, new AscendingTodo());
+
+
 
         this.todos = todos;
         notifyDataSetChanged();

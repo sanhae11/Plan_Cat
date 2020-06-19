@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo;
+package com.example.mp_plancat.todo.home;
 
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mp_plancat.R;
 import com.example.mp_plancat.database.entity.Todo;
+import com.example.mp_plancat.todo.AscendingTodo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,18 +25,20 @@ public class DateCategoryTodoRecyclerAdapter extends RecyclerView.Adapter<DateCa
     private DateCategoryTodoRecyclerAdapter.OnItemClickListener listener;
     private DateCategoryTodoRecyclerAdapter.OnItemLongClickListener longClickListener;
     private DateCategoryTodoRecyclerAdapter.OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
-    private int day, month, year;
+    private int day, week, month, year;
     private String category;
 
-    public DateCategoryTodoRecyclerAdapter(String category, int day, int month, int year){
+    public DateCategoryTodoRecyclerAdapter(String category, int day, int week, int month, int year){
         this.category = category;
         this.day = day;
+        this.week = week;
         this.month = month;
         this.year = year;
     }
 
-    public void setDate(int day, int month, int yaer) {
+    public void setDate(int day, int week, int month, int year) {
         this.day = day;
+        this.week = week;
         this.month = month;
         this.year = year;
     }
@@ -57,7 +60,24 @@ public class DateCategoryTodoRecyclerAdapter extends RecyclerView.Adapter<DateCa
         int year = calendar.get(Calendar.YEAR);
 
         holder.textViewTitle.setText(currentTodo.getTodoTitle());
-        holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(day) + "일");
+        //holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(day) + "일");
+        switch (category){
+            case "D":
+                holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(day) + "일");
+                break;
+            case "W":
+                holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(week) + "주");
+                break;
+            case "M":
+                holder.textViewEndDate.setText(String.valueOf(month) + "월");
+                break;
+            case "Y":
+                holder.textViewEndDate.setText(String.valueOf(year) + "년");
+                break;
+            default:
+                break;
+
+        }
         holder.textViewPoint.setText(String.valueOf(currentTodo.getAllocatedPoint()));
 
 
@@ -95,8 +115,10 @@ public class DateCategoryTodoRecyclerAdapter extends RecyclerView.Adapter<DateCa
 
         List<Todo> newTodo = new ArrayList<>();
 
+
         for(int i = 0; i < todos.size(); i++){
-            if(todos.get(i).endDay == day && todos.get(i).endMonth == month && todos.get(i).endYear == year && todos.get(i).todoCategory.equals(category)){
+            //if(todos.get(i).endDay == day && todos.get(i).endMonth == month && todos.get(i).endYear == year && todos.get(i).todoCategory.equals(category)){
+            if((todos.get(i).startDay <= day && day <= todos.get(i).endDay) && (todos.get(i).startMonth <= month && month <= todos.get(i).endMonth) && (todos.get(i).startYear <= year && year <= todos.get(i).endYear) && todos.get(i).todoCategory.equals(category)){
                 newTodo.add(todos.get(i));
             }
         }

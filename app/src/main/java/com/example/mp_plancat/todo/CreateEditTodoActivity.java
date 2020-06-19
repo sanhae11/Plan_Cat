@@ -349,6 +349,9 @@ public class CreateEditTodoActivity extends AppCompatActivity {
 
                     Todo todoData = new Todo(title, category_str, startDate, endDate, point, priority);
 
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+
                     int id = getIntent().getIntExtra("todoData_ID", -1);
                     if(id != -1){ //edit to do 일 시, id 값 세팅
                         todoData.setId(id);
@@ -362,8 +365,12 @@ public class CreateEditTodoActivity extends AppCompatActivity {
                             todoData.setIsFinished(false);
                     }
 
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
+                    Character character = getIntent().getCharExtra("todoData_category", 'N');
+                    if(character != 'N'){
+                        intent.putExtra("todoData_category", character);
+                    }
+
+
                     bundle.putSerializable("todoData", todoData);
                     intent.putExtra("todoData", bundle);
 

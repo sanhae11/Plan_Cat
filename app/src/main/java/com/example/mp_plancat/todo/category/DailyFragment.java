@@ -76,6 +76,7 @@ public class DailyFragment extends Fragment {
                                 bundle.putSerializable("todoData", todo);
                                 intent.putExtra("todoData", bundle);
                                 intent.putExtra("todoData_ID", todo.getTodoID());
+                                intent.putExtra("todoData_category", todo.getTodoCategory().charAt(0));
                                 intent.putExtra("todoData_checkState", todo.getIsFinished());
 
                                 startActivityForResult(intent, EDIT_TODO_REQUEST);

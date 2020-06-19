@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo.weekly;
+package com.example.mp_plancat.todo.category;
 
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,31 +20,55 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class WeeklyTodoRecyclerAdapter extends RecyclerView.Adapter<WeeklyTodoRecyclerAdapter.TodoHolder> {
+public class CategoryTodoRecyclerAdapter extends RecyclerView.Adapter<CategoryTodoRecyclerAdapter.TodoHolder> {
+
     private List<Todo> todos = new ArrayList<>();
-    private WeeklyTodoRecyclerAdapter.OnItemClickListener listener;
-    private WeeklyTodoRecyclerAdapter.OnItemLongClickListener longClickListener;
-    private WeeklyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
+    private OnItemClickListener listener;
+    private OnItemLongClickListener longClickListener;
+    private OnStatusCheckBoxChangeListener onStatusCheckBoxChangeListener;
+    private String category;
+
+    public CategoryTodoRecyclerAdapter(String category){
+        this.category = category;
+    }
 
     @NonNull
     @Override
-    public WeeklyTodoRecyclerAdapter.TodoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TodoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_todo_item, parent, false);
-        return new WeeklyTodoRecyclerAdapter.TodoHolder(itemView);
+        return new TodoHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WeeklyTodoRecyclerAdapter.TodoHolder holder, final int position) { //recyclerview 바인딩
+    public void onBindViewHolder(@NonNull TodoHolder holder, final int position) { //recyclerview 바인딩
         final Todo currentTodo = todos.get(position);
 
         Calendar calendar = currentTodo.getEndDate();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int week = calendar.get(Calendar.WEEK_OF_MONTH);
         int month = calendar.get(Calendar.MONTH) + 1;
+        int week = calendar.get(Calendar.WEEK_OF_MONTH);
         int year = calendar.get(Calendar.YEAR);
 
         holder.textViewTitle.setText(currentTodo.getTodoTitle());
-        holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(week) + "주");
+        switch (category){
+            case "D":
+                holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(day) + "일");
+                break;
+            case "W":
+                holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(week) + "주");
+                break;
+            case "M":
+                holder.textViewEndDate.setText(String.valueOf(month) + "월");
+                break;
+            case "Y":
+                holder.textViewEndDate.setText(String.valueOf(year) + "년");
+                break;
+            default:
+                break;
+
+        }
+
+        //holder.textViewEndDate.setText(String.valueOf(month) + "월 " + String.valueOf(day) + "일");
         holder.textViewPoint.setText(String.valueOf(currentTodo.getAllocatedPoint()));
 
 
@@ -80,9 +104,15 @@ public class WeeklyTodoRecyclerAdapter extends RecyclerView.Adapter<WeeklyTodoRe
     public void setTodos(List<Todo> todos){
         Collections.sort(todos, new AscendingTodo());
 
+        List<Todo> newTodo = new ArrayList<>();
 
+        for(int i = 0; i < todos.size(); i++){
+            if(todos.get(i).todoCategory.equals(category)){
+                newTodo.add(todos.get(i));
+            }
+        }
 
-        this.todos = todos;
+        this.todos = newTodo;
         notifyDataSetChanged();
     }
 
@@ -125,21 +155,21 @@ public class WeeklyTodoRecyclerAdapter extends RecyclerView.Adapter<WeeklyTodoRe
     public interface OnItemClickListener {
         void onItemClick(Todo todo);
     }
-    public void setOnItemClickListener(WeeklyTodoRecyclerAdapter.OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener){
         this.listener = listener;
     }
 
     public interface OnItemLongClickListener {
         void onItemLongClick(Todo todo, View view);
     }
-    public void setOnItemLongClickListener(WeeklyTodoRecyclerAdapter.OnItemLongClickListener listener){
+    public void setOnItemLongClickListener(OnItemLongClickListener listener){
         this.longClickListener = listener;
     }
 
     public interface OnStatusCheckBoxChangeListener{
         void onStatusCheckBoxChanged(Todo todo, boolean isChecked);
     }
-    public void setOnStatusCheckBoxChanged(WeeklyTodoRecyclerAdapter.OnStatusCheckBoxChangeListener listener){
+    public void setOnStatusCheckBoxChanged(OnStatusCheckBoxChangeListener listener){
         this.onStatusCheckBoxChangeListener = listener;
     }
 }

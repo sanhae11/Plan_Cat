@@ -1,4 +1,4 @@
-package com.example.mp_plancat.todo.monthly;
+package com.example.mp_plancat.todo;
 
 import android.app.Application;
 
@@ -10,13 +10,13 @@ import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.List;
 
-public class MonthlyTodoViewModel extends AndroidViewModel {
-    private MonthlyTodoRepository repository;
+public class TodoViewModel extends AndroidViewModel {
+    private TodoRepository repository;
     private LiveData<List<Todo>> allTodos;
 
-    public MonthlyTodoViewModel(@NonNull Application application){
+    public TodoViewModel(@NonNull Application application){
         super(application);
-        repository = new MonthlyTodoRepository(application);
+        repository = new TodoRepository(application);
         allTodos = repository.getAllTodos();
     }
 

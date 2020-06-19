@@ -8,30 +8,29 @@ import androidx.lifecycle.LiveData;
 import com.example.mp_plancat.database.TodoDatabase;
 import com.example.mp_plancat.database.dao.TodoDao;
 import com.example.mp_plancat.database.entity.Todo;
-import com.example.mp_plancat.todo.monthly.MonthlyTodoRepository;
 
 import java.util.List;
 
-public class YearlyTodoRepository {
+public class TodoRepository {
     private TodoDao todoDao;
     private LiveData<List<Todo>> allTodos;
 
-    public YearlyTodoRepository(Application application){
+    public TodoRepository(Application application){
         TodoDatabase database = TodoDatabase.getInstance(application);
         todoDao = database.todoDao();
-        allTodos = todoDao.getAllByCategory("Y");
+        allTodos = todoDao.getAllTodos();
     }
     public void insert(Todo todo){
-        new YearlyTodoRepository.InsertTodoAsyncTask(todoDao).execute(todo);
+        new InsertTodoAsyncTask(todoDao).execute(todo);
     }
     public void update(Todo todo){
-        new YearlyTodoRepository.UpdateTodoAsyncTask(todoDao).execute(todo);
+        new UpdateTodoAsyncTask(todoDao).execute(todo);
     }
     public void delete(Todo todo){
-        new YearlyTodoRepository.DeleteTodoAsyncTask(todoDao).execute(todo);
+        new DeleteTodoAsyncTask(todoDao).execute(todo);
     }
     public void deleteAllTodos(){
-        new YearlyTodoRepository.DeleteAllTodosAsyncTask(todoDao).execute();
+        new DeleteAllTodosAsyncTask(todoDao).execute();
     }
     public LiveData<List<Todo>> getAllTodos() {
         return allTodos;

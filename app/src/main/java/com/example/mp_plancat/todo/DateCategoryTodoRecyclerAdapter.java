@@ -34,6 +34,12 @@ public class DateCategoryTodoRecyclerAdapter extends RecyclerView.Adapter<DateCa
         this.year = year;
     }
 
+    public void setDate(int day, int month, int yaer) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
     @NonNull
     @Override
     public DateCategoryTodoRecyclerAdapter.TodoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

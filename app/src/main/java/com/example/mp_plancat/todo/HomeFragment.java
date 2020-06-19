@@ -42,7 +42,8 @@ public class HomeFragment extends Fragment {
     int currentYear = cal.get(Calendar.YEAR);
 
     private TodoViewModel dailyTodoViewModel, weeklyTodoViewModel, monthlyTodoViewModel, yearlyTodoViewModel;
-    RecyclerView dailyRecyclerView, weeklyRecyclerView, monthlyRecyclerView, yearlyRecyclerView;
+    private RecyclerView dailyRecyclerView, weeklyRecyclerView, monthlyRecyclerView, yearlyRecyclerView;
+    private DateCategoryTodoRecyclerAdapter dailyAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class HomeFragment extends Fragment {
         yearlyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //parameter 원래는 this였음
         yearlyRecyclerView.setHasFixedSize(true);
 
-        final DateCategoryTodoRecyclerAdapter dailyAdapter = new DateCategoryTodoRecyclerAdapter("D", currentDay, currentMonth, currentYear);
+        dailyAdapter = new DateCategoryTodoRecyclerAdapter("D", currentDay, currentMonth, currentYear);
         dailyRecyclerView.setAdapter(dailyAdapter);
         dailyTodoViewModel = ViewModelProviders.of(this).get(TodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
         dailyTodoViewModel.getAllTodos().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() { //parameter 원래 this 였는데 오류나서 바꿈
@@ -82,6 +83,7 @@ public class HomeFragment extends Fragment {
         dailyAdapter.setOnItemClickListener(new DateCategoryTodoRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Todo todo) {
+
             }
         });
 
@@ -174,21 +176,15 @@ public class HomeFragment extends Fragment {
                         currentDay = dayOfMonth;
                         btn.setText(currentYear + "년 " +currentMonth+ "월 " +currentDay +"일");
 
-                        final DateCategoryTodoRecyclerAdapter newDailyAdapter = new DateCategoryTodoRecyclerAdapter("D", currentDay, currentMonth, currentYear);
-                        dailyRecyclerView.setAdapter(newDailyAdapter);
+
+                        dailyAdapter.setDate(currentDay, currentMonth, currentYear);
+                        dailyRecyclerView.setAdapter(dailyAdapter);
                         dailyTodoViewModel = ViewModelProviders.of(HomeFragment.this).get(TodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
                         dailyTodoViewModel.getAllTodos().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() { //parameter 원래 this 였는데 오류나서 바꿈
                             @Override
                             public void onChanged(@Nullable List<Todo> todos) {
                                 //update Recyclerview
-                                newDailyAdapter.setTodos(todos);
-                            }
-                        });
-
-                        newDailyAdapter.setOnItemClickListener(new DateCategoryTodoRecyclerAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(Todo todo) {
-                                //할 일 클릭 시
+                                dailyAdapter.setTodos(todos);
                             }
                         });
                     }
@@ -205,24 +201,16 @@ public class HomeFragment extends Fragment {
                 currentYear = cal.get(Calendar.YEAR);
                 btn.setText(currentYear + "년 " +currentMonth+ "월 " +currentDay +"일");
                 //Todo 오늘 날짜의 리사이클러뷰 떠야 함
-                final DateCategoryTodoRecyclerAdapter newDailyAdapter = new DateCategoryTodoRecyclerAdapter("D", currentDay, currentMonth, currentYear);
-                dailyRecyclerView.setAdapter(newDailyAdapter);
+                dailyAdapter.setDate(currentDay, currentMonth, currentYear);
+                dailyRecyclerView.setAdapter(dailyAdapter);
                 dailyTodoViewModel = ViewModelProviders.of(HomeFragment.this).get(TodoViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
                 dailyTodoViewModel.getAllTodos().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() { //parameter 원래 this 였는데 오류나서 바꿈
                     @Override
                     public void onChanged(@Nullable List<Todo> todos) {
                         //update Recyclerview
-                        newDailyAdapter.setTodos(todos);
+                        dailyAdapter.setTodos(todos);
                     }
                 });
-
-                newDailyAdapter.setOnItemClickListener(new DateCategoryTodoRecyclerAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(Todo todo) {
-                        //할 일 클릭 시
-                    }
-                });
-
             }
         });
 

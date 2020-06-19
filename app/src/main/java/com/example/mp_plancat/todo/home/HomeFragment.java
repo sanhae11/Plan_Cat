@@ -22,6 +22,7 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import com.example.mp_plancat.MainActivity;
 import com.example.mp_plancat.R;
@@ -56,6 +57,9 @@ public class HomeFragment extends Fragment {
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
         actionBar.show(); //액션바 보여줌
         actionBar.setTitle("Home");
+
+        TextView icon_today = rootView.findViewById(R.id.icon_today);
+        icon_today.setText(currentDay + "");
 
         dailyRecyclerView = rootView.findViewById(R.id.dailyTodoRecyclerView);
         dailyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //parameter 원래는 this였음

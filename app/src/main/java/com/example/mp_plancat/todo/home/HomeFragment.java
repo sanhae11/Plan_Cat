@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import com.example.mp_plancat.MainActivity;
@@ -418,7 +420,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        final Button btn_goToday = rootView.findViewById(R.id.btn_goToday);
+        final ImageView btn_goToday = rootView.findViewById(R.id.btn_goToday);
         btn_goToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

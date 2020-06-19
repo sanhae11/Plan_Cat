@@ -8,8 +8,8 @@
             android:shape="rectangle">
             <stroke
                 android:width="0.6dp"
-                android:color="@color/colorGray" />
-            <solid android:color="@color/colorPrimaryDark"/>
+                android:color="@color/button_clicked" />
+            <solid android:color="@color/button_clicked"/>
             <corners android:radius="10dp" />
         </shape>
     </item>
@@ -20,7 +20,7 @@
             android:shape="rectangle">
             <stroke
                 android:width="0.6dp"
-                android:color="@color/colorGray" />
+                android:color="@color/colorPrimary" />
             <corners android:radius="10dp" />
             <solid android:color="@color/colorPrimary"/>
         </shape>

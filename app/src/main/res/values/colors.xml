@@ -14,4 +14,7 @@
     <color name="normalColor">#E8D9FF</color>
     <color name="basicBtnColor">#FEF9FF</color>
     <color name="basicBtnPressedColor">#F5EDF7</color>
+    <color name="cardViewColor">#FAFAFA</color>
+    <color name="homeSubtitleColor">#FF9E9B</color>
+    <color name="button_clicked">#D9C3FC</color>
 </resources>

@@ -19,10 +19,10 @@
         <shape
             android:shape="rectangle">
             <stroke
-                android:width="0.6dp"
+                android:width="1.4dp"
                 android:color="@color/colorPrimary" />
             <corners android:radius="10dp" />
-            <solid android:color="@color/colorPrimary"/>
+            />
         </shape>
     </item>
 </selector>

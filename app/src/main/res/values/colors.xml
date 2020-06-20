@@ -9,8 +9,12 @@
     <color name="colorWhiteGray">#EEEEEE</color>
     <color name="colorDarkGray">#333333</color>
     <color name="colorCream">#FFFEFF</color>
+    <color name="todoTitleColor">#000000</color> <!--Todo 글자색 추후 수정-->
     <color name="cursorColor">#A566FF</color>
     <color name="normalColor">#E8D9FF</color>
     <color name="basicBtnColor">#FEF9FF</color>
     <color name="basicBtnPressedColor">#F5EDF7</color>
+    <color name="cardViewColor">#FAFAFA</color>
+    <color name="homeSubtitleColor">#A566FF</color>
+    <color name="button_clicked">#D9C3FC</color>
 </resources>

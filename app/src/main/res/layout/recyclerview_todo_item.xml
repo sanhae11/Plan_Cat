@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="3dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/cardViewColor"
+        android:padding="8dp">
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:checked="false"
+            android:button="@android:color/transparent"
+            android:background="@drawable/custom_checkbox"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todo_point"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="100.0"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_silvercoin"
+            android:layout_toLeftOf="@id/todo_point"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="49dp"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todo_title"
+            android:text="Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/todoTitleColor"
+            android:maxLines="1"
+
+            android:layout_toRightOf="@id/checkbox"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todo_endDate"
+            android:layout_below="@id/todo_title"
+            android:layout_toRightOf="@id/checkbox"
+            android:text="06.10"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

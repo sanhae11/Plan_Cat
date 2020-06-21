@@ -6,7 +6,7 @@
     <item
         android:id="@+id/check"
         android:icon="@drawable/icon_check"
-        android:title="ok"
+        android:title="@string/btn_ok"
         app:showAsAction="always" />
 
 </menu>

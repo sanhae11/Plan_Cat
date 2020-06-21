@@ -6,7 +6,7 @@
     android:id="@+id/linearLayout"
     android:orientation="vertical"
     android:paddingTop="?android:attr/actionBarSize"
-    tools:context=".todo.CreateTodoActivity">
+    tools:context=".todo.CreateEditTodoActivity">
 
     //todo 타이틀 적는 editText
     <EditText

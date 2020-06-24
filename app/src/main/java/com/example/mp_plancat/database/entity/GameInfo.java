@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity
 public class GameInfo {
 
@@ -19,11 +21,31 @@ public class GameInfo {
     @ColumnInfo(name = "special_point")
     public int specialPoint; //특별 포인트
 
+    @ColumnInfo(name = "last_message_updated_day")
+    public int lastMessageUpdatedDay;
+
+    @ColumnInfo(name = "last_message_updated_month")
+    public int lastMessageUpdatedMonth;
+
+    @ColumnInfo(name = "last_message_updated_year")
+    public int lastMessageUpdatedYear;
+
     public GameInfo(){}
 
     public GameInfo(String userName){
         this.userName = userName;
         this.normalPoint = 0; //어플 처음 깔았을 때 기본으로 제공할 일반 포인트 양
         this.specialPoint = 0; //어플 처음 깔았을 때 기본으로 제공할 특별 포인트 양
+
+        Calendar cal = Calendar.getInstance();
+        this.lastMessageUpdatedDay = cal.get(Calendar.DATE);
+        this.lastMessageUpdatedMonth = cal.get(Calendar.MONTH) + 1;
+        this.lastMessageUpdatedYear = cal.get(Calendar.YEAR);
+    }
+
+    public Calendar getLastMessageUpdatedDate(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(lastMessageUpdatedYear, lastMessageUpdatedMonth - 1, lastMessageUpdatedDay);
+        return cal;
     }
 }

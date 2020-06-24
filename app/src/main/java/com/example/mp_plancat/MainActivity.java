@@ -20,6 +20,8 @@ import com.example.mp_plancat.todo.home.HomeFragment;
 import com.example.mp_plancat.todo.TodoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     public SharedPreferences prefs;
     public static AppDatabase db;
@@ -120,12 +122,21 @@ public class MainActivity extends AppCompatActivity {
                     db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
 
                     GameInfo gameInfo = new GameInfo();
+                    Calendar cal = Calendar.getInstance();
+                    int day = cal.get(Calendar.DATE);
+                    int month = cal.get(Calendar.MONTH) + 1;
+                    int year = cal.get(Calendar.YEAR);
+                    gameInfo.setLastMessageUpdatedDay(day);
+                    gameInfo.setLastMessageUpdatedMonth(month);
+                    gameInfo.setLastMessageUpdatedYear(year);
 
                     db.gameInfoDao().insert(gameInfo);
+
+                    Log.e("gameinfo", db.gameInfoDao().getAll().get(0).lastMessageUpdatedDay + " " + db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth + " " + db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear);
                 }
             });
 
-            Log.e("gameinfo", db.gameInfoDao().getAll().get(0).lastMessageUpdatedDay + " " + db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth + db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear);
+
 
             prefs.edit().putBoolean("isFirstRun",false).apply();
         }

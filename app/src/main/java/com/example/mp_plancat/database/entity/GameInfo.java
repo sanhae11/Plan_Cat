@@ -36,16 +36,23 @@ public class GameInfo {
         this.userName = userName;
         this.normalPoint = 0; //어플 처음 깔았을 때 기본으로 제공할 일반 포인트 양
         this.specialPoint = 0; //어플 처음 깔았을 때 기본으로 제공할 특별 포인트 양
-
-        Calendar cal = Calendar.getInstance();
-        this.lastMessageUpdatedDay = cal.get(Calendar.DATE);
-        this.lastMessageUpdatedMonth = cal.get(Calendar.MONTH) + 1;
-        this.lastMessageUpdatedYear = cal.get(Calendar.YEAR);
     }
 
     public Calendar getLastMessageUpdatedDate(){
         Calendar cal = Calendar.getInstance();
         cal.set(lastMessageUpdatedYear, lastMessageUpdatedMonth - 1, lastMessageUpdatedDay);
         return cal;
+    }
+
+    public void setLastMessageUpdatedDay(int lastMessageUpdatedDay) {
+        this.lastMessageUpdatedDay = lastMessageUpdatedDay;
+    }
+
+    public void setLastMessageUpdatedMonth(int lastMessageUpdatedMonth) {
+        this.lastMessageUpdatedMonth = lastMessageUpdatedMonth;
+    }
+
+    public void setLastMessageUpdatedYear(int lastMessageUpdatedYear) {
+        this.lastMessageUpdatedYear = lastMessageUpdatedYear;
     }
 }

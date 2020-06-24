@@ -4,16 +4,20 @@ package com.example.mp_plancat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mp_plancat.todo.home.HomeFragment;
 import com.example.mp_plancat.todo.TodoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+    public SharedPreferences prefs;
+
     HomeFragment fragmentHome;
     TodoFragment fragmentTodo;
     CatFragment fragmentCat;
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences("Pref", MODE_PRIVATE);
+
+        checkFirstRun();
 
         fragmentHome = new HomeFragment();
         fragmentTodo = new TodoFragment();
@@ -91,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default :
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void checkFirstRun(){
+        boolean isFirstRun = prefs.getBoolean("isFirstRun",true);
+        if(isFirstRun)
+        {
+            Toast.makeText(this, "어플 설치 후 첫 실행입니다", Toast.LENGTH_SHORT).show();
+
+            prefs.edit().putBoolean("isFirstRun",false).apply();
         }
     }
 

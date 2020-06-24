@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mp_plancat.todo.DeleteTodoDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
@@ -44,8 +45,21 @@ public class CatFragment extends Fragment{
         btn_msg.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                MessageFragment e = MessageFragment.getInstance();
-                e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
+                /*MessageFragment e = MessageFragment.getInstance();
+                e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);*/
+
+                MessageListDialog messageListDialog = new MessageListDialog();
+                /*messageListDialog.setDialogListener(new DeleteTodoDialog.DeleteTodoDialogListener() {
+                    @Override
+                    public void onPositiveClicked() {
+                        todoViewModel.delete(todo);
+                    }
+                    @Override
+                    public void onNegativeClicked() {
+
+                    }
+                });*/
+                messageListDialog.show(getActivity().getSupportFragmentManager(), "Message List Dialog");
             }
         });
 

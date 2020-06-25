@@ -77,6 +77,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
 
                 String title_list_string = "";
                 float points = todoDb.todoDao().getSumOfPointByDate(day, month, year);
+                getPoint = (int)points;
                 Log.e("test", points + "");
                 if(titles != null && titles.size() != 0){
                     for(int i = 0; i < titles.size(); i++) {
@@ -112,6 +113,9 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
                     public void run() {
                         GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
                         int original_Npoint = gameInfo.normalPoint;
+                        int result = original_Npoint + getPoint;
+                        Log.e("test", original_Npoint + " " + getPoint);
+                        Log.e("test", result + " ");
 
                         gameInfo.setNormalPoint(original_Npoint + getPoint);
                         gameInfo.setLastMessageUpdatedDay(cal.get(Calendar.DATE));

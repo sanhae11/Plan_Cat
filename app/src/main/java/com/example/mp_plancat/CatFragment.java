@@ -36,6 +36,8 @@ public class CatFragment extends Fragment{
     FloatingActionButton fab_menu, fab_settings, fab_shop, fab_mythings, fab_catbook;
     Animation fabOpen, fabClose, fabRClockwise, fabRAntiClockwise;
     Calendar cal = Calendar.getInstance();
+    TextView txt_silvercoin, txt_goldcoin;
+    int silvercoin, goldcoin;
 
     boolean isOpen = false;
     ImageView btn_msg;
@@ -53,6 +55,20 @@ public class CatFragment extends Fragment{
         db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "database-name").build();
         todoDb = TodoDatabase.getInstance(getActivity().getApplication());
 
+        txt_silvercoin = (TextView) rootView.findViewById(R.id.txt_silvercoin);
+        txt_goldcoin = (TextView) rootView.findViewById(R.id.txt_goldcoin);
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                silvercoin = db.gameInfoDao().getAll().get(0).normalPoint;
+                goldcoin = db.gameInfoDao().getAll().get(0).specialPoint;
+            }
+        });
+
+        txt_goldcoin.setText(goldcoin+"");
+        txt_silvercoin.setText(silvercoin+"");
+
         // 보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
         btn_msg = (ImageView)rootView.findViewById(R.id.ic_msg);
@@ -67,12 +83,14 @@ public class CatFragment extends Fragment{
                         int lastMessageUpdatedMonth = db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth;
                         int lastMessageUpdatedYear = db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear;
                         float points = todoDb.todoDao().getSumOfPointByDate(lastMessageUpdatedDay, lastMessageUpdatedMonth, lastMessageUpdatedYear);
-                        if(!(lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
+                        if((lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
                             Log.e("test", "1");
                             if(points != 0.0){
                                 Log.e("test", "2");
                                 MessageFragment e = MessageFragment.getInstance();
                                 e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
+
+                                //txt_silvercoin.setText(db.gameInfoDao().getAll().get(0).normalPoint);
                             }
                             else{
                                 Log.e("test", "3");

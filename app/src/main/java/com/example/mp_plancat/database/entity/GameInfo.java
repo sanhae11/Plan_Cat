@@ -32,8 +32,8 @@ public class GameInfo {
 
     public GameInfo(){
         this.userName = "";
-        this.normalPoint = 0;
-        this.specialPoint = 0;
+        this.normalPoint = 1000;
+        this.specialPoint = 50;
     }
 
     public GameInfo(String userName){

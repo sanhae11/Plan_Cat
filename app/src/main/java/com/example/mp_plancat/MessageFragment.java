@@ -29,13 +29,13 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
     public static AppDatabase db;
     public static TodoDatabase todoDb;
     Calendar cal = Calendar.getInstance();
-    int getPoint, day, month, year;
+    int getPoint, day, month, year, result;
     List<String> titles;
 
     public static final String TAG_EVENT_DIALOG = "dialog_event";
 
     private SimpleDateFormat mformat = new SimpleDateFormat("yyyy년 M월 d일 "); // 날짜 포맷
-    TextView txt_date, txt_content, txt_coin;
+    TextView txt_date, txt_content, txt_coin, txt_silvercoin;
     ImageButton btn_confirm;
 
     public MessageFragment(){}
@@ -50,6 +50,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.popup_silvercoin, container);
 
+
         db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "database-name").build();
         //todoDb = Room.databaseBuilder(getActivity().getApplicationContext(), TodoDatabase.class, "todo_database").build();
         todoDb = TodoDatabase.getInstance(getActivity().getApplication());
@@ -57,6 +58,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
         txt_date = (TextView)v.findViewById(R.id.txt_date);
         txt_content = (TextView)v.findViewById(R.id.txt_completedplan);
         txt_coin = (TextView)v.findViewById(R.id.txt_coin);
+        txt_silvercoin = (TextView) getActivity().findViewById(R.id.txt_silvercoin);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -113,7 +115,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
                     public void run() {
                         GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
                         int original_Npoint = gameInfo.normalPoint;
-                        int result = original_Npoint + getPoint;
+                        result = original_Npoint + getPoint;
                         Log.e("test", original_Npoint + " " + getPoint);
                         Log.e("test", result + " ");
 
@@ -124,6 +126,7 @@ public class MessageFragment extends DialogFragment implements View.OnClickListe
                         db.gameInfoDao().update(gameInfo);
                     }
                 });
+                //txt_silvercoin.setText(result);
                 dismiss();
             }
         });

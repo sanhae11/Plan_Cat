@@ -63,11 +63,12 @@ public class CatFragment extends Fragment{
             public void run() {
                 silvercoin = db.gameInfoDao().getAll().get(0).normalPoint;
                 goldcoin = db.gameInfoDao().getAll().get(0).specialPoint;
+                txt_goldcoin.setText(goldcoin+"");
+                txt_silvercoin.setText(silvercoin+"");
             }
         });
 
-        txt_goldcoin.setText(goldcoin+"");
-        txt_silvercoin.setText(silvercoin+"");
+
 
         // 보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
@@ -83,14 +84,14 @@ public class CatFragment extends Fragment{
                         int lastMessageUpdatedMonth = db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth;
                         int lastMessageUpdatedYear = db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear;
                         float points = todoDb.todoDao().getSumOfPointByDate(lastMessageUpdatedDay, lastMessageUpdatedMonth, lastMessageUpdatedYear);
-                        if(!(lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
+                        if((lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
                             Log.e("test", "1");
                             if(points != 0.0){
                                 Log.e("test", "2");
                                 MessageFragment e = MessageFragment.getInstance();
                                 e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
 
-                                //txt_silvercoin.setText(db.gameInfoDao().getAll().get(0).normalPoint);
+
                             }
                             else{
                                 Log.e("test", "3");

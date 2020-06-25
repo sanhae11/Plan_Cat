@@ -30,7 +30,11 @@ public class GameInfo {
     @ColumnInfo(name = "last_message_updated_year")
     public int lastMessageUpdatedYear;
 
-    public GameInfo(){}
+    public GameInfo(){
+        this.userName = "";
+        this.normalPoint = 0;
+        this.specialPoint = 0;
+    }
 
     public GameInfo(String userName){
         this.userName = userName;
@@ -54,5 +58,13 @@ public class GameInfo {
 
     public void setLastMessageUpdatedYear(int lastMessageUpdatedYear) {
         this.lastMessageUpdatedYear = lastMessageUpdatedYear;
+    }
+
+    public void setNormalPoint(int normalPoint) {
+        this.normalPoint = normalPoint;
+    }
+
+    public void setSpecialPoint(int specialPoint) {
+        this.specialPoint = specialPoint;
     }
 }

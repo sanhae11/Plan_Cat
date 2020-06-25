@@ -30,11 +30,11 @@ public interface TodoDao {
     List<String> getAllTitlesOfFinishedByDate(int day, int month, int year);
 
     //특정 날짜의 to do list 중 완료된 것들의 포인트 합산하여 반환
-    @Query("SELECT COUNT(allocated_point) FROM Todo WHERE :day = end_day AND :month = end_month AND :year = end_year AND is_finished = 1")
+    @Query("SELECT SUM(allocated_point) FROM Todo WHERE :day = end_day AND :month = end_month AND :year = end_year AND is_finished = 1")
     float getSumOfPointByDate(int day, int month, int year);
 
     //특정 날짜, 특정 카테고리의 to do list 중 완료된 것들의 포인트 합산하여 반환
-    @Query("SELECT COUNT(allocated_point) FROM Todo WHERE :category = todo_category AND :day = end_day AND :month = end_month AND :year = end_year AND is_finished = 1")
+    @Query("SELECT SUM(allocated_point) FROM Todo WHERE :category = todo_category AND :day = end_day AND :month = end_month AND :year = end_year AND is_finished = 1")
     float getSumOfPointFinishedByCategoryAndDate(int day, int month, int year, String category);
 
     //특정 카테고리의 to do list 반환

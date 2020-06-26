@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 
 import android.util.Log;
@@ -15,18 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mp_plancat.database.AppDatabase;
 import com.example.mp_plancat.database.TodoDatabase;
-import com.example.mp_plancat.database.entity.GameInfo;
-import com.example.mp_plancat.todo.DeleteTodoDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -36,8 +32,8 @@ public class CatFragment extends Fragment{
     FloatingActionButton fab_menu, fab_settings, fab_shop, fab_mythings, fab_catbook;
     Animation fabOpen, fabClose, fabRClockwise, fabRAntiClockwise;
     Calendar cal = Calendar.getInstance();
-    TextView txt_silvercoin, txt_goldcoin;
-    int silvercoin, goldcoin;
+    TextView txt_goldcoin;
+    int goldcoin;
 
     boolean isOpen = false;
     ImageView btn_msg;
@@ -55,20 +51,15 @@ public class CatFragment extends Fragment{
         db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "database-name").build();
         todoDb = TodoDatabase.getInstance(getActivity().getApplication());
 
-        txt_silvercoin = (TextView) rootView.findViewById(R.id.txt_silvercoin);
         txt_goldcoin = (TextView) rootView.findViewById(R.id.txt_goldcoin);
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                silvercoin = db.gameInfoDao().getAll().get(0).normalPoint;
-                goldcoin = db.gameInfoDao().getAll().get(0).specialPoint;
+                goldcoin = db.gameInfoDao().getAll().get(0).normalPoint;
                 txt_goldcoin.setText(goldcoin+"");
-                txt_silvercoin.setText(silvercoin+"");
             }
         });
-
-
 
         // 보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
@@ -84,18 +75,32 @@ public class CatFragment extends Fragment{
                         int lastMessageUpdatedMonth = db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth;
                         int lastMessageUpdatedYear = db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear;
                         float points = todoDb.todoDao().getSumOfPointByDate(lastMessageUpdatedDay, lastMessageUpdatedMonth, lastMessageUpdatedYear);
-                        if(!(lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
+                        if((lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
+                            //느낌표 있는게 제대로 작동하는 것.!!!
                             Log.e("test", "1");
                             if(points != 0.0){
                                 Log.e("test", "2");
                                 MessageFragment e = MessageFragment.getInstance();
+
+                                e.setDialogListener(new MessageFragment.MessageFragmentListener() {
+                                    @Override
+                                    public void onPositiveClicked(int coin) {
+                                        txt_goldcoin.setText(Integer.toString(coin));
+                                    }
+
+                                    @Override
+                                    public void onNegativeClicked() {
+
+                                    }
+                                });
+
                                 e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
                             }
                             else{
                                 Log.e("test", "3");
-                                MessageListDialog messageListDialog = new MessageListDialog();
+                                NoRewardDialog noRewardDialog = new NoRewardDialog();
 
-                                messageListDialog.show(getActivity().getSupportFragmentManager(), "Message List Dialog");
+                                noRewardDialog.show(getActivity().getSupportFragmentManager(), "Message List Dialog");
                                 Log.e("test", lastMessageUpdatedDay + " " +  lastMessageUpdatedMonth + " " + lastMessageUpdatedYear);
                                 Log.e("test", cal.get(Calendar.DATE) + " " + (cal.get(Calendar.MONTH) + 1) + " " + cal.get(Calendar.YEAR));
                             }
@@ -103,19 +108,11 @@ public class CatFragment extends Fragment{
                         }
                         else{ //보상 이미 확인한 경우
                             Log.e("test", "4");
-                            MessageListDialog messageListDialog = new MessageListDialog();
+                            NoRewardDialog noRewardDialog = new NoRewardDialog();
 
-                            messageListDialog.show(getActivity().getSupportFragmentManager(), "Message List Dialog");
+                            noRewardDialog.show(getActivity().getSupportFragmentManager(), "Message List Dialog");
                             Log.e("test", lastMessageUpdatedDay + " " +  lastMessageUpdatedMonth + " " + lastMessageUpdatedYear);
                             Log.e("test", cal.get(Calendar.DATE) + " " + (cal.get(Calendar.MONTH) + 1) + " " + cal.get(Calendar.YEAR));
-
-                            /*
-                            //오늘 날짜로 업데이트 하는 코드
-                            GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
-                            gameInfo.setLastMessageUpdatedDay(cal.get(Calendar.DATE));
-                            gameInfo.setLastMessageUpdatedMonth(cal.get(Calendar.MONTH) + 1);
-                            gameInfo.setLastMessageUpdatedYear(cal.get(Calendar.YEAR));
-                            db.gameInfoDao().update(gameInfo);*/
                         }
                     }
                 });

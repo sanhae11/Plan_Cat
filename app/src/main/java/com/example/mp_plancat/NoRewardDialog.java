@@ -25,7 +25,7 @@ import com.example.mp_plancat.todo.home.DateCategoryTodoRecyclerAdapter;
 import java.util.Calendar;
 import java.util.List;
 
-public class MessageListDialog extends DialogFragment {
+public class NoRewardDialog extends DialogFragment {
     private ImageButton btn_confirm;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

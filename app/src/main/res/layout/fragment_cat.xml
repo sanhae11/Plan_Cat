@@ -19,31 +19,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        // Silver Coin
-        <ImageView
-            android:id="@+id/ic_silvercoin"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/icon_silvercoin" />
-
-        <TextView
-            android:id="@+id/txt_silvercoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="11dp"
-            android:text="13120"
-            android:textSize="17dp"
-            android:textStyle="bold" />
-
         // Gold Coin
         <ImageView
             android:id="@+id/ic_goldcoin"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
             android:src="@drawable/icon_goldcoin" />
 
@@ -53,9 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="11dp"
-            android:text="40"
+            android:text=""
             android:textSize="17dp"
             android:textStyle="bold" />
+
 
         // 리니어레이아웃에서 오른쪽 정렬
         <View

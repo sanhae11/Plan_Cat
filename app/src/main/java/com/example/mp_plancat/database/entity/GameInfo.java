@@ -38,8 +38,8 @@ public class GameInfo {
 
     public GameInfo(String userName){
         this.userName = userName;
-        this.normalPoint = 0; //어플 처음 깔았을 때 기본으로 제공할 일반 포인트 양
-        this.specialPoint = 0; //어플 처음 깔았을 때 기본으로 제공할 특별 포인트 양
+        this.normalPoint = 1000; //어플 처음 깔았을 때 기본으로 제공할 일반 포인트 양
+        this.specialPoint = 50; //어플 처음 깔았을 때 기본으로 제공할 특별 포인트 양
     }
 
     public Calendar getLastMessageUpdatedDate(){

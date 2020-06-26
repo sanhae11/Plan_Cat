@@ -84,14 +84,12 @@ public class CatFragment extends Fragment{
                         int lastMessageUpdatedMonth = db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth;
                         int lastMessageUpdatedYear = db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear;
                         float points = todoDb.todoDao().getSumOfPointByDate(lastMessageUpdatedDay, lastMessageUpdatedMonth, lastMessageUpdatedYear);
-                        if((lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
+                        if(!(lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
                             Log.e("test", "1");
                             if(points != 0.0){
                                 Log.e("test", "2");
                                 MessageFragment e = MessageFragment.getInstance();
                                 e.show(getActivity().getSupportFragmentManager(), MessageFragment.TAG_EVENT_DIALOG);
-
-
                             }
                             else{
                                 Log.e("test", "3");

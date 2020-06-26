@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 보유 물품 배치 화면 -->
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AssignThingsActivity"
     android:paddingTop="?android:attr/actionBarSize">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="배치화면 배경가져오고 투명버튼 크게 만들어서 배치해두기 버튼 클릭하면 이 액티비티 꺼지고 상점으로 가기, 근데 사용중인 거 표시해야하나....."
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

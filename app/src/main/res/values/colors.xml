@@ -17,4 +17,6 @@
     <color name="cardViewColor">#FAFAFA</color>
     <color name="homeSubtitleColor">#A566FF</color>
     <color name="button_clicked">#D9C3FC</color>
+    <color name="cat_cardViewColor">#DDD8C3</color>
+    <color name="cat_name_bgColor">#908A79</color>
 </resources>

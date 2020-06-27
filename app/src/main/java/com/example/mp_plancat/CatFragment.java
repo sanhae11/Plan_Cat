@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.mp_plancat.database.AppDatabase;
 import com.example.mp_plancat.database.TodoDatabase;
+import com.example.mp_plancat.database.entity.GameInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
@@ -53,13 +54,15 @@ public class CatFragment extends Fragment{
 
         txt_goldcoin = (TextView) rootView.findViewById(R.id.txt_goldcoin);
 
+        /*
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 goldcoin = db.gameInfoDao().getAll().get(0).normalPoint;
                 txt_goldcoin.setText(goldcoin+"");
             }
-        });
+        });*/
+        new getGoldCoinTask().execute();
 
         // 보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
@@ -200,5 +203,21 @@ public class CatFragment extends Fragment{
             }
         });
         return rootView;
+    }
+
+    private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
+            Log.e("goldcoin" , gameInfo.normalPoint+"");
+            return gameInfo.normalPoint;
+        }
+        @Override
+        protected void onPostExecute(Integer gold_point){
+            //인터페이스의 함수를 호출하여 result_point에 저장된 값을 Cat Fragment로 전달
+            //messageFragmentListener.onPositiveClicked(gold_point);
+            txt_goldcoin.setText(gold_point+"");
+        }
     }
 }

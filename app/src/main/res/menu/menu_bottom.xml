@@ -18,7 +18,7 @@
         android:id="@+id/tab_cat"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/icon_catsole"
+        android:icon="@drawable/icon_cat_sole"
         android:title="Cat"/>
 
 </menu>

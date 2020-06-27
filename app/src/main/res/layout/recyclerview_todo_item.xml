@@ -35,12 +35,12 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icon_silvercoin"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_goldcoin"
             android:layout_toLeftOf="@id/todo_point"
             android:layout_centerVertical="true"
-            android:layout_marginRight="49dp"
+            android:layout_marginRight="54dp"
             android:layout_alignParentRight="true" />
 
         <TextView

@@ -1,5 +1,6 @@
 package com.example.mp_plancat.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,11 +20,17 @@ public interface CatDao {
 
     //모든 고양이 list 반환
     @Query("SELECT * FROM Cat")
-    List<Cat> getAll();
+    LiveData<List<Cat>> getAllCats();
+
+    @Query("SELECT COUNT(*) FROM Cat")
+    int getNumOfCats();
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Cat... cats);
 
     @Delete
     void delete(Cat... cats);
+
+    @Query("DELETE FROM Cat")
+    void deleteAllCats();
 }

@@ -6,139 +6,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cat_recyclerview"/>
 
-        <RelativeLayout
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--    <LinearLayout-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
-            <ImageView
-                android:id="@+id/icon_ep"
-                android:src="@drawable/icon_ep"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_alignParentTop="true" />
-            <TextView
-                android:id="@+id/ep"
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_toRightOf="@+id/icon_ep"
-                android:text="1000"
-                android:textSize="15dp"/>
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:id="@+id/icon_sp"
-                android:src="@drawable/icon_sp"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_toRightOf="@+id/ep" />
-            <TextView
-                android:id="@+id/sp"
-                android:layout_width="wrap_content"
-                android:layout_height="17dp"
-                android:layout_toRightOf="@+id/icon_sp"
-                android:text="1000"
-                android:textSize="15dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:text="MY CAT"
-                android:textSize="24dp"
-                android:textColor="#000000"/>
-            <ImageButton
-                android:id="@+id/exitbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/x_button"
-                android:scaleType="fitCenter"/>
-        </RelativeLayout>
+<!--        <RelativeLayout-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
-        <GridLayout
-            android:columnCount="2"
-            android:alignmentMode="alignMargins"
-            android:columnOrderPreserved="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--            <ImageView-->
+<!--                android:id="@+id/icon_ep"-->
+<!--                android:src="@drawable/icon_ep"-->
+<!--                android:layout_width="17dp"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_alignParentTop="true" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/ep"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_toRightOf="@+id/icon_ep"-->
+<!--                android:text="1000"-->
+<!--                android:textSize="15dp"/>-->
+<!--            <ImageView-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:id="@+id/icon_sp"-->
+<!--                android:src="@drawable/icon_sp"-->
+<!--                android:layout_width="17dp"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_toRightOf="@+id/ep" />-->
+<!--            <TextView-->
+<!--                android:id="@+id/sp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="17dp"-->
+<!--                android:layout_toRightOf="@+id/icon_sp"-->
+<!--                android:text="1000"-->
+<!--                android:textSize="15dp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="25dp"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:text="MY CAT"-->
+<!--                android:textSize="24dp"-->
+<!--                android:textColor="#000000"/>-->
+<!--            <ImageButton-->
+<!--                android:id="@+id/exitbtn"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:src="@drawable/x_button"-->
+<!--                android:scaleType="fitCenter"/>-->
+<!--        </RelativeLayout>-->
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="6dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp">
+<!--        <GridLayout-->
+<!--            android:columnCount="2"-->
+<!--            android:alignmentMode="alignMargins"-->
+<!--            android:columnOrderPreserved="false"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_rowWeight="1"-->
+<!--                app:cardElevation="6dp"-->
+<!--                app:cardCornerRadius="12dp"-->
+<!--                android:layout_margin="12dp">-->
 
-                    <ImageButton
-                        android:id="@+id/cat1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="12dp"
-                        android:scaleType="fitCenter"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/icon_ep" />
+<!--                <LinearLayout-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp"
-                        android:text="Aciel"/>
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/cat1"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:src="@drawable/icon_ep" />-->
 
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textColor="#6f6f6f"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:text="Aciel"/>-->
 
-            </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                app:cardElevation="6dp"
-                app:cardCornerRadius="12dp"
-                android:layout_margin="12dp"
-                >
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+<!--            </androidx.cardview.widget.CardView>-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_rowWeight="1"-->
+<!--                app:cardElevation="6dp"-->
+<!--                app:cardCornerRadius="12dp"-->
+<!--                android:layout_margin="12dp"-->
+<!--                >-->
 
-                    <ImageButton
-                        android:id="@+id/cat2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="12dp"
-                        android:scaleType="fitCenter"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/icon_sp" />
+<!--                <LinearLayout-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp"
-                        android:text="Yumi"/>
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/cat2"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="100dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:scaleType="fitCenter"-->
+<!--                        android:background="@android:color/transparent"-->
+<!--                        android:src="@drawable/icon_sp" />-->
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </GridLayout>
-    </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textColor="#6f6f6f"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:text="Yumi"/>-->
+
+<!--                </LinearLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--        </GridLayout>-->
+<!--    </LinearLayout>-->
 
 </ScrollView>

@@ -48,7 +48,7 @@ public class CatFragment extends Fragment{
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
         actionBar.hide(); // 액션바 숨김
 
-        db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "database-name").build();
+        db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "database-name").fallbackToDestructiveMigration().build();
         todoDb = TodoDatabase.getInstance(getActivity().getApplication());
 
         txt_goldcoin = (TextView) rootView.findViewById(R.id.txt_goldcoin);

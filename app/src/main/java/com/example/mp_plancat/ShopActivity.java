@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,8 +19,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.mp_plancat.database.AppDatabase;
 import com.example.mp_plancat.database.CatDatabase;
+import com.example.mp_plancat.database.TodoDatabase;
+import com.example.mp_plancat.database.entity.GameInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,9 @@ import java.util.List;
 public class ShopActivity extends AppCompatActivity {
     ImageButton exit_button;
     ImageButton cat1;
+    public static AppDatabase db;
+    public static TodoDatabase todoDb;
+    TextView txt_goldcoin;
 
     private CatViewModel catViewModel;
 
@@ -40,19 +48,24 @@ public class ShopActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").fallbackToDestructiveMigration().build();
+        txt_goldcoin = (TextView) findViewById(R.id.txt_goldcoin);
+        new getGoldCoinTask().execute();
+
         // 리사이클러뷰에 표시할 데이터 리스트 생성.
         ArrayList<String> list = new ArrayList<>();
-        for (int i=0; i<100; i++) {
-            list.add(String.format("TEXT %d", i)) ;
+        for (int i = 0; i < 100; i++) {
+            list.add(String.format("TEXT %d", i));
         }
 
         // 리사이클러뷰에 LinearLayoutManager 객체 지정.
-        RecyclerView recyclerView = findViewById(R.id.shop_recyclerview) ;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)) ;
+        RecyclerView recyclerView = findViewById(R.id.shop_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        SimpleTextAdapter adapter = new SimpleTextAdapter(list) ;
-        recyclerView.setAdapter(adapter) ;
+        SimpleTextAdapter adapter = new SimpleTextAdapter(list);
+        recyclerView.setAdapter(adapter);
     }
 //
 //        catDatabase = CatDatabase.getInstance(getApplicationContext());
@@ -105,8 +118,22 @@ public class ShopActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
-    }
+        private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
 
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
+                Log.e("goldcoin" , gameInfo.normalPoint+"");
+                return gameInfo.normalPoint;
+            }
+            @Override
+            protected void onPostExecute(Integer gold_point){
+                //인터페이스의 함수를 호출하여 result_point에 저장된 값을 Cat Fragment로 전달
+                //messageFragmentListener.onPositiveClicked(gold_point);
+                txt_goldcoin.setText(gold_point+"");
+            }
+        }
+}
 
 
 //package com.example.mp_plancat;

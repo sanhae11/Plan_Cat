@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.ViewHolder> {
+public class MyThingsAdapter extends RecyclerView.Adapter<MyThingsAdapter.ViewHolder> {
 
     private ArrayList<String> mData = null ;
 
@@ -28,27 +28,27 @@ public class SimpleTextAdapter extends RecyclerView.Adapter<SimpleTextAdapter.Vi
     }
 
     // 생성자에서 데이터 리스트 객체를 전달받음.
-    SimpleTextAdapter(ArrayList<String> list) {
+    MyThingsAdapter(ArrayList<String> list) {
         mData = list ;
     }
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
-    public SimpleTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyThingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
         LayoutInflater inflater2 = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
 
-        View view = inflater.inflate(R.layout.recyclerview_cat_shop_item, parent, false) ;
+        View view = inflater.inflate(R.layout.recyclerview_cat_mythings_item, parent, false) ;
 
-        SimpleTextAdapter.ViewHolder vh = new SimpleTextAdapter.ViewHolder(view) ;
+        MyThingsAdapter.ViewHolder vh = new MyThingsAdapter.ViewHolder(view) ;
 
         return vh;
     }
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(SimpleTextAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(MyThingsAdapter.ViewHolder holder, int position) {
         String text = mData.get(position) ;
         holder.textView1.setText(text) ;
     }

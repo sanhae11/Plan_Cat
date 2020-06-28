@@ -17,7 +17,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.mp_plancat.database.CatDatabase;
 import com.example.mp_plancat.database.TodoDatabase;
@@ -31,6 +33,7 @@ import java.util.List;
 public class CatBookActivity extends AppCompatActivity {
     ImageButton exit_button;
     ImageButton cat1;
+    ImageView x_btn;
 
     private CatViewModel catViewModel;
 
@@ -72,6 +75,22 @@ public class CatBookActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Cat cat) {
                 //Todo 여기가 고양이 클릭했을 때 이벤트 발생하는 곳!!!
+                if(cat.getIsCollected() == 1){
+                    //수집된 고양이를 클릭했을 경우, 고양이 정보 뜸
+                }
+                else {
+                    //물음표 고양이를 클릭했을 경우, 다이얼로그 창
+
+                }
+            }
+        });
+
+        x_btn = (ImageView) findViewById(R.id.x_btn);
+        x_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //엑스 버튼 누를 시 액티비티 종료
+                finish();
             }
         });
 

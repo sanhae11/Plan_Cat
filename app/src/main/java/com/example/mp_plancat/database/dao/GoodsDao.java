@@ -25,6 +25,9 @@ public interface GoodsDao {
     @Query("SELECT * FROM Goods WHERE is_assigned == 1")
     List<Goods> getAllAssigned();
 
+    //구매가 안된 goods 반환
+    @Query("SELECT * FROM Goods WHERE is_Purchased = 0")
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Goods... goods);
 

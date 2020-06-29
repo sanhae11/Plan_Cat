@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 보유 물품 배치 화면 -->
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AssignThingsActivity"
-    android:paddingTop="?android:attr/actionBarSize">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="배치화면 배경가져오고 투명버튼 크게 만들어서 배치해두기 버튼 클릭하면 이 액티비티 꺼지고 상점으로 가기, 근데 사용중인 거 표시해야하나....."
-        />
+    android:background="@drawable/bg_ex"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/x_btn"
+        android:src="@drawable/x_button"
+        android:layout_gravity="right|top"
+        android:layout_margin="15dp"/>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/assign_location_1"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_assign_location_transparent"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="170dp"/>
+    <ImageButton
+        android:id="@+id/assign_location_2"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_assign_location_transparent"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="70dp"/>
+    <ImageButton
+        android:id="@+id/assign_location_3"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_assign_location_transparent"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="270dp"/>
+
+    <ImageButton
+        android:id="@+id/assign_location_4"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="460dp"
+        android:background="@drawable/button_assign_location_transparent" />
+    <ImageButton
+        android:id="@+id/assign_location_5"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="580dp"
+        android:background="@drawable/button_assign_location_transparent" />
+
+
+</FrameLayout>

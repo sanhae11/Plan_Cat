@@ -1,46 +1,75 @@
 package com.example.mp_plancat;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
-import java.util.ArrayList;
+import com.example.mp_plancat.database.entity.Goods;
+
+import java.util.List;
 
 public class MyThingsActivity extends AppCompatActivity {
+    GoodsViewModel goodsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_things);
 
-        // 리사이클러뷰에 표시할 데이터 리스트 생성.
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            list.add(String.format("TEXT %d", i));
-        }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
-        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
-        RecyclerView recyclerView = findViewById(R.id.mythings_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView recyclerView = findViewById(R.id.my_things_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //parameter 원래는 this였음
+        recyclerView.setHasFixedSize(true);
 
-        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        MyThingsAdapter adapter = new MyThingsAdapter(list);
+
+
+        final MyThingsAdapter adapter = new MyThingsAdapter();
         recyclerView.setAdapter(adapter);
 
-        // 왜 배치 버튼이 안먹히지
-//        Button btn_assign = findViewById(R.id.btn_assign);
-//        btn_assign.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                MyThingsFragment e = MyThingsFragment.getInstance();
-//                e.show(getSupportFragmentManager(), MyThingsFragment.TAG_EVENT_DIALOG);
-//            }
-//        });
+        goodsViewModel = ViewModelProviders.of(this).get(GoodsViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
+        goodsViewModel.getAllGoods().observe(this, new Observer<List<Goods>>() { //parameter 원래 this 였는데 오류나서 바꿈
+            @Override
+            public void onChanged(@Nullable List<Goods> goods) {
+                //update Recyclerview
+                adapter.setGoods(goods);
+            }
+        });
+
+        adapter.setOnItemClickListener(new MyThingsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Goods goods) {
+            }
+        });
+
+        adapter.setOnButtonClickListener(new MyThingsAdapter.OnButtonClickListener() {
+            @Override
+            public void onButtonClick(Goods goods) {
+                //AssignThingsDialog assignThingsDialog = new AssignThingsDialog();
+
+                //assignThingsDialog.show(getSupportFragmentManager(), "Assign Things Dialog");
+                startActivity(new Intent(MyThingsActivity.this, AssignThingsActivity.class));
+            }
+        });
+        /*super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_things);
+
+        furniture_1 = (ImageButton) findViewById(R.id.furniture_1);
+        furniture_1.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            MyThingsFragment e = MyThingsFragment.getInstance();
+            e.show(getSupportFragmentManager(), MyThingsFragment.TAG_EVENT_DIALOG);
+        }
+        });*/
     }
 }

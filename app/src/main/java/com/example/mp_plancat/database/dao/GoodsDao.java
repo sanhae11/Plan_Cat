@@ -1,5 +1,6 @@
 package com.example.mp_plancat.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -17,13 +18,20 @@ public interface GoodsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Goods... goods);
 
-    //특정 카테고리의 goods list 반환
-    @Query("SELECT * FROM Goods WHERE :category = goods_category")
-    List<Goods> getAllByCategory(String category);
+    //goods list 반환
+    @Query("SELECT * FROM Goods")
+    LiveData<List<Goods>> getAllGoods();
+
+    @Query("SELECT * FROM Goods WHERE is_assigned == 1")
+    List<Goods> getAllAssigned();
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Goods... goods);
 
     @Delete
     void delete(Goods... goods);
+
+    @Query("DELETE FROM Goods")
+    void deleteAllGoods();
 }
+

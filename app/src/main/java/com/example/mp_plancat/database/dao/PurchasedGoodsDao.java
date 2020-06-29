@@ -22,9 +22,9 @@ public interface PurchasedGoodsDao {
     @Query("SELECT * FROM Goods WHERE goodsID IN (SELECT purchased_goodsID FROM PurchasedGoods)")
     List<Goods> getAll();
 
-    //특정 카테고리의 보유 물품 list 반환
-    @Query("SELECT * FROM Goods  WHERE goodsID IN (SELECT purchased_goodsID FROM PurchasedGoods) AND :category = goods_category")
-    List<Goods> getAllByCategory(String category);
+    //보유 물품 list 반환
+    @Query("SELECT * FROM Goods  WHERE goodsID IN (SELECT purchased_goodsID FROM PurchasedGoods)")
+    List<Goods> getAllPurchased();
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(PurchasedGoods... purchasedGoods);
@@ -32,3 +32,4 @@ public interface PurchasedGoodsDao {
     @Delete
     void delete(PurchasedGoods... purchasedGoods);
 }
+

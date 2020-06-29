@@ -20,9 +20,6 @@ public class Goods {
     @ColumnInfo(name = "goods_description") //물품에 대한 설명
     public String goodsDescription;
 
-    @ColumnInfo(name = "goods_category") //카테고리; Toy, Food, Furn(=Furniture)
-    public String goodsCategory;
-
     @ColumnInfo(name = "purchase_point") //구매 시 필요한 포인트
     public int purchasePoint;
 
@@ -38,13 +35,60 @@ public class Goods {
 
     public Goods(){}
 
-    public Goods(String goodsName, String goodsDescription, String goodsCategory, int purchasePoint, String goodsImgSrc){
+    public Goods(String goodsName, String goodsDescription, int purchasePoint){
         this.goodsName = goodsName;
         this.goodsDescription = goodsDescription;
-        this.goodsCategory = goodsCategory;
         this.purchasePoint = purchasePoint;
-        this.goodsImgSrc = goodsImgSrc;
+        this.goodsImgSrc = "";
         this.isPurchased = 0;
         this.isAssigned = 0;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getGoodsDescription() {
+        return goodsDescription;
+    }
+
+    public void setGoodsDescription(String goodsDescription) {
+        this.goodsDescription = goodsDescription;
+    }
+
+    public int getPurchasePoint() {
+        return purchasePoint;
+    }
+
+    public void setPurchasePoint(int purchasePoint) {
+        this.purchasePoint = purchasePoint;
+    }
+
+    public String getGoodsImgSrc() {
+        return goodsImgSrc;
+    }
+
+    public void setGoodsImgSrc(String goodsImgSrc) {
+        this.goodsImgSrc = goodsImgSrc;
+    }
+
+    public int getIsPurchased() {
+        return isPurchased;
+    }
+
+    public void setIsPurchased(int isPurchased) {
+        this.isPurchased = isPurchased;
+    }
+
+    public int getIsAssigned() {
+        return isAssigned;
+    }
+
+    public void setIsAssigned(int isAssigned) {
+        this.isAssigned = isAssigned;
     }
 }

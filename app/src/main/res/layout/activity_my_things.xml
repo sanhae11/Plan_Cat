@@ -44,7 +44,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/mythings_recyclerview"/>
+            android:id="@+id/my_things_recyclerview"/>
     </LinearLayout>
 
 

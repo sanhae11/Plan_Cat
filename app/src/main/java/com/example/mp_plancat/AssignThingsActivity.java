@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class AssignThingsActivity extends AppCompatActivity {
     private ImageButton location1, location2, location3, location4, location5;
@@ -28,7 +29,7 @@ public class AssignThingsActivity extends AppCompatActivity {
         location1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(AssignThingsActivity.this, "첫번째버튼클릭", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -2,6 +2,7 @@ package com.example.mp_plancat;
 //고양이 화면
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -38,13 +39,19 @@ public class CatFragment extends Fragment{
 
     boolean isOpen = false;
     ImageView btn_msg;
+    private static MediaPlayer mp;
 
     //TODO:이미지 움직이게 하기
     //TODO:추후 데이터베이스 작업한 후에, 포인트 보상 팝업창 구현
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_cat, container, false);
+
+        mp = MediaPlayer.create(getActivity(),R.raw.main_bgm);
+        mp.setLooping(true);
+        mp.start();
 
         ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
         actionBar.hide(); // 액션바 숨김
@@ -204,6 +211,7 @@ public class CatFragment extends Fragment{
         });
         return rootView;
     }
+    
 
     private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
 
@@ -221,3 +229,4 @@ public class CatFragment extends Fragment{
         }
     }
 }
+

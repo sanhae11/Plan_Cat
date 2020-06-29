@@ -1,53 +1,40 @@
 package com.example.mp_plancat;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.mp_plancat.database.AppDatabase;
-import com.example.mp_plancat.database.CatDatabase;
-import com.example.mp_plancat.database.TodoDatabase;
 import com.example.mp_plancat.database.entity.GameInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ShopActivity extends AppCompatActivity {
-    ImageButton exit_button;
-    ImageButton cat1;
+
     public static AppDatabase db;
-    public static TodoDatabase todoDb;
+
+    // 리사이클러뷰뷰
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+   // private ShopAdapter adapter;
+
     TextView txt_goldcoin;
-
-    private CatViewModel catViewModel;
-
-    CatDatabase catDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
+        // 액션바 숨기기
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
 
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").fallbackToDestructiveMigration().build();
         txt_goldcoin = (TextView) findViewById(R.id.txt_goldcoin);
@@ -67,31 +54,6 @@ public class ShopActivity extends AppCompatActivity {
         SimpleTextAdapter adapter = new SimpleTextAdapter(list);
         recyclerView.setAdapter(adapter);
     }
-//
-//        catDatabase = CatDatabase.getInstance(getApplicationContext());
-//
-//        RecyclerView recyclerView = findViewById(R.id.shop_recyclerview);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setHasFixedSize(true);
-//
-//        final CatRecyclerAdapter adapter = new CatRecyclerAdapter();
-//        recyclerView.setAdapter(adapter);
-//
-//        AsyncTask.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                Log.e("test", catDatabase.catDao().getNumOfCats() + "");
-//            }
-//        });
-//        catViewModel = ViewModelProviders.of(this).get(CatViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
-//        catViewModel.getAllCats().observe(this, new Observer<List<Cat>>() { //parameter 원래 this 였는데 오류나서 바꿈
-//            @Override
-//            public void onChanged(@Nullable List<Cat> cats) {
-//                //update Recyclerview
-//                adapter.setCats(cats);
-//            }
-//        });
-//
 //        adapter.setOnItemClickListener(new CatRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
 //            @Override
 //            public void onItemClick(Cat cat) {
@@ -99,25 +61,6 @@ public class ShopActivity extends AppCompatActivity {
 //            }
 //        });
 
-        /*exit_button=(ImageButton) findViewById(R.id.exitbtn);
-
-        exit_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent=new Intent(CatBookActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        cat1=(ImageButton) findViewById(R.id.cat1);
-
-        cat1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent=new Intent(CatBookActivity.this, CatPopActivity.class);
-                startActivity(intent);
-            }
-        });*/
         private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
 
             @Override
@@ -134,6 +77,19 @@ public class ShopActivity extends AppCompatActivity {
             }
         }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //package com.example.mp_plancat;

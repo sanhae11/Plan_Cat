@@ -25,6 +25,9 @@ public interface CatDao {
     @Query("SELECT COUNT(*) FROM Cat")
     int getNumOfCats();
 
+    @Query("SELECT COUNT(*) FROM Cat WHERE isCollected = 1")
+    int getNumOfCollectedCats();
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Cat... cats);
 

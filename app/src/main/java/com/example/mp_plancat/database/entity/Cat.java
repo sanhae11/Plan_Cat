@@ -9,8 +9,10 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Cat {
+public class Cat implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     public int catID;

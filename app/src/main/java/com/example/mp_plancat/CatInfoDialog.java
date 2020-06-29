@@ -3,7 +3,6 @@ package com.example.mp_plancat;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
@@ -37,7 +36,7 @@ public class CatInfoDialog extends DialogFragment {
         cat_name.setText(cat.getCatName());
         cat_description.setText(cat.getCatDescription());
         if (cat.getCatName().equals("삼색")){
-            cat_img.setImageResource(R.drawable.samsaek);
+            cat_img.setImageResource(R.drawable.cat_7);
         }
 
         btn_check_white = dialog.findViewById(R.id.btn_check_white);

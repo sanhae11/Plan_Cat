@@ -21,6 +21,9 @@ public interface GoodsDao {
     @Query("SELECT * FROM Goods WHERE :category = goods_category")
     List<Goods> getAllByCategory(String category);
 
+    //구매가 안된 goods 반환
+    @Query("SELECT * FROM Goods WHERE is_Purchased = 0")
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Goods... goods);
 

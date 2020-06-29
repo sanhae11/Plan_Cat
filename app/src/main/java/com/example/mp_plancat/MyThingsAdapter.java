@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mp_plancat.database.entity.Goods;
+import com.example.mp_plancat.database.entity.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,15 @@ public class MyThingsAdapter extends RecyclerView.Adapter<MyThingsAdapter.ThingH
     }
 
     public void setGoods(List<Goods> goods){
-        this.goods = goods;
+        List<Goods> newGoods = new ArrayList<>();
+
+        for(int i = 0; i < goods.size(); i++){
+            if(goods.get(i).isPurchased == 1){
+                newGoods.add(goods.get(i));
+            }
+        }
+
+        this.goods = newGoods;
         notifyDataSetChanged();
     }
 

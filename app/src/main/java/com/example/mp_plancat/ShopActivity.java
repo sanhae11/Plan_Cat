@@ -25,20 +25,15 @@ import com.example.mp_plancat.database.AppDatabase;
 import com.example.mp_plancat.database.CatDatabase;
 import com.example.mp_plancat.database.TodoDatabase;
 import com.example.mp_plancat.database.entity.GameInfo;
+import com.example.mp_plancat.database.entity.Goods;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopActivity extends AppCompatActivity {
-    ImageButton exit_button;
-    ImageButton cat1;
     public static AppDatabase db;
-    public static TodoDatabase todoDb;
+    GoodsViewModel goodsViewModel;
     TextView txt_goldcoin;
-
-    private CatViewModel catViewModel;
-
-    CatDatabase catDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,91 +43,73 @@ public class ShopActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").fallbackToDestructiveMigration().build();
+
         txt_goldcoin = (TextView) findViewById(R.id.txt_goldcoin);
-        new getGoldCoinTask().execute();
+        new ShopActivity.getGoldCoinTask().execute();
 
-        // 리사이클러뷰에 표시할 데이터 리스트 생성.
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            list.add(String.format("TEXT %d", i));
-        }
-
-        // 리사이클러뷰에 LinearLayoutManager 객체 지정.
         RecyclerView recyclerView = findViewById(R.id.shop_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //parameter 원래는 this였음
+        recyclerView.setHasFixedSize(true);
 
-        // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
-        SimpleTextAdapter adapter = new SimpleTextAdapter(list);
+
+
+        final ShopAdapter adapter = new ShopAdapter();
         recyclerView.setAdapter(adapter);
-    }
-//
-//        catDatabase = CatDatabase.getInstance(getApplicationContext());
-//
-//        RecyclerView recyclerView = findViewById(R.id.shop_recyclerview);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setHasFixedSize(true);
-//
-//        final CatRecyclerAdapter adapter = new CatRecyclerAdapter();
-//        recyclerView.setAdapter(adapter);
-//
-//        AsyncTask.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                Log.e("test", catDatabase.catDao().getNumOfCats() + "");
-//            }
-//        });
-//        catViewModel = ViewModelProviders.of(this).get(CatViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
-//        catViewModel.getAllCats().observe(this, new Observer<List<Cat>>() { //parameter 원래 this 였는데 오류나서 바꿈
-//            @Override
-//            public void onChanged(@Nullable List<Cat> cats) {
-//                //update Recyclerview
-//                adapter.setCats(cats);
-//            }
-//        });
-//
-//        adapter.setOnItemClickListener(new CatRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
-//            @Override
-//            public void onItemClick(Cat cat) {
-//                //Todo 여기가 고양이 클릭했을 때 이벤트 발생하는 곳!!!
-//            }
-//        });
 
-        /*exit_button=(ImageButton) findViewById(R.id.exitbtn);
-
-        exit_button.setOnClickListener(new View.OnClickListener(){
+        goodsViewModel = ViewModelProviders.of(this).get(GoodsViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
+        goodsViewModel.getAllGoods().observe(this, new Observer<List<Goods>>() { //parameter 원래 this 였는데 오류나서 바꿈
             @Override
-            public void onClick(View v){
-                Intent intent=new Intent(CatBookActivity.this, MainActivity.class);
-                startActivity(intent);
+            public void onChanged(@Nullable List<Goods> goods) {
+                //update Recyclerview
+                adapter.setGoods(goods);
             }
         });
 
-        cat1=(ImageButton) findViewById(R.id.cat1);
+        adapter.setOnItemClickListener(new ShopAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Goods goods) {
+            }
+        });
 
-        cat1.setOnClickListener(new View.OnClickListener(){
+        adapter.setOnButtonClickListener(new ShopAdapter.OnButtonClickListener() {
             @Override
-            public void onClick(View v){
-                Intent intent=new Intent(CatBookActivity.this, CatPopActivity.class);
-                startActivity(intent);
-            }
-        });*/
-        private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
+            public void onButtonClick(Goods goods) {
+                //AssignThingsDialog assignThingsDialog = new AssignThingsDialog();
 
-            @Override
-            protected Integer doInBackground(Void... voids) {
-                GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
-                Log.e("goldcoin" , gameInfo.normalPoint+"");
-                return gameInfo.normalPoint;
+                //assignThingsDialog.show(getSupportFragmentManager(), "Assign Things Dialog");
+                //startActivity(new Intent(ShopActivity.this, AssignThingsActivity.class));
+                //Todo 구매
             }
-            @Override
-            protected void onPostExecute(Integer gold_point){
-                //인터페이스의 함수를 호출하여 result_point에 저장된 값을 Cat Fragment로 전달
-                //messageFragmentListener.onPositiveClicked(gold_point);
-                txt_goldcoin.setText(gold_point+"");
-            }
+        });
+        /*super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_things);
+
+        furniture_1 = (ImageButton) findViewById(R.id.furniture_1);
+        furniture_1.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            MyThingsFragment e = MyThingsFragment.getInstance();
+            e.show(getSupportFragmentManager(), MyThingsFragment.TAG_EVENT_DIALOG);
         }
+        });*/
+    }
+
+    private class getGoldCoinTask extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            GameInfo gameInfo = db.gameInfoDao().getAll().get(0);
+            Log.e("goldcoin" , gameInfo.normalPoint+"");
+            return gameInfo.normalPoint;
+        }
+        @Override
+        protected void onPostExecute(Integer gold_point){
+            //인터페이스의 함수를 호출하여 result_point에 저장된 값을 Cat Fragment로 전달
+            //messageFragmentListener.onPositiveClicked(gold_point);
+            txt_goldcoin.setText(gold_point+"");
+        }
+    }
 }
 
 

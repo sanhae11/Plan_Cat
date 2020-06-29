@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 @Entity(indices = {@Index(value = {"goods_name"}, unique = true)})
 public class Goods {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public int goodsID;
 
     @ColumnInfo(name = "goods_name") //물품 이름
@@ -35,7 +35,8 @@ public class Goods {
 
     public Goods(){}
 
-    public Goods(String goodsName, String goodsDescription, int purchasePoint){
+    public Goods(int goodsID, String goodsName, String goodsDescription, int purchasePoint){
+        this.goodsID = goodsID;
         this.goodsName = goodsName;
         this.goodsDescription = goodsDescription;
         this.purchasePoint = purchasePoint;
@@ -90,5 +91,13 @@ public class Goods {
 
     public void setIsAssigned(int isAssigned) {
         this.isAssigned = isAssigned;
+    }
+
+    public int getGoodsID() {
+        return goodsID;
+    }
+
+    public void setGoodsID(int goodsID) {
+        this.goodsID = goodsID;
     }
 }

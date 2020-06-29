@@ -36,6 +36,7 @@ public class MyThingsFragment extends DialogFragment implements View.OnClickList
 
         // confirm button ; go assgin_things
         btn_confirm = (ImageButton)v.findViewById(R.id.btn_confirm);
+        btn_confirm.setOnClickListener(this);
         btn_confirm.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

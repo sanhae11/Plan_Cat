@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,11 +21,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.mp_plancat.database.CatDatabase;
-import com.example.mp_plancat.database.TodoDatabase;
 import com.example.mp_plancat.database.entity.Cat;
-import com.example.mp_plancat.database.entity.Todo;
-import com.example.mp_plancat.todo.TodoViewModel;
-import com.example.mp_plancat.todo.category.CategoryTodoRecyclerAdapter;
+
 
 import java.util.List;
 
@@ -80,7 +76,9 @@ public class CatBookActivity extends AppCompatActivity {
                 }
                 else {
                     //물음표 고양이를 클릭했을 경우, 다이얼로그 창
+                    NotCollectedCatDialog notCollectedCatDialog = new NotCollectedCatDialog();
 
+                    notCollectedCatDialog.show(getSupportFragmentManager(), "Not Collected Cat Dialog");
                 }
             }
         });

@@ -19,17 +19,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mp_plancat.database.CatDatabase;
 import com.example.mp_plancat.database.entity.Cat;
+import com.example.mp_plancat.database.entity.GameInfo;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 public class CatBookActivity extends AppCompatActivity {
     ImageButton exit_button;
     ImageButton cat1;
     ImageView x_btn;
+
+    TextView txt_numOfCats;
 
     private CatViewModel catViewModel;
 
@@ -49,6 +54,9 @@ public class CatBookActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); //parameter 원래는 this였음
         recyclerView.setHasFixedSize(true);
 
+        txt_numOfCats = (TextView) findViewById(R.id.txt_num_of_cats);
+        new getNumOfCatsTask().execute();
+
         final CatRecyclerAdapter adapter = new CatRecyclerAdapter();
         recyclerView.setAdapter(adapter);
 
@@ -67,12 +75,22 @@ public class CatBookActivity extends AppCompatActivity {
             }
         });
 
-        adapter.setOnItemClickListener(new CatRecyclerAdapter.OnItemClickListener() { //할 일 클릭 시 edit to do 화면으로 이동
+        adapter.setOnItemClickListener(new CatRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Cat cat) {
                 //Todo 여기가 고양이 클릭했을 때 이벤트 발생하는 곳!!!
+                Log.e("iscollected", cat.getIsCollected()+"");
+                Log.e("name", cat.getCatName()+"");
+                Log.e("desc", cat.getCatDescription()+"");
                 if(cat.getIsCollected() == 1){
                     //수집된 고양이를 클릭했을 경우, 고양이 정보 뜸
+
+                    Bundle args = new Bundle();
+                    args.putSerializable("catData", cat);
+
+                    CatInfoDialog catInfoDialog = new CatInfoDialog();
+                    catInfoDialog.setArguments(args);
+                    catInfoDialog.show(getSupportFragmentManager(), "Cat Info Dialog");
                 }
                 else {
                     //물음표 고양이를 클릭했을 경우, 다이얼로그 창
@@ -82,6 +100,7 @@ public class CatBookActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         x_btn = (ImageView) findViewById(R.id.x_btn);
         x_btn.setOnClickListener(new View.OnClickListener() {
@@ -111,5 +130,21 @@ public class CatBookActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
+    }
+
+    private class getNumOfCatsTask extends AsyncTask<Void, Void, String>{
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            int NumOfCats = catDatabase.catDao().getNumOfCats();
+            int NumOfCollected = catDatabase.catDao().getNumOfCollectedCats();
+            String str = Integer.toString(NumOfCollected) + "/" + Integer.toString(NumOfCats);
+            return str;
+        }
+        @Override
+        protected void onPostExecute(String string){
+            txt_numOfCats.setText(string);
+
+        }
     }
 }

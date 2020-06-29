@@ -8,34 +8,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class AssignThingsActivity extends AppCompatActivity {
+    private ImageButton location1, location2, location3, location4, location5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_things);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true); //뒤로 가기 버튼
-        actionBar.show();
-        actionBar.setTitle("");
-    }
+        location1 = (ImageButton) findViewById(R.id.assign_location_1);
+        location2 = (ImageButton) findViewById(R.id.assign_location_2);
+        location3 = (ImageButton) findViewById(R.id.assign_location_3);
+        location4 = (ImageButton) findViewById(R.id.assign_location_4);
+        location5 = (ImageButton) findViewById(R.id.assign_location_5);
 
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_check_actionbar, menu);
-        return true;
-    }
+        location1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //뒤로 가기 버튼 눌렀을 때 동작
-                finish();
-                return true;
             }
-        }
-        return super.onOptionsItemSelected(item);
+        });
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 }

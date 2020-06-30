@@ -211,7 +211,7 @@ public class CatFragment extends Fragment{
         });
         return rootView;
     }
-    
+
 
     private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
 

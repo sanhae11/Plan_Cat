@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 고양이 화면 -->
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -56,6 +56,49 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp" />
     </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/assign_location_1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_assign_location_invisible"
+        android:layout_marginTop="260dp"
+        android:layout_marginLeft="170dp"
+        android:scaleType="fitCenter"/>
+    <ImageButton
+        android:id="@+id/assign_location_2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_assign_location_invisible"
+        android:layout_marginTop="370dp"
+        android:layout_marginLeft="70dp"
+        android:scaleType="fitCenter"/>
+    <ImageButton
+        android:id="@+id/assign_location_3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/button_assign_location_invisible"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="270dp"
+        android:scaleType="fitCenter"/>
+
+    <ImageButton
+        android:id="@+id/assign_location_4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="460dp"
+        android:scaleType="fitCenter"
+        android:background="@drawable/button_assign_location_invisible" />
+    <ImageButton
+        android:id="@+id/assign_location_5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="580dp"
+        android:scaleType="fitCenter"
+        android:background="@drawable/button_assign_location_invisible" />
 
     // Fab catbook button
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -136,4 +179,4 @@
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
         android:src="@drawable/icon_fab" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

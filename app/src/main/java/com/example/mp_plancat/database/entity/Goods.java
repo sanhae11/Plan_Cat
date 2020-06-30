@@ -8,8 +8,10 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(indices = {@Index(value = {"goods_name"}, unique = true)})
-public class Goods {
+import java.io.Serializable;
+
+@Entity
+public class Goods implements Serializable {
 
     @PrimaryKey
     public int goodsID;

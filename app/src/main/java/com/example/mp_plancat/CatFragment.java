@@ -19,15 +19,24 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mp_plancat.database.AppDatabase;
 import com.example.mp_plancat.database.TodoDatabase;
 import com.example.mp_plancat.database.entity.GameInfo;
+import com.example.mp_plancat.database.entity.Goods;
+import com.example.mp_plancat.database.entity.Location;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 public class CatFragment extends Fragment{
+    private int REQUEST_TEST = 3;
+
     public static AppDatabase db;
     public static TodoDatabase todoDb;
     FloatingActionButton fab_menu, fab_settings, fab_shop, fab_mythings, fab_catbook;
@@ -35,6 +44,8 @@ public class CatFragment extends Fragment{
     Calendar cal = Calendar.getInstance();
     TextView txt_goldcoin;
     int goldcoin;
+
+    private ImageView location1, location2, location3, location4, location5;
 
     boolean isOpen = false;
     ImageView btn_msg;
@@ -52,6 +63,12 @@ public class CatFragment extends Fragment{
         db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "database-name").fallbackToDestructiveMigration().build();
         todoDb = TodoDatabase.getInstance(getActivity().getApplication());
 
+        location1 = (ImageView) rootView.findViewById(R.id.assign_location_1);
+        location2 = (ImageView) rootView.findViewById(R.id.assign_location_2);
+        location3 = (ImageView) rootView.findViewById(R.id.assign_location_3);
+        location4 = (ImageView) rootView.findViewById(R.id.assign_location_4);
+        location5 = (ImageView) rootView.findViewById(R.id.assign_location_5);
+
         txt_goldcoin = (TextView) rootView.findViewById(R.id.txt_goldcoin);
 
         /*
@@ -63,6 +80,7 @@ public class CatFragment extends Fragment{
             }
         });*/
         new getGoldCoinTask().execute();
+        new getAssignedGoodsListTask().execute();
 
         // 보상 알림창에, 포인트 안받을시, 노란포인트받을때, 은색포인트받을 때 각각 나누기........
         // 포인트 보상 알림창 + 팝업창 구현
@@ -78,7 +96,7 @@ public class CatFragment extends Fragment{
                         int lastMessageUpdatedMonth = db.gameInfoDao().getAll().get(0).lastMessageUpdatedMonth;
                         int lastMessageUpdatedYear = db.gameInfoDao().getAll().get(0).lastMessageUpdatedYear;
                         float points = todoDb.todoDao().getSumOfPointByDate(lastMessageUpdatedDay, lastMessageUpdatedMonth, lastMessageUpdatedYear);
-                        if(!(lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
+                        if((lastMessageUpdatedDay == cal.get(Calendar.DATE) && lastMessageUpdatedMonth == cal.get(Calendar.MONTH) + 1 && lastMessageUpdatedYear == cal.get(Calendar.YEAR) )){
                             //느낌표 있는게 제대로 작동하는 것.!!!
                             Log.e("test", "1");
                             if(points != 0.0){
@@ -192,7 +210,8 @@ public class CatFragment extends Fragment{
         fab_mythings.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                getActivity().startActivity(new Intent(getActivity(), MyThingsActivity.class)); // 클릭 시 my things activity 화면으로 감
+                Intent intent = new Intent(getActivity(), MyThingsActivity.class);
+                getActivity().startActivityForResult(intent, REQUEST_TEST); // 클릭 시 my things activity 화면으로 감
             }
         });
 
@@ -204,6 +223,20 @@ public class CatFragment extends Fragment{
         });
         return rootView;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_TEST) {
+            if (resultCode == RESULT_OK) {
+                new getAssignedGoodsListTask().execute();
+            } else {   // RESULT_CANCEL
+
+            }
+        }
+    }
+
 
     private class getGoldCoinTask extends AsyncTask<Void, Void, Integer>{
 
@@ -220,4 +253,83 @@ public class CatFragment extends Fragment{
             txt_goldcoin.setText(gold_point+"");
         }
     }
+
+    private class getAssignedGoodsListTask extends AsyncTask<Void, Void, List<Location>>{
+
+        @Override
+        protected List<Location> doInBackground(Void... voids) {
+            List<Location> locations = new ArrayList<>();
+            locations = db.locationDao().getAllLocations();
+            Log.e("testcatfrag", locations.size()+"");
+            //Log.e("test", locations.get(0).goodsID + " " + locations.get(0).locationID);
+            //Log.e("test", locations.get(1).goodsID + " " + locations.get(1).locationID);
+
+
+            List<Goods> list = new ArrayList<>();
+            list = db.goodsDao().getAllGoodsNotLive();
+            for(int i=  0; i < list.size() ; i++){
+                Log.e("goodstets", list.get(i).goodsID + list.get(i).getGoodsName());
+            }
+
+
+            return locations;
+        }
+        @Override
+        protected void onPostExecute(List<Location> locations){
+            ImageView target_imageview;
+            for(int i = 0; i < locations.size(); i++){
+                target_imageview = searchImageView(locations.get(i));
+
+                setImage(target_imageview, locations.get(i));
+                Log.e("testtest", locations.get(i).goodsID + " " + locations.get(i).locationID+"");
+            }
+
+
+        }
+
+        private ImageView searchImageView(Location location){
+            switch (location.locationID){
+                case 1:
+                    return location1;
+                case 2:
+                    return location2;
+                case 3:
+                    return location3;
+                case 4:
+                    return location4;
+                default:
+                    return location5;
+            }
+        }
+
+        private void setImage(ImageView imageView, Location location){
+            switch (location.goodsID){
+                case 1:
+                    imageView.setImageResource(R.drawable.goods_cat_1);
+                    break;
+                case 2:
+                    imageView.setImageResource(R.drawable.goods_cat_2);
+                    break;
+                case 3:
+                    imageView.setImageResource(R.drawable.goods_cat_3);
+                    break;
+                case 4:
+                    imageView.setImageResource(R.drawable.goods_cat_4);
+                    break;
+                case 5:
+                    imageView.setImageResource(R.drawable.goods_cat_5);
+                    break;
+                case 6:
+                    imageView.setImageResource(R.drawable.goods_cat_6);
+                    break;
+                case 7:
+                    imageView.setImageResource(R.drawable.goods_cat_7);
+                    break;
+                default:
+                    imageView.setImageResource(R.drawable.goods_cat_8);
+                    break;
+            }
+        }
+    }
+
 }

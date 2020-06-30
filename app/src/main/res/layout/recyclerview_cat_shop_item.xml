@@ -37,7 +37,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="14dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/goods_cat_1" />
+                android:src="@drawable/goods_1" />
         </LinearLayout>
 
         <LinearLayout

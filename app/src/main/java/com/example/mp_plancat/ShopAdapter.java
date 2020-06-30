@@ -46,7 +46,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ThingHolder>{
 
         switch(currentGoods.getGoodsID()) {
             case 1:
-                holder.shop_img.setImageResource(R.drawable.goods_cat_1);
+                holder.shop_img.setImageResource(R.drawable.goods_1);
                 break;
             case 2:
                 holder.shop_img.setImageResource(R.drawable.goods_2);

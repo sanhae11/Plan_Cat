@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,15 @@ public class MyThingsAdapter extends RecyclerView.Adapter<MyThingsAdapter.ThingH
 
         holder.thing_name.setText(currentGoods.getGoodsName());
         holder.thing_description.setText(currentGoods.getGoodsDescription());
+
+        if(currentGoods.getIsAssigned() == 1){
+            holder.btn_assign.setText("배치 취소");
+        }
+        else{
+            holder.btn_assign.setText("배치하기");
+        }
+
+
         holder.btn_assign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +51,33 @@ public class MyThingsAdapter extends RecyclerView.Adapter<MyThingsAdapter.ThingH
                 }
             }
         });
+
+        switch(currentGoods.getGoodsID()) {
+            case 1:
+                holder.thing_img.setImageResource(R.drawable.goods_1);
+                break;
+            case 2:
+                holder.thing_img.setImageResource(R.drawable.goods_2);
+                break;
+            case 3:
+                holder.thing_img.setImageResource(R.drawable.goods_3);
+                break;
+            case 4:
+                holder.thing_img.setImageResource(R.drawable.goods_4);
+                break;
+            case 5:
+                holder.thing_img.setImageResource(R.drawable.goods_5);
+                break;
+            case 6:
+                holder.thing_img.setImageResource(R.drawable.goods_6);
+                break;
+            case 7:
+                holder.thing_img.setImageResource(R.drawable.goods_7);
+                break;
+            default:
+                holder.thing_img.setImageResource(R.drawable.goods_8);
+                break;
+        }
         //holder.cat_img.setImageBitmap(currentCat.getCatImgBitmap());
     }
 
@@ -66,12 +103,14 @@ public class MyThingsAdapter extends RecyclerView.Adapter<MyThingsAdapter.ThingH
         private TextView thing_name;
         private TextView thing_description;
         private Button btn_assign;
+        private ImageView thing_img;
 
         public ThingHolder(View itemView){
             super(itemView);
             thing_name = itemView.findViewById(R.id.shop_name);
             thing_description = itemView.findViewById(R.id.text1);
             btn_assign = itemView.findViewById(R.id.btn_assign);
+            thing_img = itemView.findViewById(R.id.shop_img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

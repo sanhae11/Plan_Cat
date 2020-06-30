@@ -21,10 +21,13 @@ public interface GoodsDao {
     @Query("SELECT * FROM Goods")
     LiveData<List<Goods>> getAllGoods();
 
+    @Query("SELECT * FROM Goods")
+    List<Goods> getAllGoodsNotLive();
+
     @Query("SELECT * FROM Goods WHERE is_assigned = 1")
     List<Goods> getAllAssigned();
 
-    @Query("SELECT * FROM Goods WHERE is_Purchased = 0")
+    @Query("SELECT * FROM Goods WHERE is_Purchased = 1")
     List<Goods> getAllPurchased();
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

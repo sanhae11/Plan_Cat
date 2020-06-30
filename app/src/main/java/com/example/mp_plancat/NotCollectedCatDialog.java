@@ -2,8 +2,6 @@ package com.example.mp_plancat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +17,7 @@ public class NotCollectedCatDialog extends DialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        final View dialog = inflater.inflate(R.layout.popup_not_collected_cat, null);
+        final View dialog = inflater.inflate(R.layout.popup_one_button, null);
 
 
         btn_check_white = dialog.findViewById(R.id.btn_check_white);

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.mp_plancat.database.AppDatabase;
 import com.example.mp_plancat.database.entity.GameInfo;
 import com.example.mp_plancat.database.entity.Goods;
+import com.example.mp_plancat.database.entity.Location;
 
 import java.util.List;
 
@@ -67,10 +68,40 @@ public class MyThingsActivity extends AppCompatActivity {
         adapter.setOnButtonClickListener(new MyThingsAdapter.OnButtonClickListener() {
             @Override
             public void onButtonClick(Goods goods) {
-                //AssignThingsDialog assignThingsDialog = new AssignThingsDialog();
+                if(goods.getIsAssigned() == 1){
+                    // 배치를 취소하시겠습니까?
+                    AssignThingsDialog assignThingsDialog = new AssignThingsDialog();
+                    assignThingsDialog.show(getSupportFragmentManager(), "Cancel Assignment Dialog");
 
-                //assignThingsDialog.show(getSupportFragmentManager(), "Assign Things Dialog");
-                startActivity(new Intent(MyThingsActivity.this, AssignThingsActivity.class));
+                    assignThingsDialog.setOnButtonClickListener(new AssignThingsDialog.OnButtonClickListener() {
+                        @Override
+                        public void onButtonClick() {
+                            AsyncTask.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int goodsID = goods.getGoodsID();
+                                    Location location = db.locationDao().findLoation(goodsID);
+                                    db.locationDao().delete(location);
+                                    goods.setIsAssigned(0);
+                                    goodsViewModel.update(goods);
+                                }
+                            });
+                            Intent intent = new Intent();
+                            intent.putExtra("result", "some value");
+                            setResult(RESULT_OK, intent);
+
+                            finish();
+                        }
+                    });
+                }
+                else{
+                    Intent intent = new Intent(MyThingsActivity.this, AssignThingsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("goodsData", goods);
+                    intent.putExtra("goodsData", bundle);
+
+                    startActivity(intent);
+                }
             }
         });
         /*super.onCreate(savedInstanceState);

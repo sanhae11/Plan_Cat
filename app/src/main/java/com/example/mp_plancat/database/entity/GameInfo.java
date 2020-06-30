@@ -67,4 +67,8 @@ public class GameInfo {
     public void setSpecialPoint(int specialPoint) {
         this.specialPoint = specialPoint;
     }
+
+    public int getNormalPoint() {
+        return normalPoint;
+    }
 }

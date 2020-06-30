@@ -63,14 +63,14 @@ public abstract class CatDatabase extends RoomDatabase {
             todoDao.insert(new Todo("모프 팀프로젝트", "D", cal3, cal3, 100.0, 1));*/
 
             //Bitmap bm = BitmapFactory.decodeResource(R.drawable.cat_unknown);
-            catDao.insert(new Cat("길냥1", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥2", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥3", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥4", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥5", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥6", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥7", "나는 길냥이예요"));
-            catDao.insert(new Cat("길냥8", "나는 길냥이예요"));
+            catDao.insert(new Cat(1, "길냥1", "나는 길냥이예요"));
+            catDao.insert(new Cat(2, "길냥2", "나는 길냥이예요"));
+            catDao.insert(new Cat(3, "길냥3", "나는 길냥이예요"));
+            catDao.insert(new Cat(4, "길냥4", "나는 길냥이예요"));
+            catDao.insert(new Cat(5, "길냥5", "나는 길냥이예요"));
+            catDao.insert(new Cat(6, "길냥6", "나는 길냥이예요"));
+            catDao.insert(new Cat(7, "길냥7", "나는 길냥이예요"));
+            catDao.insert(new Cat(8, "길냥8", "나는 길냥이예요"));
 
             return null;
         }

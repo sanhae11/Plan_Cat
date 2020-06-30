@@ -34,7 +34,7 @@
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/furniture_1_b" />
+                android:src="@drawable/goods_cat_1" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,16 +59,16 @@
                     android:text="고양이귀숨숨집"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite"
-                    android:textSize="18dp"
+                    android:textSize="15dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/text1"
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
+                    android:layout_height="22dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:textSize="13sp" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -85,7 +85,10 @@
                     android:layout_weight="1"
                     android:cursorVisible="false"
                     android:text="배치"
-                    android:textSize="12dp" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="13dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_button_cat_dialog"/>
             </LinearLayout>
 
         </LinearLayout>

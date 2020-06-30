@@ -36,6 +36,37 @@ public class CatRecyclerAdapter extends RecyclerView.Adapter<CatRecyclerAdapter.
         final Cat currentCat = cats.get(position);
 
         holder.cat_name.setText(String.valueOf(currentCat.getCatName()));
+
+        if(currentCat.isCollected == 1){
+            switch(currentCat.getCatID()) {
+                case 1:
+                    holder.cat_img.setImageResource(R.drawable.cat_1);
+                    break;
+                case 2:
+                    holder.cat_img.setImageResource(R.drawable.cat_2);
+                    break;
+                case 3:
+                    holder.cat_img.setImageResource(R.drawable.cat_3);
+                    break;
+                case 4:
+                    holder.cat_img.setImageResource(R.drawable.cat_4);
+                    break;
+                case 5:
+                    holder.cat_img.setImageResource(R.drawable.cat_5);
+                    break;
+                case 6:
+                    holder.cat_img.setImageResource(R.drawable.cat_6);
+                    break;
+                case 7:
+                    holder.cat_img.setImageResource(R.drawable.cat_7);
+                    break;
+                default:
+                    holder.cat_img.setImageResource(R.drawable.cat_8);
+                    break;
+            }
+        }
+
+
         //holder.cat_img.setImageBitmap(currentCat.getCatImgBitmap());
     }
 

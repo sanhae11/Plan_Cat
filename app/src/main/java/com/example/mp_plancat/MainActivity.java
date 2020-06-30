@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -44,7 +45,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTodo = new TodoFragment();
         fragmentCat = new CatFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentHome).commit();
+
+        Intent intent = getIntent();
+        if(intent.getExtras() != null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentCat).commit(); //fragment 전환
+        }
+        else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentHome).commit();
+        }
+
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

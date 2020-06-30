@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Entity
 public class Cat implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     public int catID;
 
     @ColumnInfo
@@ -32,7 +32,8 @@ public class Cat implements Serializable {
 
     public Cat(){}
 
-    public Cat(String catName, String catDescription){
+    public Cat(int catID, String catName, String catDescription){
+        this.catID = catID;
         this.catName = catName;
         this.catDescription = catDescription;
         this.isCollected = 0;
@@ -52,5 +53,13 @@ public class Cat implements Serializable {
 
     public int getIsCollected() {
         return isCollected;
+    }
+
+    public int getCatID() {
+        return catID;
+    }
+
+    public void setCatID(int catID) {
+        this.catID = catID;
     }
 }

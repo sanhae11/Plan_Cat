@@ -57,13 +57,13 @@ public abstract class GoodsDatabase extends RoomDatabase {
             goodsDao.deleteAllGoods();
 
             goodsDao.insert(new Goods(1, "고양이귀숨숨집", "고양이가 숨을 수 있다!", 1000));
-            goodsDao.insert(new Goods(2, "카샤카샤", "고양이는 혼자서도 잘 논다!", 1500));
-            goodsDao.insert(new Goods(3, "야구공", "야구를 하는 고양이가 있다?!", 1500));
-            goodsDao.insert(new Goods(4, "소라빵", "고양이는 아늑한 곳을 좋아한다!", 2000));
+            goodsDao.insert(new Goods(2, "카샤카샤", "혼자서도 잘 논다!", 1500));
+            goodsDao.insert(new Goods(3, "야구공", "야구하는 고양이가 있다?!", 1500));
+            goodsDao.insert(new Goods(4, "소라빵", "아늑한 곳을 좋아한다!", 2000));
             goodsDao.insert(new Goods(5, "캣닢 쿠션", "고양이가 좋아한다!", 2000));
             goodsDao.insert(new Goods(6, "물고기 어항", "고양이의 텔레비전!", 2000));
             goodsDao.insert(new Goods(7, "파란 방석", "편하게 잠을 잘 수 있다!", 2500));
-            goodsDao.insert(new Goods(8, "빨간 공", "하루종일 가지고 놀 수 있다!", 3000));
+            goodsDao.insert(new Goods(8, "빨간 공", "하루종일 가지고 놀자!", 3000));
 
             return null;
         }

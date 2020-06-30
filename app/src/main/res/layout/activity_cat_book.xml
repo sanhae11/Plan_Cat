@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_num_of_cats"
-                android:text="2/8"
+                android:text=""
                 android:textStyle="bold"
                 android:textColor="@color/colorBlack"
                 android:layout_gravity="center_vertical"

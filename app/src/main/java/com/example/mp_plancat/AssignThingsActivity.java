@@ -251,36 +251,47 @@ public class AssignThingsActivity extends AppCompatActivity {
 
     private void setCatCollected(int goodsID){
         String name, description;
+        Log.e("goodsID", goodsID + "");
         switch (goodsID){
             case 1:
                 name = "멈이";
                 description = "멈멈이? 개냥이인가?";
+                break;
             case 2:
                 name = "짜장";
                 description = "점심으로 짜장을 먹고 온 듯 하다";
+                break;
             case 3:
                 name = "토미";
                 description = "귀여운 회색 고양이이다";
+                break;
             case 4:
                 name = "치즈";
                 description = "치즈를 좋아한다";
+                break;
             case 5:
                 name = "탄이";
                 description = "탄이 역시 짜장이와 점심을 먹은 듯 하다";
+                break;
             case 6:
                 name = "귤이";
                 description = "귤을 좋아하는 특이한 고양이이";
+                break;
             case 7:
                 name = "삼색";
                 description = "삼색고양이이다";
+                break;
             default:
                 name = "껌냥";
                 description = "껌껌하다";
+                break;
         }
         Cat cat = new Cat(goodsID, name, description);
         cat.isCollected = 1;
 
-        catViewModel.update(cat);
+        Log.e("catinfo", name + " " + description + " " + goodsID);
+
+        catViewModel.insert(cat);
     }
 
     private class setTransparentTask extends AsyncTask<Void, Void, List<Location>>{

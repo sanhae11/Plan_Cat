@@ -34,6 +34,7 @@ public class CatRecyclerAdapter extends RecyclerView.Adapter<CatRecyclerAdapter.
     @Override
     public void onBindViewHolder(@NonNull CatRecyclerAdapter.CatHolder holder, final int position) { //recyclerview 바인딩
         final Cat currentCat = cats.get(position);
+        String name, description;
 
         holder.cat_name.setText(String.valueOf(currentCat.getCatName()));
 
@@ -41,29 +42,46 @@ public class CatRecyclerAdapter extends RecyclerView.Adapter<CatRecyclerAdapter.
             switch(currentCat.getCatID()) {
                 case 1:
                     holder.cat_img.setImageResource(R.drawable.cat_1);
+                    name = "멈이";
+                    description = "멈멈이? 개냥이인가?";
                     break;
                 case 2:
                     holder.cat_img.setImageResource(R.drawable.cat_2);
+                    name = "짜장";
+                    description = "점심으로 짜장을 먹고 온 듯 하다";
                     break;
                 case 3:
                     holder.cat_img.setImageResource(R.drawable.cat_3);
+                    name = "토미";
+                    description = "귀여운 회색 고양이이다";
                     break;
                 case 4:
                     holder.cat_img.setImageResource(R.drawable.cat_4);
+                    name = "치즈";
+                    description = "치즈를 좋아한다";
                     break;
                 case 5:
                     holder.cat_img.setImageResource(R.drawable.cat_5);
+                    name = "탄이";
+                    description = "탄이 역시 짜장이와 점심을 먹은 듯 하다";
                     break;
                 case 6:
                     holder.cat_img.setImageResource(R.drawable.cat_6);
+                    name = "귤이";
+                    description = "귤을 좋아하는 특이한 고양이이";
                     break;
                 case 7:
                     holder.cat_img.setImageResource(R.drawable.cat_7);
+                    name = "삼색";
+                    description = "삼색고양이이다";
                     break;
                 default:
                     holder.cat_img.setImageResource(R.drawable.cat_8);
+                    name = "껌냥";
+                    description = "껌껌하다";
                     break;
             }
+            holder.cat_name.setText(name);
         }
 
 

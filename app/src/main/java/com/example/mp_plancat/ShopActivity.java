@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class ShopActivity extends AppCompatActivity {
     public static AppDatabase db;
     GoodsViewModel goodsViewModel;
     TextView txt_goldcoin;
-    ImageView x_btn;
+    private ImageView x_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

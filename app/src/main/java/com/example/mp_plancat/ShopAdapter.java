@@ -35,6 +35,15 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ThingHolder>{
         holder.thing_name.setText(currentGoods.getGoodsName());
         holder.thing_description.setText(currentGoods.getGoodsDescription());
         holder.point.setText(Integer.toString(currentGoods.getPurchasePoint()));
+
+        if(currentGoods.getIsPurchased() == 1){
+            holder.btn_buy.setText("구매 완료");
+            holder.btn_buy.setClickable(false);
+        }
+        else{
+            holder.btn_buy.setText("구매");
+            holder.btn_buy.setClickable(true);
+        }
         holder.btn_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

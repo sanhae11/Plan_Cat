@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
@@ -45,7 +46,11 @@ public class CatFragment extends Fragment{
     TextView txt_goldcoin;
     int goldcoin;
 
-    private ImageView location1, location2, location3, location4, location5;
+    private static ImageView location1;
+    private static ImageView location2;
+    private static ImageView location3;
+    private static ImageView location4;
+    private static ImageView location5;
 
     boolean isOpen = false;
     ImageView btn_msg;
@@ -228,7 +233,7 @@ public class CatFragment extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_TEST) {
+        if (requestCode == REQUEST_TEST || requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 new getAssignedGoodsListTask().execute();
             } else {   // RESULT_CANCEL
@@ -254,7 +259,7 @@ public class CatFragment extends Fragment{
         }
     }
 
-    private class getAssignedGoodsListTask extends AsyncTask<Void, Void, List<Location>>{
+    public static class getAssignedGoodsListTask extends AsyncTask<Void, Void, List<Location>>{
 
         @Override
         protected List<Location> doInBackground(Void... voids) {
@@ -265,11 +270,7 @@ public class CatFragment extends Fragment{
             //Log.e("test", locations.get(1).goodsID + " " + locations.get(1).locationID);
 
 
-            List<Goods> list = new ArrayList<>();
-            list = db.goodsDao().getAllGoodsNotLive();
-            for(int i=  0; i < list.size() ; i++){
-                Log.e("goodstets", list.get(i).goodsID + list.get(i).getGoodsName());
-            }
+
 
 
             return locations;

@@ -36,6 +36,9 @@ public class AssignThingsDialog extends DialogFragment {
         else if(getTag().equals("Buy Things Dialog")){
             dialog_content.setText("장난감을 구매하시겠습니까?");
         }
+        else if(getTag().equals("Cancel Assignment Dialog")){
+            dialog_content.setText("배치를 취소하시겠습니까?");
+        }
 
         btn_check_white = dialog.findViewById(R.id.btn_check_white);
         btn_x_white = dialog.findViewById(R.id.btn_x_white);
@@ -50,7 +53,7 @@ public class AssignThingsDialog extends DialogFragment {
                     buttonclickListener.onButtonClick();
                 }
 
-
+/*
                 if(getTag().equals("Assign Things Dialog")){
                     Log.e("test dialog", "assign things dialog 실행");
                     dialog_content.setText("장난감을 배치하시겠습니까?");
@@ -66,7 +69,8 @@ public class AssignThingsDialog extends DialogFragment {
                     dialog_content.setText("장난감을 구매하시겠습니까?");
                     //Todo 구매
                 }
-
+                else if
+*/
                 dismiss();
             }
         });

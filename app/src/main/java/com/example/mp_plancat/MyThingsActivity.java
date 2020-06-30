@@ -13,7 +13,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mp_plancat.database.AppDatabase;
@@ -27,6 +29,7 @@ public class MyThingsActivity extends AppCompatActivity {
     public static AppDatabase db;
     GoodsViewModel goodsViewModel;
     TextView txt_goldcoin;
+    ImageView x_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +87,16 @@ public class MyThingsActivity extends AppCompatActivity {
                                     db.locationDao().delete(location);
                                     goods.setIsAssigned(0);
                                     goodsViewModel.update(goods);
+
+                                    Intent intent = new Intent(MyThingsActivity.this, MainActivity.class);
+                                    intent.putExtra("result", "some value");
+                                    startActivity(intent);
+                                    finish();
+                                    //setResult(RESULT_OK, intent);
+                                    //finish();
+
                                 }
                             });
-                            Intent intent = new Intent();
-                            intent.putExtra("result", "some value");
-                            setResult(RESULT_OK, intent);
-
-                            finish();
                         }
                     });
                 }
@@ -101,7 +107,17 @@ public class MyThingsActivity extends AppCompatActivity {
                     intent.putExtra("goodsData", bundle);
 
                     startActivity(intent);
+                    finish();
                 }
+            }
+        });
+
+        x_btn = (ImageView) findViewById(R.id.x_btn);
+        x_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //엑스 버튼 누를 시 액티비티 종료
+                finish();
             }
         });
         /*super.onCreate(savedInstanceState);
@@ -115,6 +131,22 @@ public class MyThingsActivity extends AppCompatActivity {
             e.show(getSupportFragmentManager(), MyThingsFragment.TAG_EVENT_DIALOG);
         }
         });*/
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent();
+                intent.putExtra("result", "some value");
+                setResult(RESULT_OK, intent);
+                finish();
+            } else {   // RESULT_CANCEL
+
+            }
+        }
     }
 
     private class getGoldCoinTask extends AsyncTask<Void, Void, Integer> {

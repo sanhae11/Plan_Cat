@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFF3</color>
-    <color name="colorPrimaryDark">#566270</color>
+<!--    <color name="colorPrimary">#FFFFF3</color>-->
+<!--    <color name="colorPrimaryDark">#566270</color>-->
+    <color name="colorPrimary">#908A79</color>
+    <color name="colorPrimaryDark">#FFFFF5</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorGray">#888888</color>
     <color name="colorBlack">#000000</color>
@@ -10,13 +12,13 @@
     <color name="colorDarkGray">#333333</color>
     <color name="colorCream">#FFFEFF</color>
     <color name="todoTitleColor">#000000</color> <!--Todo 글자색 추후 수정-->
-    <color name="cursorColor">#A566FF</color>
-    <color name="normalColor">#E8D9FF</color>
-    <color name="basicBtnColor">#FEF9FF</color>
+    <color name="cursorColor">#908A79</color>
+    <color name="normalColor">#DDD8C3</color>
+    <color name="basicBtnColor">#DDD8C3</color>
     <color name="basicBtnPressedColor">#F5EDF7</color>
     <color name="cardViewColor">#FAFAFA</color>
-    <color name="homeSubtitleColor">#A566FF</color>
-    <color name="button_clicked">#D9C3FC</color>
+    <color name="homeSubtitleColor">#908A79</color>
+    <color name="button_clicked">#DDD8C3</color>
     <color name="cat_cardViewColor">#DDD8C3</color>
     <color name="cat_name_bgColor">#908A79</color>
     <color name="colorBrown">#908A79</color>

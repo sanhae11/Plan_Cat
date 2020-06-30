@@ -1,8 +1,11 @@
 package com.example.mp_plancat;
 //고양이 - 보유 물품 배치 화면
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -17,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.mp_plancat.database.AppDatabase;
+import com.example.mp_plancat.database.entity.Cat;
 import com.example.mp_plancat.database.entity.GameInfo;
 import com.example.mp_plancat.database.entity.Goods;
 import com.example.mp_plancat.database.entity.Location;
@@ -27,6 +31,8 @@ public class AssignThingsActivity extends AppCompatActivity {
     private ImageView location1, location2, location3, location4, location5;
     private ImageView x_btn;
     private AppDatabase db;
+    private GoodsViewModel goodsViewModel;
+    private CatViewModel catViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,27 @@ public class AssignThingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assign_things);
 
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").fallbackToDestructiveMigration().build();
+
+        final MyThingsAdapter adapter = new MyThingsAdapter();
+        //recyclerView.setAdapter(adapter);
+        goodsViewModel = ViewModelProviders.of(this).get(GoodsViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
+        goodsViewModel.getAllGoods().observe(this, new Observer<List<Goods>>() { //parameter 원래 this 였는데 오류나서 바꿈
+            @Override
+            public void onChanged(@Nullable List<Goods> goods) {
+                //update Recyclerview
+                adapter.setGoods(goods);
+            }
+        });
+
+        final CatRecyclerAdapter catAdapter = new CatRecyclerAdapter();
+        catViewModel = ViewModelProviders.of(this).get(CatViewModel.class); //parameter 원래 this 였는데 오류 안나서 안 바꿈
+        catViewModel.getAllCats().observe(this, new Observer<List<Cat>>() { //parameter 원래 this 였는데 오류나서 바꿈
+            @Override
+            public void onChanged(@Nullable List<Cat> cats) {
+                //update Recyclerview
+                catAdapter.setCats(cats);
+            }
+        });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -59,13 +86,23 @@ public class AssignThingsActivity extends AppCompatActivity {
                     @Override
                     public void onButtonClick() {
                         selected_goods.setIsAssigned(1);
+                        int goodsID = selected_goods.getGoodsID();
+                        setCatCollected(goodsID);
+                        goodsViewModel.update(selected_goods);
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
+                                //db.goodsDao().update(selected_goods);
                                 Location newloce = new Location(1, selected_goods.getGoodsID());
                                 db.locationDao().insert(newloce);
                             }
                         });
+                        Intent intent = new Intent(AssignThingsActivity.this, MainActivity.class);
+                        intent.putExtra("result", "some value");
+//                        setResult(RESULT_OK, intent);
+
+                        //finish();
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -81,13 +118,23 @@ public class AssignThingsActivity extends AppCompatActivity {
                     @Override
                     public void onButtonClick() {
                         selected_goods.setIsAssigned(1);
+                        int goodsID = selected_goods.getGoodsID();
+                        setCatCollected(goodsID);
+                        goodsViewModel.update(selected_goods);
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
+                                //db.goodsDao().update(selected_goods);
                                 Location newloce = new Location(2, selected_goods.getGoodsID());
                                 db.locationDao().insert(newloce);
                             }
                         });
+                        Intent intent = new Intent(AssignThingsActivity.this, MainActivity.class);
+                        intent.putExtra("result", "some value");
+//                        setResult(RESULT_OK, intent);
+
+                        //finish();
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -103,17 +150,23 @@ public class AssignThingsActivity extends AppCompatActivity {
                     @Override
                     public void onButtonClick() {
                         selected_goods.setIsAssigned(1);
+                        int goodsID = selected_goods.getGoodsID();
+                        setCatCollected(goodsID);
+                        goodsViewModel.update(selected_goods);
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
+                                //db.goodsDao().update(selected_goods);
                                 Location newloce = new Location(3, selected_goods.getGoodsID());
                                 db.locationDao().insert(newloce);
                             }
                         });
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(AssignThingsActivity.this, MainActivity.class);
                         intent.putExtra("result", "some value");
-                        setResult(RESULT_OK, intent);
+//                        setResult(RESULT_OK, intent);
 
+                        //finish();
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -129,13 +182,23 @@ public class AssignThingsActivity extends AppCompatActivity {
                     @Override
                     public void onButtonClick() {
                         selected_goods.setIsAssigned(1);
+                        int goodsID = selected_goods.getGoodsID();
+                        setCatCollected(goodsID);
+                        goodsViewModel.update(selected_goods);
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
+                                //db.goodsDao().update(selected_goods);
                                 Location newloce = new Location(4, selected_goods.getGoodsID());
                                 db.locationDao().insert(newloce);
                             }
                         });
+                        Intent intent = new Intent(AssignThingsActivity.this, MainActivity.class);
+                        intent.putExtra("result", "some value");
+//                        setResult(RESULT_OK, intent);
+
+                        //finish();
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -151,13 +214,23 @@ public class AssignThingsActivity extends AppCompatActivity {
                     @Override
                     public void onButtonClick() {
                         selected_goods.setIsAssigned(1);
+                        int goodsID = selected_goods.getGoodsID();
+                        setCatCollected(goodsID);
+                        goodsViewModel.update(selected_goods);
                         AsyncTask.execute(new Runnable() {
                             @Override
                             public void run() {
+                                //db.goodsDao().update(selected_goods);
                                 Location newloce = new Location(5, selected_goods.getGoodsID());
                                 db.locationDao().insert(newloce);
                             }
                         });
+                        Intent intent = new Intent(AssignThingsActivity.this, MainActivity.class);
+                        intent.putExtra("result", "some value");
+//                        setResult(RESULT_OK, intent);
+
+                        //finish();
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -174,6 +247,40 @@ public class AssignThingsActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void setCatCollected(int goodsID){
+        String name, description;
+        switch (goodsID){
+            case 1:
+                name = "멈이";
+                description = "멈멈이? 개냥이인가?";
+            case 2:
+                name = "짜장";
+                description = "점심으로 짜장을 먹고 온 듯 하다";
+            case 3:
+                name = "토미";
+                description = "귀여운 회색 고양이이다";
+            case 4:
+                name = "치즈";
+                description = "치즈를 좋아한다";
+            case 5:
+                name = "탄이";
+                description = "탄이 역시 짜장이와 점심을 먹은 듯 하다";
+            case 6:
+                name = "귤이";
+                description = "귤을 좋아하는 특이한 고양이이";
+            case 7:
+                name = "삼색";
+                description = "삼색고양이이다";
+            default:
+                name = "껌냥";
+                description = "껌껌하다";
+        }
+        Cat cat = new Cat(goodsID, name, description);
+        cat.isCollected = 1;
+
+        catViewModel.update(cat);
     }
 
     private class setTransparentTask extends AsyncTask<Void, Void, List<Location>>{

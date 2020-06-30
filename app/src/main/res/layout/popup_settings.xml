@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <!-- TODO : 모서리 둥글게 하고싶다 근데 안된다-->
-
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -83,21 +81,21 @@
                 android:layout_toRightOf="@+id/txt_soundeff" />
         </RelativeLayout>
 
-        <!--- 사운드 넣고 작동하면 삭제할 부분-->
-        <TextView
-            android:id="@+id/sb1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Button State"
-            android:textSize="10dp" />
+<!--        &lt;!&ndash;- 사운드 넣고 작동하면 삭제할 부분&ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/sb1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="Button State"-->
+<!--            android:textSize="10dp" />-->
 
-        <TextView
-            android:id="@+id/sb2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Button State"
-            android:textSize="10dp" />
+<!--        <TextView-->
+<!--            android:id="@+id/sb2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="Button State"-->
+<!--            android:textSize="10dp" />-->
     </LinearLayout>
 </RelativeLayout>

@@ -35,33 +35,33 @@ public class SettingsFragment extends DialogFragment implements View.OnClickList
 
         // background sound switch
         sb_bgsound = (SwitchButton)v.findViewById(R.id.sb_bgsound);
-        final TextView sb1 = (TextView)v.findViewById(R.id.sb1);
+//        final TextView sb1 = (TextView)v.findViewById(R.id.sb1);
         sb_bgsound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    sb1.setText("Option ON"); // example
-                }
-                else{
-                    sb1.setText("Option OFF");
-                }
+//                if(isChecked){
+//                    sb1.setText("Option ON"); // example
+//                }
+//                else{
+//                    sb1.setText("Option OFF");
+//                }
             }
         });
 
         // sound effect switch
         sb_soundeff = (SwitchButton)v.findViewById(R.id.sb_soundeff);
-        final TextView sb2 = (TextView)v.findViewById(R.id.sb2);
-        sb_soundeff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    sb2.setText("Option ON"); // example
-                }
-                else{
-                    sb2.setText("Option OFF");
-                }
-            }
-        });
+//        final TextView sb2 = (TextView)v.findViewById(R.id.sb2);
+//        sb_soundeff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    sb2.setText("Option ON"); // example
+//                }
+//                else{
+//                    sb2.setText("Option OFF");
+//                }
+//            }
+//        });
 
         // TODO : 배경음, 효과음 database & 설정
         btn_close = (ImageView)v.findViewById(R.id.btn_close);

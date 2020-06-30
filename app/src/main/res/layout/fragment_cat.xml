@@ -62,43 +62,46 @@
         android:id="@+id/assign_location_1"
         android:layout_width="170dp"
         android:layout_height="170dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="140dp"
         android:background="@drawable/button_assign_location_invisible"
-        android:layout_marginTop="170dp"
-        android:layout_marginLeft="130dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter" />
+
     <ImageButton
         android:id="@+id/assign_location_2"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:background="@drawable/button_assign_location_invisible"
-        android:layout_marginTop="290dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="40dp"
         android:scaleType="fitCenter"/>
     <ImageButton
         android:id="@+id/assign_location_3"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:background="@drawable/button_assign_location_invisible"
-        android:layout_marginTop="250dp"
-        android:layout_marginLeft="230dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="170dp"
         android:scaleType="fitCenter"/>
 
     <ImageButton
         android:id="@+id/assign_location_4"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="140dp"
         android:scaleType="fitCenter"
         android:background="@drawable/button_assign_location_invisible" />
+
     <ImageButton
         android:id="@+id/assign_location_5"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="490dp"
-        android:scaleType="fitCenter"
-        android:background="@drawable/button_assign_location_invisible" />
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/button_assign_location_invisible"
+        android:scaleType="fitCenter" />
+
 
     // Fab catbook button
     <com.google.android.material.floatingactionbutton.FloatingActionButton

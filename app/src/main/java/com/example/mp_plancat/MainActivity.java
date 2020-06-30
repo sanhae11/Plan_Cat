@@ -78,47 +78,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actionbar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) { //액션바의 점 세개 메뉴 누를 때, 특정 화면에 따라 메뉴 구성 달라짐
-
-        if(category == 1){
-            menu.findItem(R.id.menu_hide_past_list).setVisible(true); //'과거 목록 숨기기' 메뉴 보여줌
-        }
-        else if(category == 2){
-            menu.findItem(R.id.menu_hide_past_list).setVisible(false); //'과거 목록 숨기기' 메뉴 없앰
-        }
-        else{
-            menu.findItem(R.id.menu_hide_past_list).setVisible(true); //'과거 목록 숨기기' 메뉴 보여줌
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){ //각 메뉴 클릭 시 알맞게 동작
-        switch (item.getItemId()){
-            case R.id.menu_hide_done_list :
-                //TODO:완료 목록 숨기기
-                return true;
-            case R.id.menu_hide_past_list :
-                //TODO:과거 목록 숨기기
-                return true;
-            case R.id.menu_hide_coin :
-                //TODO:코인 표시 숨기기
-                return true;
-            default :
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void checkFirstRun(){
         boolean isFirstRun = prefs.getBoolean("isFirstRun",true);
         if(isFirstRun)

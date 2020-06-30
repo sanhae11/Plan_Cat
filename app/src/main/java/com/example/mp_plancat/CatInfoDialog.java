@@ -35,8 +35,31 @@ public class CatInfoDialog extends DialogFragment {
 
         cat_name.setText(cat.getCatName());
         cat_description.setText(cat.getCatDescription());
-        if (cat.getCatName().equals("삼색")){
-            cat_img.setImageResource(R.drawable.cat_7);
+        switch (cat.getCatID()){
+            case 1:
+                cat_img.setImageResource(R.drawable.cat_1);
+                break;
+            case 2:
+                cat_img.setImageResource(R.drawable.cat_2);
+                break;
+            case 3:
+                cat_img.setImageResource(R.drawable.cat_3);
+                break;
+            case 4:
+                cat_img.setImageResource(R.drawable.cat_4);
+                break;
+            case 5:
+                cat_img.setImageResource(R.drawable.cat_5);
+                break;
+            case 6:
+                cat_img.setImageResource(R.drawable.cat_6);
+                break;
+            case 7:
+                cat_img.setImageResource(R.drawable.cat_7);
+                break;
+            default:
+                cat_img.setImageResource(R.drawable.cat_8);
+                break;
         }
 
         btn_check_white = dialog.findViewById(R.id.btn_check_white);
@@ -53,4 +76,3 @@ public class CatInfoDialog extends DialogFragment {
         return builder.create();
     }
 }
-

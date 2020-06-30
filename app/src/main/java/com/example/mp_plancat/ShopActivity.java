@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class ShopActivity extends AppCompatActivity {
     public static AppDatabase db;
     GoodsViewModel goodsViewModel;
     TextView txt_goldcoin;
+    ImageView x_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +129,15 @@ public class ShopActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        x_btn = (ImageView) findViewById(R.id.x_btn);
+        x_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //엑스 버튼 누를 시 액티비티 종료
+                finish();
             }
         });
         /*super.onCreate(savedInstanceState);
